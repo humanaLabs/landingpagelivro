@@ -13,7 +13,7 @@ export default function Home() {
       <AuthorSection />
       <FaqSection />
       <FloatingChat />
-      <BrowserCompatibilityMonitor />
+      
     </div>
   );
 }

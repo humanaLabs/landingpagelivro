@@ -14,7 +14,7 @@ export function FeaturesSection() {
             <Image
               src="/design.png"
               alt="Efeito digital"
-              width={400}
+              width={300}
               height={300}
               className="opacity-80 object-contain"
             />
@@ -37,7 +37,7 @@ export function FeaturesSection() {
               </p>
             </div>
 
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <div className="bg-white-900/60 border border-white-500 rounded-3xl px-12 py-12">
                 <h3 className="text-left font-medium text-white text-base mb-8">
                   Sobre o livro
