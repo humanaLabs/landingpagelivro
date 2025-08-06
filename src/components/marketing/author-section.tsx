@@ -12,7 +12,7 @@ export function AuthorSection() {
             
             {/* Author Header - Photo + Name */}
             <div className="flex items-center gap-6 mb-8">
-              <div className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/fotoeduardo.png"
                   alt="Eduardo Ibrahim"
@@ -21,31 +21,31 @@ export function AuthorSection() {
                   priority
                 />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-black">
+              <h2 className="text-design-title  text-black">
                 Eduardo Ibrahim
               </h2>
             </div>
 
             {/* Expandable About Section */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-8">
-              <h3 className="font-semibold text-black text-xl mb-6">
+            <div className="bg-white border border-black rounded-2xl p-8">
+              <h3 className="text-design-subtitle  text-black mb-6">
                 Sobre o autor
               </h3>
               
-              <div className="text-gray-800 leading-relaxed space-y-4 text-base">
-                <p>
+              <div className="text-black space-y-4">
+                <p className="text-design-body ">
                   Eduardo Ibrahim é uma das maiores referências em tecnologia e futuro. Fundador e CEO da Humana AI, 
                   Professor da Singularity University e autor do best-seller Economia Exponencial, Ibrahim é um dos 
                   pioneiros na aplicação da IA no contexto estratégico de negócios.
                 </p>
                 
-                <p>
+                <p className="text-design-body ">
                   Com trajetória que passa pelo campus da NASA no Vale do Silício, TEDx e programas de beta-tester da 
                   OpenAI, Ibrahim combina visão prática e pensamento disruptivo. Como palestrante internacional é voz 
                   ativa em grandes organizações, onde traduz o complexo em linguagem acessível.
                 </p>
                 
-                <p>
+                <p className="text-design-body ">
                   Neste novo livro, ele propõe uma visão transformadora: a IA guiando a economia não para nos substituir, 
                   mas para ampliar o que temos de mais humano. Uma leitura provocadora e essencial para líderes, 
                   inovadores e todos que desejam prosperar na nova era da IA.
@@ -76,22 +76,22 @@ export function AuthorSection() {
           {/* Barra branca com título */}
           <div className="bg-white py-8 px-4">
             <div className="text-center">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black tracking-tight leading-tight">
+              <h2 className="text-design-mega  text-black tracking-tight">
                 ECONOMIA GUIADA POR IA
               </h2>
             </div>
           </div>
 
           {/* Quote Section - Parte inferior */}
-          <div className="bg-black text-gray-300 py-16 px-8 min-h-[30vh] flex items-center">
+          <div className="bg-black text-white py-16 px-8 min-h-[80vh] flex items-center font-light">
             <div className="max-w-4xl mx-auto text-center w-full">
-              <blockquote className="text-lg md:text-lg leading-relaxed mb-8 italic">
+              <blockquote className="text-design-body  mb-8 italic">
                 "Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece
                 uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas.
                 Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em
                 IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente."
               </blockquote>
-              <cite className="text-white font-medium not-italic">— Gary Bolles</cite>
+              <cite className="text-white  font-medium not-italic">— Gary Bolles</cite>
             </div>
           </div>
         </div>

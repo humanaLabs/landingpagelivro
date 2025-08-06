@@ -13,7 +13,7 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="text-lg font-medium text-white">
+            <Link href="/" className="text-design-button  text-white">
               <div className="flex flex-col leading-tight">
                 <span>Economia</span>
                 <span>guiada por IA</span>
@@ -23,7 +23,7 @@ export function Header() {
 
           {/* CTA Button - Desktop */}
           <div className="hidden md:flex">
-            <button className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors font-medium">
+            <button className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-design-button ">
               Quero meu exemplar
             </button>
           </div>
@@ -50,7 +50,7 @@ export function Header() {
           <div className="md:hidden py-4 border-t border-gray-600">
             <div className="flex flex-col space-y-4">
               <button 
-                className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-center font-medium"
+                className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-center text-design-button "
                 onClick={() => setIsMenuOpen(false)}
               >
                 Quero meu exemplar
