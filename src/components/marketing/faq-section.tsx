@@ -40,7 +40,7 @@ export function FaqSection() {
         {/* Right Side - FAQ Section */}
         <div className="bg-white px-16 py-20 flex flex-col justify-center">
           <div className="max-w-md">
-            <h2 className="text-3xl font-bold text-black mb-16 leading-relaxed">
+            <h2 className="text-design-title  text-black mb-16">
               Perguntas{" "}
               <span className="block">Frequentes</span>
             </h2>
@@ -49,14 +49,14 @@ export function FaqSection() {
               {faqs.map((faq, index) => (
                 <div key={index} className="border-b border-gray-100 pb-8">
                   <details className="group">
-                    <summary className="cursor-pointer font-bold text-black flex items-center justify-between text-base py-2 list-none">
+                    <summary className="cursor-pointer text-design-subtitle  text-black flex items-center justify-between py-2 list-none">
                       {faq.question}
                       <svg className="w-4 h-4 transform group-open:rotate-180 transition-transform flex-shrink-0 ml-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                       </svg>
                     </summary>
                     
-                    <div className="mt-6 text-gray-600 leading-relaxed text-base">
+                    <div className="mt-6 text-design-body  text-black">
                       {faq.answer}
                     </div>
                   </details>

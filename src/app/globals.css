@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,7 +46,7 @@
   --radius: 0.5rem;
   
   /* Font Families */
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
@@ -85,7 +87,53 @@
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), 'Poppins', system-ui, sans-serif !important;
+}
+
+/* Forçar fonte Poppins em todos os elementos */
+*, *::before, *::after {
+  font-family: 'Poppins', system-ui, sans-serif !important;
+}
+
+/* Forçar também em elementos específicos */
+h1, h2, h3, h4, h5, h6, p, span, div, button, a {
+  font-family: 'Poppins', system-ui, sans-serif !important;
+}
+
+/* Classes customizadas para design */
+.text-design-mega {
+  font-size: 85px !important;
+  line-height: 61px !important;
+  font-weight: 600 !important;
+  font-family: 'Poppins', system-ui, sans-serif !important;
+}
+
+.text-design-title {
+  font-size: 40px !important;
+  line-height: 50px !important;
+  font-weight: 600 !important;
+  font-family: 'Poppins', system-ui, sans-serif !important;
+}
+
+.text-design-subtitle {
+  font-size: 20px !important;
+  line-height: 138% !important;
+  font-weight: 600 !important;
+  font-family: 'Poppins', system-ui, sans-serif !important;
+}
+
+.text-design-body {
+  font-size: 15px !important;
+  line-height: 138% !important;
+  font-weight: 400 !important;
+  font-family: 'Poppins', system-ui, sans-serif !important;
+}
+
+.text-design-button {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  font-weight: 500 !important;
+  font-family: 'Poppins', system-ui, sans-serif !important;
 }
 
 /* Scrollbar styling */
