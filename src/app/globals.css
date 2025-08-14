@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,43 +7,43 @@
   /* Base Colors */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
-  
+ 
   /* Card Colors */
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
-  
+ 
   /* Popover Colors */
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-  
+ 
   /* Primary Colors */
   --primary: 222.2 84% 4.9%;
   --primary-foreground: 210 40% 98%;
-  
+ 
   /* Secondary Colors */
   --secondary: 210 40% 96%;
   --secondary-foreground: 222.2 84% 4.9%;
-  
+ 
   /* Muted Colors */
   --muted: 210 40% 96%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  
+ 
   /* Accent Colors */
   --accent: 210 40% 96%;
   --accent-foreground: 222.2 84% 4.9%;
-  
+ 
   /* Destructive Colors */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
-  
+ 
   /* Border Colors */
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
   --ring: 222.2 84% 4.9%;
-  
+ 
   /* Radius */
   --radius: 0.5rem;
-  
+ 
   /* Font Families */
   --font-sans: "Poppins", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -53,92 +52,135 @@
 [data-theme="dark"] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
-  
+ 
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;
-  
+ 
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
-  
+ 
   --primary: 210 40% 98%;
   --primary-foreground: 222.2 84% 4.9%;
-  
+ 
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
-  
+ 
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
-  
+ 
   --accent: 217.2 32.6% 17.5%;
   --accent-foreground: 210 40% 98%;
-  
+ 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
-  
+ 
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 212.7 26.8% 83.9%;
+}
+
+/* Reset básico para garantir consistência */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 * {
   border-color: hsl(var(--border));
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-size: 16px; /* Base font size para rem calculations */
+}
+
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: var(--font-sans), 'Poppins', system-ui, sans-serif !important;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Forçar fonte Poppins em todos os elementos */
 *, *::before, *::after {
-  font-family: 'Poppins', system-ui, sans-serif !important;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 /* Forçar também em elementos específicos */
-h1, h2, h3, h4, h5, h6, p, span, div, button, a {
-  font-family: 'Poppins', system-ui, sans-serif !important;
+h1, h2, h3, h4, h5, h6, p, span, div, button, a, input, textarea, select {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
-/* Classes customizadas para design */
+/* Classes customizadas para design com responsividade */
 .text-design-mega {
-  font-size: 85px !important;
-  line-height: 61px !important;
+  font-size: clamp(2.5rem, 8vw, 5.3125rem) !important; /* 40px - 85px */
+  line-height: clamp(2.5rem, 8vw, 3.8125rem) !important; /* 40px - 61px */
   font-weight: 600 !important;
   font-family: 'Poppins', system-ui, sans-serif !important;
 }
 
 .text-design-title {
-  font-size: 40px !important;
-  line-height: 50px !important;
+  font-size: clamp(1.75rem, 4vw, 2.5rem) !important; /* 28px - 40px */
+  max-width: 18ch;
+  line-height: clamp(2rem, 4vw, 3.125rem) !important; /* 32px - 50px */
   font-weight: 600 !important;
   font-family: 'Poppins', system-ui, sans-serif !important;
 }
 
 .text-design-subtitle {
-  font-size: 20px !important;
+  font-size: clamp(1rem, 2vw, 1.1875rem) !important; /* 16px - 19px */
   line-height: 138% !important;
   font-weight: 600 !important;
   font-family: 'Poppins', system-ui, sans-serif !important;
 }
 
 .text-design-body {
-  font-size: 15px !important;
+  font-size: clamp(0.875rem, 1.5vw, 0.9375rem) !important; /* 14px - 15px */
   line-height: 138% !important;
   font-weight: 400 !important;
   font-family: 'Poppins', system-ui, sans-serif !important;
 }
 
 .text-design-button {
-  font-size: 14px !important;
-  line-height: 20px !important;
+  font-size: 0.875rem !important; /* 14px */
+  line-height: 1.25rem !important; /* 20px */
   font-weight: 500 !important;
   font-family: 'Poppins', system-ui, sans-serif !important;
 }
 
-/* Scrollbar styling */
+/* Garantir que imagens sejam responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Flexbox e Grid fixes para compatibilidade */
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+/* Scrollbar styling com fallbacks */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--muted));
+}
+
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -152,4 +194,200 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--accent-foreground));
+}
+
+/* Media queries para breakpoints específicos */
+@media screen and (max-width: 640px) {
+  .text-design-mega {
+    font-size: 2.5rem !important; /* 40px */
+    line-height: 2.5rem !important;
+  }
+  
+  .text-design-title {
+    font-size: 1.75rem !important; /* 28px */
+    line-height: 2rem !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .text-design-mega {
+    font-size: 2rem !important; /* 32px */
+    line-height: 2.25rem !important;
+  }
+}
+
+/* Fix para problemas específicos do Chrome */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select, textarea, input {
+    font-size: 16px; /* Previne zoom no iOS */
+  }
+}
+
+/* Garantir que elementos não quebrem o layout */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Fix para elementos position sticky */
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+/* ========== ANIMAÇÕES DE SCROLL ========== */
+
+/* Base para todas as animações */
+.scroll-fade-in,
+.scroll-fade-in-left,
+.scroll-fade-in-right,
+.scroll-fade-in-up,
+.scroll-fade-in-down,
+.scroll-scale-in,
+.scroll-slide-up,
+.scroll-slide-down,
+.scroll-slide-left,
+.scroll-slide-right {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity;
+}
+
+/* Fade In básico */
+.scroll-fade-in {
+  transform: translateY(30px);
+}
+
+.scroll-fade-in.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade In da esquerda */
+.scroll-fade-in-left {
+  transform: translateX(-60px);
+}
+
+.scroll-fade-in-left.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade In da direita */
+.scroll-fade-in-right {
+  transform: translateX(60px);
+}
+
+.scroll-fade-in-right.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade In de baixo */
+.scroll-fade-in-up {
+  transform: translateY(60px);
+}
+
+.scroll-fade-in-up.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade In de cima */
+.scroll-fade-in-down {
+  transform: translateY(-60px);
+}
+
+.scroll-fade-in-down.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scale In */
+.scroll-scale-in {
+  transform: scale(0.8);
+}
+
+.scroll-scale-in.animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Slide animations */
+.scroll-slide-up {
+  transform: translateY(80px);
+}
+
+.scroll-slide-up.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-slide-down {
+  transform: translateY(-80px);
+}
+
+.scroll-slide-down.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-slide-left {
+  transform: translateX(-80px);
+}
+
+.scroll-slide-left.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-slide-right {
+  transform: translateX(80px);
+}
+
+.scroll-slide-right.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Animações com delay (stagger) */
+.scroll-stagger-1.animate { transition-delay: 0.1s; }
+.scroll-stagger-2.animate { transition-delay: 0.2s; }
+.scroll-stagger-3.animate { transition-delay: 0.3s; }
+.scroll-stagger-4.animate { transition-delay: 0.4s; }
+.scroll-stagger-5.animate { transition-delay: 0.5s; }
+.scroll-stagger-6.animate { transition-delay: 0.6s; }
+
+/* Animações mais rápidas */
+.scroll-fast {
+  transition-duration: 0.4s !important;
+}
+
+/* Animações mais lentas */
+.scroll-slow {
+  transition-duration: 1.2s !important;
+}
+
+/* Animações com easing diferente */
+.scroll-bounce {
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+/* Performance optimizations */
+.scroll-fade-in,
+.scroll-fade-in-left,
+.scroll-fade-in-right,
+.scroll-fade-in-up,
+.scroll-fade-in-down,
+.scroll-scale-in,
+.scroll-slide-up,
+.scroll-slide-down,
+.scroll-slide-left,
+.scroll-slide-right {
+  backface-visibility: hidden;
+  perspective: 1000px;
 }

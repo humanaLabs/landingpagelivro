@@ -2,15 +2,17 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useI18n } from "../../../lib/i18n";
 
 export function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const { t, locale } = useI18n();
 
   const toggleChat = () => setIsOpen(!isOpen);
 
   return (
-    <>
+    <div key={locale}>
       {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-36 right-4 w-80 h-96 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 flex flex-col">
@@ -27,7 +29,7 @@ export function FloatingChat() {
                 />
               </div>
               <div>
-                <div className="text-design-button ">IBRAHIM RESPONDE</div>
+                <div className="text-design-button ">{t('chat.title')}</div>
               </div>
             </div>
             
@@ -47,7 +49,7 @@ export function FloatingChat() {
               {/* User Message */}
               <div className="flex justify-end">
                 <div className="bg-gray-600 text-white px-4 py-2 rounded-full max-w-xs">
-                  <div className="text-design-button ">Pergunta do usuário.</div>
+                  <div className="text-design-button ">{t('chat.userMessage')}</div>
                 </div>
                 <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center ml-2 flex-shrink-0">
                   <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,7 +70,7 @@ export function FloatingChat() {
                   />
                 </div>
                 <div className="bg-white border border-gray-200 px-4 py-2 rounded-lg max-w-xs">
-                  <div className="text-design-button  text-gray-800">Resposta.</div>
+                  <div className="text-design-button  text-gray-800">{t('chat.botResponse')}</div>
                 </div>
               </div>
             </div>
@@ -81,7 +83,7 @@ export function FloatingChat() {
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Explore o livro com uma IA."
+                placeholder={t('chat.placeholder')}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-full text-design-button  focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
               />
               <button className="bg-black text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
@@ -117,6 +119,6 @@ export function FloatingChat() {
           />
         )}
       </button>
-    </>
+    </div>
   );
 } 

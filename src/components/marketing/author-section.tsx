@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useI18n } from "../../../lib/i18n";
 
 export function AuthorSection() {
+  const { t, locale } = useI18n();
+
   return (
-    <>
+    <div key={locale}>
       {/* Seção inicial do autor - compacta */}
       <section className="bg-white pt-48 pb-20 relative z-0"> {/* Compensar sobreposição da seção anterior */}
         <div className="container mx-auto px-4">
@@ -22,33 +25,27 @@ export function AuthorSection() {
                 />
               </div>
               <h2 className="text-design-title  text-black">
-                Eduardo Ibrahim
+                {t('author.name')}
               </h2>
             </div>
 
             {/* Expandable About Section */}
             <div className="bg-white border border-black rounded-2xl p-8">
               <h3 className="text-design-subtitle  text-black mb-6">
-                Sobre o autor
+                {t('author.aboutAuthor')}
               </h3>
               
               <div className="text-black space-y-4">
                 <p className="text-design-body ">
-                  Eduardo Ibrahim é uma das maiores referências em tecnologia e futuro. Fundador e CEO da Humana AI, 
-                  Professor da Singularity University e autor do best-seller Economia Exponencial, Ibrahim é um dos 
-                  pioneiros na aplicação da IA no contexto estratégico de negócios.
+                  {t('author.bio1')}
                 </p>
                 
                 <p className="text-design-body ">
-                  Com trajetória que passa pelo campus da NASA no Vale do Silício, TEDx e programas de beta-tester da 
-                  OpenAI, Ibrahim combina visão prática e pensamento disruptivo. Como palestrante internacional é voz 
-                  ativa em grandes organizações, onde traduz o complexo em linguagem acessível.
+                  {t('author.bio2')}
                 </p>
                 
                 <p className="text-design-body ">
-                  Neste novo livro, ele propõe uma visão transformadora: a IA guiando a economia não para nos substituir, 
-                  mas para ampliar o que temos de mais humano. Uma leitura provocadora e essencial para líderes, 
-                  inovadores e todos que desejam prosperar na nova era da IA.
+                  {t('author.bio3')}
                 </p>
               </div>
             </div>
@@ -63,13 +60,16 @@ export function AuthorSection() {
           {/* Avatar Interativo - Formato quadro */}
           <div className="flex justify-center py-12 bg-white">
           <div className="relative w-[800px] h-[450px] bg-white rounded-lg overflow-hidden shadow-xl border border-gray-200">
-              <Image
-                src="/avatarinterativo.png"
-                alt="Avatar Interativo Eduardo Ibrahim"
-                fill
-                className="object-cover object-top"
-                priority
-              />
+          <video
+  src="/videoavatar.mp4"
+  className="w-full h-full object-cover object-top"
+  controls
+  autoPlay
+  muted
+  loop
+>
+  Seu navegador não suporta o elemento de vídeo.
+</video>
             </div>
           </div>
 
@@ -77,7 +77,7 @@ export function AuthorSection() {
           <div className="bg-white py-8 px-4">
             <div className="text-center">
               <h2 className="text-design-mega  text-black tracking-tight">
-                ECONOMIA GUIADA POR IA
+                {t('author.bookTitle')}
               </h2>
             </div>
           </div>
@@ -86,16 +86,44 @@ export function AuthorSection() {
           <div className="bg-black text-white py-16 px-8 min-h-[80vh] flex items-center font-light">
             <div className="max-w-4xl mx-auto text-center w-full">
               <blockquote className="text-design-body  mb-8 italic">
-                "Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece
-                uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas.
-                Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em
-                IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente."
+                {t('author.quote')}
               </blockquote>
-              <cite className="text-white  font-medium not-italic">— Gary Bolles</cite>
+              <cite className="text-white  font-medium not-italic">{t('author.quoteAuthor')}</cite>
             </div>
           </div>
+
+          {/* Seção de Depoimentos - Design Card Exato */}
+          <div className="bg-white py-16 px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                
+                {t('author.testimonials').map((testimonial: any, index: number) => (
+                  <div key={index} className="bg-white p-6 text-center h-full flex flex-col">
+                    <div className="text-black text-sm leading-relaxed mb-6 flex-grow">
+                      {testimonial.text}
+                    </div>
+                    
+                    <div className="mt-auto">
+                      <div className="bg-black text-white py-3 mb-4">
+                        <div className="font-bold text-sm">{testimonial.author}</div>
+                      </div>
+                      
+                      <div className="text-black text-sm mb-4">{testimonial.position}</div>
+                      
+                      <div className="flex justify-center">
+                        <span className="text-black text-xl">✦✦✦✦✦</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </section>
-    </>
+    </div>
   );
 }
