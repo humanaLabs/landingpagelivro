@@ -174,11 +174,11 @@ const translations = {
       bookDescriptionLine3: "das organizações e da economia global.",
       aboutBook: "Sobre o livro",
       bookContent1: "Ao invés de automatizar o passado, as empresas precisam cocriar o futuro. Essa é a proposta do livro: repensar os indicadores, os papéis humanos, a governança e as decisões a partir de uma inteligência combinada — onde humanos e algoritmos agem juntos.",
-      bookContent2: "A obra propõe novos indicadores como o Produto Interno Cognitivo (PIC) e o Valor Cognitivo Combinado (VC²) para medir o impacto real da inteligência nas organizações. Também apresenta ferramentas como engenharia reversa de funções, reskilling estratégico e cérebros organizacionais, que ajudam líderes e equipes a navegar essa transição com consciência, ética e inovação.",
+      bookContent2: "A obra propõe novos indicadores como o Produto Interno Cognitivo (PIC) e o Valor Cognitivo Combinado (Vᶜᶜ) para medir o impacto real da inteligência nas organizações. Também apresenta ferramentas como engenharia reversa de funções, reskilling estratégico e cérebros organizacionais, que ajudam líderes e equipes a navegar essa transição com consciência, ética e inovação.",
       benefitsTitle: "Benefícios",
       benefits: [
         "Compreenda a nova lógica da economia cognitiva",
-        "Conheça os conceitos inéditos de PIC e VC",
+        "Conheça os conceitos inéditos de PIC e Vᶜᶜ",
         "Aprenda a tomar decisões com IA de forma ética e estratégica",
         "Prepare sua equipe para o futuro do trabalho",
         "Transforme sua empresa em uma organização cognitiva"
@@ -236,13 +236,21 @@ const translations = {
       ]
     },
     form: {
+      title: "Quero saber mais",
+      subtitle: "Preencha seus dados para receber novidades e um trecho do livro.",
       name: "Nome",
       email: "E-mail",
       phone: "Telefone",
       message: "Mensagem",
       submit: "Enviar",
+      sending: "Enviando...",
+      success: "Dados enviados com sucesso!",
+      error: "Ocorreu um erro. Tente novamente.",
       required: "Campo obrigatório",
-      invalidEmail: "E-mail inválido"
+      invalidEmail: "E-mail inválido",
+      errorName: "Digite pelo menos 3 letras no nome.",
+      errorEmail: "Digite um e-mail válido.",
+      errorPhone: "Digite um telefone válido (somente números)."
     },
     chat: {
       title: "IBRAHIM RESPONDE",
@@ -255,7 +263,9 @@ const translations = {
       ctaButton: "Quero meu exemplar",
       privacyPolicy: "Política de Privacidade",
       termsOfUse: "Termos de Uso",
-      contact: "Contato"
+      contact: "Contato",
+      humanaSiteLabel: "Site da Humana AI:",
+      eduardoLabel: "Eduardo Ibrahim",
     }
   },
       en: {
@@ -296,11 +306,11 @@ const translations = {
       bookDescriptionLine3: "of organizations and the global economy.",
       aboutBook: "About the book",
       bookContent1: "Instead of automating the past, companies need to co-create the future. This is the book's proposal: rethinking indicators, human roles, governance and decisions based on combined intelligence — where humans and algorithms act together.",
-      bookContent2: "The work proposes new indicators such as the Cognitive Domestic Product (CDP) and the Combined Cognitive Value (CCV) to measure the real impact of intelligence in organizations. It also presents tools such as reverse engineering of functions, strategic reskilling and organizational brains, which help leaders and teams navigate this transition with awareness, ethics and innovation.",
+      bookContent2: "The work proposes new indicators such as the Cognitive Domestic Product (CDP) and the Combined Cognitive Value (Vᶜᶜ) to measure the real impact of intelligence in organizations. It also presents tools such as reverse engineering of functions, strategic reskilling and organizational brains, which help leaders and teams navigate this transition with awareness, ethics and innovation.",
       benefitsTitle: "Benefits",
       benefits: [
         "Understand the new logic of the cognitive economy",
-        "Learn about the unprecedented concepts of CDP and CCV",
+        "Learn about the unprecedented concepts of CDP and Vᶜᶜ",
         "Learn to make decisions with AI ethically and strategically",
         "Prepare your team for the future of work",
         "Transform your company into a cognitive organization"
@@ -358,13 +368,21 @@ const translations = {
       ]
     },
     form: {
+      title: "Get more details",
+      subtitle: "Fill in your information to receive updates and a sample chapter.",
       name: "Name",
       email: "Email",
       phone: "Phone",
       message: "Message",
       submit: "Submit",
+      sending: "Sending...",
+      success: "Data sent successfully!",
+      error: "Something went wrong. Please try again.",
       required: "Required field",
-      invalidEmail: "Invalid email"
+      invalidEmail: "Invalid email",
+      errorName: "Please enter at least 3 letters for the name.",
+      errorEmail: "Please enter a valid email.",
+      errorPhone: "Please enter a valid phone number (digits only)."
     },
     chat: {
       title: "IBRAHIM ANSWERS",
@@ -377,7 +395,9 @@ const translations = {
       ctaButton: "Get my copy",
       privacyPolicy: "Privacy Policy",
       termsOfUse: "Terms of Use",
-      contact: "Contact"
+      contact: "Contact",
+      humanaSiteLabel: "Humana AI website:",
+      eduardoLabel: "Eduardo Ibrahim",
     }
   },
       es: {
@@ -418,11 +438,11 @@ const translations = {
       bookDescriptionLine3: "de las organizaciones y la economía global.",
       aboutBook: "Sobre el libro",
       bookContent1: "En lugar de automatizar el pasado, las empresas necesitan co-crear el futuro. Esta es la propuesta del libro: repensar los indicadores, los roles humanos, la gobernanza y las decisiones a partir de una inteligencia combinada — donde humanos y algoritmos actúan juntos.",
-      bookContent2: "La obra propone nuevos indicadores como el Producto Interno Cognitivo (PIC) y el Valor Cognitivo Combinado (VC²) para medir el impacto real de la inteligencia en las organizaciones. También presenta herramientas como ingeniería inversa de funciones, reskilling estratégico y cerebros organizacionales, que ayudan a líderes y equipos a navegar esta transición con conciencia, ética e innovación.",
+      bookContent2: "La obra propone nuevos indicadores como el Producto Interno Cognitivo (PIC) y el Valor Cognitivo Combinado (Vᶜᶜ) para medir el impacto real de la inteligencia en las organizaciones. También presenta herramientas como ingeniería inversa de funciones, reskilling estratégico y cerebros organizacionales, que ayudan a líderes y equipos a navegar esta transición con conciencia, ética e innovación.",
       benefitsTitle: "Beneficios",
       benefits: [
         "Comprende la nueva lógica de la economía cognitiva",
-        "Conoce los conceptos inéditos de PIC y VC",
+        "Conoce los conceptos inéditos de PIC y Vᶜᶜ",
         "Aprende a tomar decisiones con IA de forma ética y estratégica",
         "Prepara tu equipo para el futuro del trabajo",
         "Transforma tu empresa en una organización cognitiva"
@@ -480,14 +500,23 @@ const translations = {
       ]
     },
     form: {
+      title: "Quiero más información",
+      subtitle: "Completa tus datos para recibir novedades y un capítulo de muestra.",
       name: "Nombre",
       email: "Correo electrónico",
       phone: "Teléfono",
       message: "Mensaje",
       submit: "Enviar",
+      sending: "Enviando...",
+      success: "¡Datos enviados con éxito!",
+      error: "Ocurrió un error. Intenta nuevamente.",
       required: "Campo obligatorio",
-      invalidEmail: "Correo electrónico inválido"
+      invalidEmail: "Correo electrónico inválido",
+      errorName: "Escribe al menos 3 letras en el nombre.",
+      errorEmail: "Escribe un correo electrónico válido.",
+      errorPhone: "Escribe un teléfono válido (solo números)."
     },
+    
     chat: {
       title: "IBRAHIM RESPONDE",
       placeholder: "Explora el libro con IA.",
@@ -499,7 +528,9 @@ const translations = {
       ctaButton: "Quiero mi ejemplar",
       privacyPolicy: "Política de Privacidad",
       termsOfUse: "Términos de Uso",
-      contact: "Contacto"
+      contact: "Contacto",
+      humanaSiteLabel: "Sitio de Humana AI:",
+      eduardoLabel: "Eduardo Ibrahim",
     }
   }
   };
