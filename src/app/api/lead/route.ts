@@ -74,7 +74,7 @@ Origem: Página "Quero meu exemplar"
 
     const info = await transporter.sendMail({
       from: process.env.MAIL_FROM || process.env.SMTP_USER, // remetente (deve ser do seu domínio/conta SMTP)
-      to: "contato@humana.ai",                               // <- DESTINO fixo
+      to: "matheus.rodrigues@humana.ai",                               // <- DESTINO fixo
       replyTo: email,                                        // responder direto para o lead
       subject: '📚 Novo interesse no livro "Economia guiada por IA"',
       html,
