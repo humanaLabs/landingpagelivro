@@ -1316,7 +1316,7 @@
                                     },
                                     {
                                         "id": "3003:96",
-                                        "name": "ECONOMIA GUIADA POR IA",
+                                        "name": "Economia Guiada por IA",
                                         "type": "TEXT",
                                         "scrollBehavior": "SCROLLS",
                                         "blendMode": "PASS_THROUGH",
@@ -1351,7 +1351,7 @@
                                             "vertical": "TOP",
                                             "horizontal": "CENTER"
                                         },
-                                        "characters": "ECONOMIA GUIADA POR IA",
+                                        "characters": "Economia Guiada por IA",
                                         "characterStyleOverrides": [],
                                         "styleOverrideTable": {},
                                         "lineTypes": [
