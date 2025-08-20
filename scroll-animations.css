@@ -1,0 +1,294 @@
+/* === ANIMAÇÕES DE SCROLL === */
+
+/* Base para todas as animações */
+.animate-on-scroll {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  /* === FADE ANIMATIONS === */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .fade-in.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .fade-in-left {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  
+  .fade-in-left.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .fade-in-right {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  
+  .fade-in-right.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  
+  .fade-in-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .fade-in-down {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  
+  .fade-in-down.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* === SCALE ANIMATIONS === */
+  .scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  
+  .scale-in.animate {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .scale-up {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  
+  .scale-up.animate {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* === ROTATE ANIMATIONS === */
+  .rotate-in {
+    opacity: 0;
+    transform: rotate(-10deg) translateY(30px);
+  }
+  
+  .rotate-in.animate {
+    opacity: 1;
+    transform: rotate(0deg) translateY(0);
+  }
+  
+  /* === BLUR ANIMATIONS === */
+  .blur-in {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(30px);
+  }
+  
+  .blur-in.animate {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+  
+  /* === SLIDE ANIMATIONS === */
+  .slide-in-left {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  
+  .slide-in-left.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .slide-in-right {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  
+  .slide-in-right.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* === ANIMAÇÕES DE PÁGINA (PAGE LOAD) === */
+  @keyframes pageLoad {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .page-load-animation {
+    animation: pageLoad 1s ease-out forwards;
+  }
+  
+  /* === STAGGER DELAYS === */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+  
+  /* === EFEITOS ESPECIAIS === */
+  .glow-in {
+    opacity: 0;
+    filter: drop-shadow(0 0 20px transparent);
+    transform: translateY(30px);
+  }
+  
+  .glow-in.animate {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+    transform: translateY(0);
+  }
+  
+  /* === ANIMAÇÕES PARA TEXTO === */
+  .text-reveal {
+    opacity: 0;
+    transform: translateY(100%);
+    display: inline-block;
+    overflow: hidden;
+  }
+  
+  .text-reveal.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* === ANIMAÇÕES PARA CARDS === */
+  .card-slide-up {
+    opacity: 0;
+    transform: translateY(40px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .card-slide-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* === ANIMAÇÕES PARA BOTÕES === */
+  .button-bounce-in {
+    opacity: 0;
+    transform: scale(0.3) rotate(-15deg);
+  }
+  
+  .button-bounce-in.animate {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  /* === ANIMAÇÕES PARA IMAGENS === */
+  .image-zoom {
+    opacity: 0;
+    transform: scale(1.2);
+    filter: blur(4px);
+  }
+  
+  .image-zoom.animate {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  
+  /* === ANIMAÇÕES PARA BACKGROUNDS === */
+  .bg-slide-in {
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.8s ease-out;
+  }
+  
+  .bg-slide-in.animate {
+    background-size: 100% 100%;
+  }
+  
+  /* === ANIMAÇÕES DE LOADING === */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+    }
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+  
+  /* === UTILITIES === */
+  .animate-fast { transition-duration: 0.3s !important; }
+  .animate-slow { transition-duration: 1.2s !important; }
+  .animate-bounce { transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; }
+  
+  /* === RESPONSIVE ADJUSTMENTS === */
+  @media (max-width: 768px) {
+    .animate-on-scroll {
+      transition-duration: 0.6s;
+    }
+    
+    .fade-in-left,
+    .fade-in-right {
+      transform: translateX(-30px);
+    }
+    
+    .fade-in-left.animate,
+    .fade-in-right.animate {
+      transform: translateX(0);
+    }
+    
+    .fade-in-up,
+    .fade-in-down {
+      transform: translateY(30px);
+    }
+    
+    .fade-in-up.animate,
+    .fade-in-down.animate {
+      transform: translateY(0);
+    }
+  }
+  
+  /* === PREFERS REDUCED MOTION === */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll,
+    .fade-in,
+    .fade-in-left,
+    .fade-in-right,
+    .fade-in-up,
+    .fade-in-down,
+    .scale-in,
+    .scale-up,
+    .rotate-in,
+    .blur-in,
+    .slide-in-left,
+    .slide-in-right,
+    .card-slide-up,
+    .button-bounce-in,
+    .image-zoom {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+  }

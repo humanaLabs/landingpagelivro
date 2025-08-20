@@ -2,6 +2,23 @@
   "name": "landing-page",
   "version": "1.0.0",
   "private": true,
+  "description": "Uma landing page moderna e profissional construída com Next.js 15, TypeScript e Tailwind CSS, seguindo as melhores práticas de desenvolvimento e design.",
+  "homepage": "https://github.com/humanaLabs/landingpagelivro#readme",
+  "bugs": {
+    "url": "https://github.com/humanaLabs/landingpagelivro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humanaLabs/landingpagelivro.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "next.config.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
   "scripts": {
     "dev": "next dev --turbo",
     "dev:normal": "next dev",
@@ -14,15 +31,19 @@
     "update-deps": "npm update"
   },
   "dependencies": {
+    "framer-motion": "^12.23.12",
     "lucide-react": "^0.468.0",
     "next": "^15.4.2",
+    "nodemailer": "^7.0.5",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "resend": "^6.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "@types/nodemailer": "^7.0.0",
     "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.6", 
+    "@types/react-dom": "^19.1.6",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.4.2",
