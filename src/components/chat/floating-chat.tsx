@@ -96,29 +96,7 @@ export function FloatingChat() {
         </div>
       )}
 
-      {/* Chat Toggle Button */}
-      <button
-        onClick={toggleChat}
-        className={`fixed bottom-5 right-4 w-12 h-12 rounded-full shadow-xl flex items-center justify-center z-50 transition-all duration-300 overflow-hidden ${
-          isOpen 
-            ? 'bg-gray-800' 
-            : 'bg-white hover:bg-gray-50 border-2 border-gray-200'
-        }`}
-      >
-        {isOpen ? (
-          <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <Image
-            src="/balaodemensagem.png"
-            alt="Chat - Balão de Conversa"
-            width={28}
-            height={28}
-            className="object-contain"
-          />
-        )}
-      </button>
+      
     </div>
   );
 } 

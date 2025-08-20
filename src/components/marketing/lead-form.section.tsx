@@ -59,7 +59,7 @@ export function LeadForm() {
   };
 
   return (
-    <section key={locale} className="bg-black text-white py-16 px-4">
+    <section  key={locale} id="formularioContato" className="bg-black text-white py-16 px-4 scroll-mt-12">
       <div className="max-w-3xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

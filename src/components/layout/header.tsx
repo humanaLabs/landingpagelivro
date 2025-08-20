@@ -24,11 +24,22 @@ export function Header() {
                </div>
           {/* Language Selector and CTA Button - Desktop */}
           <div className="hidden md:flex items-center space-x-4">
-            <LanguageSelector />
-            <button className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-design-button">
-              {t('hero.cta')}
-            </button>
-          </div>
+  <LanguageSelector />
+  <button
+    type="button"
+    onClick={() => {
+      const formulario = document.getElementById("formularioContato");
+      if (formulario) {
+        formulario.scrollIntoView({ behavior: "smooth" });
+      } else {
+        console.warn("Elemento com id formularioContato não encontrado!");
+      }
+    }}
+    className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-design-button"
+  >
+    {t("hero.cta")}
+  </button>
+</div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">

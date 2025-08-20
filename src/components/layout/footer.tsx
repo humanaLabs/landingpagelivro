@@ -6,7 +6,7 @@ export function Footer() {
   const { t, locale } = useI18n();
 
   return (
-    <footer key={locale} className="bg-black text-white">
+    <footer key={locale} className=" bg-black text-white">
       <div className="w-full mx-auto px-5 pt-10 pb-6">
         {/* Grid 3 colunas */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 items-start">
@@ -60,12 +60,12 @@ export function Footer() {
                 </svg>
               </a>
             </div>
-            <div className="text-[13px]">{t("footer.publisherName")}</div>
+            <div className="text-[13px] transform translate-x-10">{t("footer.publisherName")}</div>
           </div>
 
-          {/* CENTRO */}
-          <div className="flex flex-col items-center mt-11">
-            <div className="flex gap-4 whitespace-nowrap text-[14px]">
+          {/* CENTRO - OPÇÃO 1: Usando transform */}
+          <div className="flex flex-col items-center transform translate-y-12">
+            <div className="flex gap-3 whitespace-nowrap text-[14px]">
               <a href="#" className="hover:text-gray-300">{t("footer.privacyPolicy")}</a>
               <span>|</span>
               <a href="#" className="hover:text-gray-300">{t("footer.termsOfUse")}</a>
@@ -116,10 +116,6 @@ export function Footer() {
                 </svg>
               </a>
             </div>
-
-            <button className="border border-white text-white px-4 py-[3px] text-[13px] rounded-full hover:bg-white hover:text-black transition-colors font-semibold">
-              {t("footer.ctaButton")}
-            </button>
           </div>
 
         </div>

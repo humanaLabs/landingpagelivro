@@ -8,6 +8,16 @@ export function HeroSection() {
   const [hovered, setHovered] = useState(false);
   const { t, locale } = useI18n();
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  
+  const handleScrollToForm = () => {
+    const formElement = document.getElementById('formularioContato');
+    if (formElement) {
+      formElement.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   return (
     <section
@@ -56,7 +66,10 @@ export function HeroSection() {
               </div>
 
               <div className="flex justify-start">
-                <button className="bg-black text-white px-5 py-1.5 rounded-full hover:bg-white hover:text-black transition-all duration-300 font-poppins text-design-button border border-black">
+                <button 
+                  onClick={handleScrollToForm}
+                  className="bg-black text-white px-5 py-1.5 rounded-full hover:bg-white hover:text-black transition-all duration-300 font-poppins text-design-button border border-black"
+                >
                   {t("hero.cta")}
                 </button>
               </div>
