@@ -71,7 +71,7 @@ export function FeaturesSection() {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white pt-10 pb-10">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
             {/* Book with Hand Image - Left Side */}
@@ -91,7 +91,7 @@ export function FeaturesSection() {
                 priority
                 style={{
                   marginBottom: "-1px",
-                  transform: "translateY(65px) scale(1.0)",
+                  transform: "translateY(75px) scale(0.9)",
                   filter: "drop-shadow(0 15px 35px rgba(0, 0, 0, 0.1))",
                 }}
               />
@@ -143,15 +143,15 @@ export function FeaturesSection() {
       </section>
 
       {/* Future Glimpse Section */}
-      <section className="relative bg-black text-white pb-24 pt-24 overflow-visible">
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="relative bg-black text-white pb-12 pt-12 overflow-visible">
+        <div className="container mx-auto px-4 relative z-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="lg:pr-0"
+              className="lg:pr-0 pl-8"
             >
               <h2 className="text-design-title text-white mb-14 whitespace-pre-line max-w-none">
                 {t("features.futureTitle")}
@@ -164,8 +164,8 @@ export function FeaturesSection() {
               <button
   onClick={() => {
     const link = document.createElement("a");
-    link.href = "/Economia%20Guiada%20por%20IA%20-%20Intro%20e%20cap%2001.pdf"; 
-    link.download = "Economia_Guiada_por_IA_Previa.pdf"; // nome que aparece ao salvar
+    link.href = "/Economia%20Guiada%20por%20IA%20-%20Introdução.pdf"; // sem espaço antes de .pdf
+    link.download = "Economia Guiada por IA - Introdução.pdf";
     link.click();
   }}
   className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center group text-design-button"
@@ -189,26 +189,26 @@ export function FeaturesSection() {
 
             {/* Preview Papers */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative flex justify-center lg:justify-end items-end"
-            >
-              <Image
-                src="/engenhariareversa.png"
-                alt="Prévia do conteúdo - Engenharia Reversa de Funções"
-                width={800}
-                height={650}
-                className="transform relative"
-                style={{
-                  filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.8))",
-                  marginBottom: "-120px",
-                  zIndex: 1000,
-                  position: "relative",
-                }}
-              />
-            </motion.div>
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.7, delay: 0.2 }}
+  className="relative flex justify-center lg:justify-end items-end"
+>
+<Image
+  src="/engenhariareversa.png"
+  alt="Prévia do conteúdo - Engenharia Reversa de Funções"
+  width={650}
+  height={500}
+  className="absolute z-20  w-[500px] h-auto"
+  style={{
+    filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.8))",
+    position: "relative",
+    transform: "translate(-70px, 65px)",
+  }}
+/>
+</motion.div>
+
           </div>
         </div>
       </section>

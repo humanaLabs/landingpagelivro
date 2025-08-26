@@ -1,76 +1,85 @@
 // lib/i18n.ts
+import React, { useState, useEffect } from 'react';
+
 interface Translations {
-    [key: string]: any;
-  }
-  
-  interface I18nConfig {
-    defaultLocale: string;
-    locales: string[];
-    translations: Record<string, Translations>;
-  }
-  
-  class I18n {
-    private config: I18nConfig;
-    private currentLocale: string;
-    private listeners: Set<() => void> = new Set();
-    private isClient: boolean = false;
-  
-    constructor(config: I18nConfig) {
-      this.config = config;
-      this.currentLocale = this.config.defaultLocale; // Sempre começar com o padrão
-      
-      // Só detectar idioma no cliente após hidratação
-      if (typeof window !== 'undefined') {
-        this.isClient = true;
-        // Detectar idioma de forma assíncrona
-        setTimeout(() => {
-          const detectedLocale = this.detectLocale();
-          if (detectedLocale !== this.currentLocale) {
-            this.currentLocale = detectedLocale;
-            this.notifyListeners();
-          }
-        }, 0);
-      }
+  [key: string]: any;
+}
+
+interface I18nConfig {
+  defaultLocale: string;
+  locales: string[];
+  translations: Record<string, Translations>;
+}
+
+class I18n {
+  private config: I18nConfig;
+  private currentLocale: string;
+  private listeners: Set<() => void> = new Set();
+  private isClient: boolean = false;
+  private isHydrated: boolean = false;
+
+  constructor(config: I18nConfig) {
+    this.config = config;
+    this.currentLocale = this.config.defaultLocale;
+    
+    if (typeof window !== 'undefined') {
+      this.isClient = true;
     }
-  
-    private detectLocale(): string {
-      // Só executar no cliente
-      if (!this.isClient) {
-        return this.config.defaultLocale;
-      }
-      
-      // Tentar pegar do localStorage primeiro
-      try {
-        const savedLocale = localStorage.getItem('locale');
-        if (savedLocale && this.config.locales.includes(savedLocale)) {
-          return savedLocale;
-        }
-      } catch (e) {
-        // Ignorar erros de localStorage
-      }
-  
-      // Tentar detectar do navegador
-      try {
-        if (navigator) {
-          const browserLocale = navigator.language.split('-')[0];
-          if (this.config.locales.includes(browserLocale)) {
-            return browserLocale;
-          }
-        }
-      } catch (e) {
-        // Ignorar erros de navegador
-      }
-  
+  }
+
+  // ✅ Método para hidratar APENAS uma vez, após o componente montar
+  hydrate() {
+    if (this.isHydrated || !this.isClient) {
+      return;
+    }
+    
+    const detectedLocale = this.detectLocale();
+    if (detectedLocale !== this.currentLocale) {
+      this.currentLocale = detectedLocale;
+      this.isHydrated = true;
+      this.notifyListeners();
+    } else {
+      this.isHydrated = true;
+    }
+  }
+
+  private detectLocale(): string {
+    if (!this.isClient) {
       return this.config.defaultLocale;
     }
-  
-      setLocale(locale: string) {
+    
+    // Tentar pegar do localStorage primeiro
+    try {
+      const savedLocale = localStorage.getItem('locale');
+      if (savedLocale && this.config.locales.includes(savedLocale)) {
+        return savedLocale;
+      }
+    } catch (e) {
+      // Ignorar erros de localStorage
+    }
+
+    // Tentar detectar do navegador
+    try {
+      if (navigator && navigator.language) {
+        const browserLocale = navigator.language.split('-')[0];
+        if (this.config.locales.includes(browserLocale)) {
+          return browserLocale;
+        }
+      }
+    } catch (e) {
+      // Ignorar erros de navegador
+    }
+
+    return this.config.defaultLocale;
+  }
+
+  setLocale(locale: string) {
     if (this.config.locales.includes(locale)) {
       console.log('🔄 Changing locale from', this.currentLocale, 'to', locale);
       this.currentLocale = locale;
       
       // Salvar no localStorage de forma segura
-      if (typeof window !== 'undefined') {
+      if (this.isClient) {
         try {
           localStorage.setItem('locale', locale);
           console.log('💾 Saved locale to localStorage:', locale);
@@ -79,63 +88,67 @@ interface Translations {
         }
       }
       
-      console.log('📢 Notifying listeners...');
       this.notifyListeners();
     } else {
       console.warn('⚠️ Invalid locale:', locale);
     }
   }
-  
-    getLocale(): string {
-      return this.currentLocale;
+
+  getLocale(): string {
+    return this.currentLocale;
+  }
+
+  t(key: string, variables?: Record<string, string | number>): any {
+    const translation = this.getNestedValue(this.config.translations[this.currentLocale], key);
+    
+    if (!translation) {
+      console.warn(`Translation missing for key: ${key} in locale: ${this.currentLocale}`);
+      return key;
     }
-  
-        t(key: string, variables?: Record<string, string | number>): any {
-      const translation = this.getNestedValue(this.config.translations[this.currentLocale], key);
-      
-      if (!translation) {
-        console.warn(`Translation missing for key: ${key} in locale: ${this.currentLocale}`);
-        return key;
-      }
 
-      if (typeof translation === 'string') {
-        return this.interpolate(translation, variables);
-      }
+    if (typeof translation === 'string') {
+      return this.interpolate(translation, variables);
+    }
 
-      if (Array.isArray(translation)) {
-        return translation;
-      }
-
+    if (Array.isArray(translation)) {
       return translation;
     }
-  
-    private getNestedValue(obj: any, path: string): any {
-      return path.split('.').reduce((current, key) => current?.[key], obj);
-    }
-  
-    private interpolate(text: string, variables?: Record<string, string | number>): string {
-      if (!variables) return text;
-  
-      return text.replace(/\{\{(\w+)\}\}/g, (match, key) => {
-        return variables[key]?.toString() || match;
-      });
-    }
-  
-      subscribe(callback: () => void) {
+
+    return translation;
+  }
+
+  private getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((current, key) => current?.[key], obj);
+  }
+
+  private interpolate(text: string, variables?: Record<string, string | number>): string {
+    if (!variables) return text;
+
+    return text.replace(/\{\{(\w+)\}\}/g, (match, key) => {
+      return variables[key]?.toString() || match;
+    });
+  }
+
+  subscribe(callback: () => void) {
     this.listeners.add(callback);
     return () => {
       this.listeners.delete(callback);
     };
   }
-  
-      private notifyListeners() {
+
+  private notifyListeners() {
     console.log('🔔 Notifying', this.listeners.size, 'listeners');
     this.listeners.forEach(callback => callback());
   }
+
+  // ✅ Método para verificar se já foi hidratado
+  getIsHydrated(): boolean {
+    return this.isHydrated;
   }
-  
-  // Traduções
-const translations = {
+}
+
+// Traduções (mantidas iguais)
+const translations: Record<string, Translations> = {
   pt: {
     common: {
       loading: "Carregando...",
@@ -159,7 +172,9 @@ const translations = {
       blog: "Blog"
     },
     hero: {
-      title: "O futuro da economia é cognitivo — e já começou.",
+      titleLine1: "O futuro da economia",
+      titleLine2: "é cognitivo — e já",
+      titleLine3: "começou.",
       subtitleLine1: "Descubra como a inteligência artificial está mudando",
       subtitleLine2: "a lógica do valor, do trabalho e da tomada de",
       subtitleLine3: "decisões nas empresas.",
@@ -194,26 +209,39 @@ const translations = {
       bio2: "Com trajetória que passa pelo campus da NASA no Vale do Silício, TEDx e programas de beta-tester da OpenAI, Ibrahim combina visão prática e pensamento disruptivo. Como palestrante internacional é voz ativa em grandes organizações, onde traduz o complexo em linguagem acessível.",
       bio3: "Neste novo livro, ele propõe uma visão transformadora: a IA guiando a economia não para nos substituir, mas para ampliar o que temos de mais humano. Uma leitura provocadora e essencial para líderes, inovadores e todos que desejam prosperar na nova era da IA.",
       bookTitle: "ECONOMIA GUIADA POR IA",
-      quote: "\"Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas. Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente.\"",
-      quoteAuthor: "— Gary Bolles",
-      testimonials: [
-        {
-          text: "\"Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas. Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente.\"",
-          author: "GARY BOLLES",
-          position: "CARGO - EMPRESA"
-        },
-        {
-          text: "\"Este livro é como uma aula magna sobre o agora. Ibrahim não está prevendo o futuro — ele está nomeando o que já começou. A forma como ele articula o papel da IA nas organizações, nos talentos e na criação de valor transforma nossa percepção de presente. Uma leitura obrigatória para quem quer pensar com profundidade, estratégia e humanidade.\"",
-          author: "ANANDA ZOUAIN",
-          position: "CARGO - EMPRESA"
-        },
-        {
-          text: "\"Ler este livro é como ajustar sua lente mental para uma realidade já moldada pela inteligência artificial. Ibrahim não apenas explica o que está acontecendo — ele nos prepara para participar disso. Seu conceito de 'inteligência combinada' não é apenas uma teoria, é um chamado à ação para líderes e criativos. Se você ainda está se perguntando se a IA é importante, está fazendo a pergunta errada.\"",
-          author: "ISABELA VANZIN",
-          position: "CARGO - EMPRESA"
-        }
-      ]
-    },
+        testimonials: [
+          {
+            text: "\"Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas. Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente.\"",
+            author: "GARY BOLLES",
+          },
+          {
+            text: "\"Ler este livro é como ajustar sua lente mental para uma realidade já moldada pela inteligência artificial. Ibrahim não apenas explica o que está acontecendo — ele nos prepara para participar disso. Seu conceito de 'inteligência combinada' não é apenas uma teoria, é um chamado à ação para líderes e criativos. Se você ainda está se perguntando se a IA é importante, está fazendo a pergunta errada.\"",
+            author: "ISABELA VANZIN",
+          },
+          {
+            text: "\"Este livro é como uma aula magna sobre o agora. Ibrahim não está prevendo o futuro — ele está nomeando o que já começou. A forma como ele articula o papel da IA nas organizações, nos talentos e na criação de valor transforma nossa percepção de presente. Uma leitura obrigatória para quem quer pensar com profundidade, estratégia e humanidade.\"",
+            author: "ANANDA ZOUAIN",
+          },
+          {
+            text: "\"Ibrahim não está apenas acompanhando a revolução da IA — ele está conduzindo a conversa. Este livro redefine o que significa liderar em um mundo cognitivo, onde máquinas e humanos pensam juntos. A clareza com que ele conecta estratégia, talento e valor é rara. Uma leitura que muda não só a cabeça, mas o rumo dos negócios.\"",
+            author: "RICARDO ALEM",
+          },
+          {
+            text: "\"Cada capítulo deste livro revela o que muitos ainda não enxergaram: a inteligência artificial já está moldando o presente, e ignorá-la é um risco estratégico. Ibrahim oferece uma nova linguagem para os líderes que querem ser protagonistas da transformação — e não apenas espectadores dela.\"",
+            author: "CRISTIANO SOUZA",
+          },
+          {
+            text: "\"Este livro me deu a sensação de estar acessando o código-fonte do presente. Ibrahim traduz a complexidade da IA com lucidez e, ao mesmo tempo, profundidade. Um convite para repensar como organizamos o trabalho, desenvolvemos pessoas e criamos valor real.\"",
+            author: "PAOLLA MELLO",
+          },
+          {
+            text: "\"‘Economia Guiada por IA’ é mais do que um livro — é um mapa para quem precisa navegar um mundo onde decisões são cada vez mais cognitivas. Ibrahim mostra que a inteligência artificial, quando bem aplicada, não substitui o humano — ela o amplia. Estratégico, provocador e atual.\"",
+            author: "JOÃO PEDRO MORENO",
+          }
+        ],
+        showMore: "Mostrar mais {{count}}",
+        showLess: "Mostrar menos"
+      },
     faq: {
       title: "Perguntas Frequentes",
       questions: [
@@ -232,7 +260,7 @@ const translations = {
         {
           question: "Posso comprar para minha equipe?",
           answer: "Sim! Temos condições especiais para compras corporativas. Entre em contato via email."
-        }
+        },
       ]
     },
     form: {
@@ -268,7 +296,8 @@ const translations = {
       eduardoLabel: "Eduardo Ibrahim",
     }
   },
-      en: {
+
+  en: {
     common: {
       loading: "Loading...",
       error: "Error",
@@ -291,7 +320,9 @@ const translations = {
       blog: "Blog"
     },
     hero: {
-      title: "The future of economy is cognitive — and it has already begun.",
+      titleLine1: "The future of economy",
+      titleLine2: "is cognitive — and it",
+      titleLine3: "has already begun.",
       subtitleLine1: "Discover how artificial intelligence is changing",
       subtitleLine2: "the logic of value, work and decision-making",
       subtitleLine3: "in companies.",
@@ -328,24 +359,39 @@ const translations = {
       bookTitle: "AI-GUIDED ECONOMY",
       quote: "\"Ibrahim delivers, in this book, much more than a vision about artificial intelligence: he offers us a new grammar for understanding value, talent and decision in a world that thinks with machines. This is essential reading for leaders who don't want to rebuild their organizations based on AI. What he proposes here is not futurism. It's a powerful manual for the present.\"",
       quoteAuthor: "— Gary Bolles",
-      testimonials: [
-        {
-          text: "\"Ibrahim delivers, in this book, much more than a vision about artificial intelligence: he offers us a new grammar for understanding value, talent and decision in a world that thinks with machines. This is essential reading for leaders who don't want to rebuild their organizations based on AI. What he proposes here is not futurism. It's a powerful manual for the present.\"",
-          author: "GARY BOLLES",
-          position: "POSITION - COMPANY"
-        },
-        {
-          text: "\"This book is like a master class about the now. Ibrahim is not predicting the future — he is naming what has already begun. The way he articulates the role of AI in organizations, talents and value creation transforms our perception of the present. A mandatory read for those who want to think with depth, strategy and humanity.\"",
-          author: "ANANDA ZOUAIN",
-          position: "POSITION - COMPANY"
-        },
-        {
-          text: "\"Reading this book is like adjusting your mental lens to a reality already shaped by artificial intelligence. Ibrahim doesn't just explain what's happening — he prepares us to participate in it. His concept of 'combined intelligence' is not just a theory, it's a call to action for leaders and creatives. If you're still wondering if AI is important, you're asking the wrong question.\"",
-          author: "ISABELA VANZIN",
-          position: "POSITION - COMPANY"
-        }
-      ]
-    },
+        testimonials: [
+          {
+            text: "\"In this book, Ibrahim delivers much more than a vision about artificial intelligence: he offers us a new grammar to understand value, talent, and decision-making in a world that thinks with machines. This is essential reading for leaders who don’t want to rebuild their organizations based on AI. What he proposes here is not futurism. It is a powerful manual for the present.\"",
+            author: "GARY BOLLES",
+          },
+            {
+              text: "\"Reading this book feels like adjusting your mental lens to a reality already shaped by artificial intelligence. Ibrahim doesn’t just explain what's happening — he equips us to participate in it. His concept of ‘intelligence combined’ is not just a theory, it’s a wake-up call for leaders and creatives alike. If you're still asking whether AI matters, you’re asking the wrong question.\"",
+              author: "ISABELA VANZIN",
+            },
+            {
+              text: "\"This book is like a masterclass on the ‘now’. Ibrahim is not predicting the future — he is naming what has already begun. The way he articulates the role of AI in organizations, talent, and value creation transforms our perception of the present. A must-read for anyone who wants to think with depth, strategy, and humanity.\"",
+              author: "ANANDA ZOUAIN",
+            },
+            {
+              text: "\"Ibrahim is not just following the AI revolution — he's leading the conversation. This book redefines what it means to lead in a cognitive world, where humans and machines think together. The clarity with which he connects strategy, talent, and value is rare. A read that shifts not just your mind, but the direction of business.\"",
+              author: "RICARDO ALEM",
+            },
+            {
+              text: "\"Each chapter of this book reveals what many still fail to see: artificial intelligence is already shaping the present, and ignoring it is a strategic risk. Ibrahim offers a new language for leaders who want to be protagonists of transformation — not just spectators.\"",
+              author: "CRISTIANO SOUZA",
+            },
+            {
+              text: "\"This book feels like accessing the source code of the present. Ibrahim translates the complexity of AI with clarity and depth. It’s an invitation to rethink how we organize work, develop people, and create real value.\"",
+              author: "PAOLLA MELLO",
+            },
+            {
+              text: "\"‘AI-Driven Economy’ is more than a book — it’s a map for navigating a world where decisions are increasingly cognitive. Ibrahim shows that when properly applied, artificial intelligence doesn’t replace humans — it amplifies them. Strategic, provocative, and timely.",
+              author: "JOÃO PEDRO MORENO",
+            }
+          ],
+        showMore: "Show more {{count}}",
+        showLess: "Show less"
+      },
     faq: {
       title: "Frequently Asked Questions",
       questions: [
@@ -400,35 +446,38 @@ const translations = {
       eduardoLabel: "Eduardo Ibrahim",
     }
   },
-      es: {
-    common: {
-      loading: "Cargando...",
-      error: "Error",
-      success: "Éxito",
-      cancel: "Cancelar",
-      confirm: "Confirmar",
-      save: "Guardar",
-      edit: "Editar",
-      delete: "Eliminar",
-      back: "Volver",
-      next: "Siguiente",
-      previous: "Anterior",
-      close: "Cerrar"
-    },
-    navigation: {
-      home: "Inicio",
-      about: "Acerca de",
-      services: "Servicios",
-      contact: "Contacto",
-      blog: "Blog"
-    },
-    hero: {
-      title: "El futuro de la economía es cognitivo — y ya ha comenzado.",
-      subtitleLine1: "Descubre cómo la inteligencia artificial está cambiando",
-      subtitleLine2: "la lógica del valor, el trabajo y la toma de",
-      subtitleLine3: "decisiones en las empresas.",
-      cta: "Quiero mi ejemplar"
-    },
+  
+    es: {
+      common: {
+        loading: "Cargando...",
+        error: "Error",
+        success: "Éxito",
+        cancel: "Cancelar",
+        confirm: "Confirmar",
+        save: "Guardar",
+        edit: "Editar",
+        delete: "Eliminar",
+        back: "Volver",
+        next: "Siguiente",
+        previous: "Anterior",
+        close: "Cerrar"
+      },
+      navigation: {
+        home: "Inicio",
+        about: "Acerca de",
+        services: "Servicios",
+        contact: "Contacto",
+        blog: "Blog"
+      },
+      hero: {
+        titleLine1: "El futuro de la economía",
+        titleLine2: "es cognitivo — y ya",
+        titleLine3: "ha comenzado.",
+        subtitleLine1: "Descubre cómo la inteligencia artificial está cambiando",
+        subtitleLine2: "la lógica del valor, el trabajo y la toma de",
+        subtitleLine3: "decisiones en las empresas.",
+        cta: "Quiero mi ejemplar"
+      },
     features: {
       aiTitleLine1: "La inteligencia artificial no solo está",
       aiTitleLine2: "optimizando procesos.",
@@ -458,114 +507,130 @@ const translations = {
       bio2: "Con una trayectoria que pasa por el campus de la NASA en Silicon Valley, TEDx y programas de beta-tester de OpenAI, Ibrahim combina visión práctica y pensamiento disruptivo. Como orador internacional es voz activa en grandes organizaciones, donde traduce lo complejo en lenguaje accesible.",
       bio3: "En este nuevo libro, propone una visión transformadora: la IA guiando la economía no para reemplazarnos, sino para amplificar lo que tenemos de más humano. Una lectura provocadora y esencial para líderes, innovadores y todos los que desean prosperar en la nueva era de la IA.",
       bookTitle: "ECONOMÍA GUIADA POR IA",
-      quote: "\"Ibrahim entrega, en este libro, mucho más que una visión sobre inteligencia artificial: nos ofrece una nueva gramática para entender valor, talento y decisión en un mundo que piensa con máquinas. Esta es una lectura esencial para líderes que no quieren reconstruir sus organizaciones basándose en IA. Lo que propone aquí no es futurismo. Es un manual poderoso para el presente.\"",
-      quoteAuthor: "— Gary Bolles",
       testimonials: [
         {
-          text: "\"Ibrahim entrega, en este libro, mucho más que una visión sobre inteligencia artificial: nos ofrece una nueva gramática para entender valor, talento y decisión en un mundo que piensa con máquinas. Esta es una lectura esencial para líderes que no quieren reconstruir sus organizaciones basándose en IA. Lo que propone aquí no es futurismo. Es un manual poderoso para el presente.\"",
+          text: "\"En este libro, Ibrahim entrega mucho más que una visión sobre la inteligencia artificial: nos ofrece una nueva gramática para entender el valor, el talento y la toma de decisiones en un mundo que piensa con máquinas. Esta es una lectura esencial para los líderes que no quieran reconstruir sus organizaciones únicamente en torno a la IA. Lo que propone aquí no es futurismo. Es un poderoso manual para el presente.\"",
           author: "GARY BOLLES",
-          position: "CARGO - EMPRESA"
         },
         {
-          text: "\"Este libro es como una clase magistral sobre el ahora. Ibrahim no está prediciendo el futuro — está nombrando lo que ya comenzó. La forma como articula el papel de la IA en las organizaciones, los talentos y la creación de valor transforma nuestra percepción del presente. Una lectura obligatoria para quien quiere pensar con profundidad, estrategia y humanidad.\"",
+          text: "\"Este libro es como una clase magistral sobre el presente. Ibrahim no predice el futuro, sino que nombra lo que ya ha comenzado. La forma en que articula el papel de la IA en las organizaciones, el talento y la creación de valor transforma nuestra percepción del presente. Una lectura imprescindible para cualquiera que desee pensar con profundidad, estrategia y humanidad.\"",
           author: "ANANDA ZOUAIN",
-          position: "CARGO - EMPRESA"
         },
         {
-          text: "\"Leer este libro es como ajustar tu lente mental para una realidad ya moldeada por la inteligencia artificial. Ibrahim no solo explica lo que está pasando — nos prepara para participar en ello. Su concepto de 'inteligencia combinada' no es solo una teoría, es un llamado a la acción para líderes y creativos. Si aún te preguntas si la IA es importante, estás haciendo la pregunta equivocada.\"",
+          text: "\"Leer este libro es como ajustar la lente mental a una realidad ya moldeada por la inteligencia artificial. Ibrahim no solo explica lo que está sucediendo, sino que nos prepara para participar en ello. Su concepto de ‘inteligencia combinada’  no es solo una teoría; es un llamado a la acción para líderes y creativos. Si todavía te preguntas si la IA es importante, te estás haciendo la pregunta equivocada.\"",
           author: "ISABELA VANZIN",
-          position: "CARGO - EMPRESA"
+        },
+        {
+          text: "\"Ibrahim no solo está siguiendo la revolución de la IA — está liderando la conversación. Este libro redefine lo que significa liderar en un mundo cognitivo, donde humanos y máquinas piensan juntos. La claridad con la que conecta estrategia, talento y valor es rara. Una lectura que cambia no solo la mente, sino también el rumbo de los negocios.\"",
+          author: "RICARDO ALEM",
+        },
+        {
+          text: "\"Cada capítulo de este libro revela lo que muchos aún no ven: la inteligencia artificial ya está moldeando el presente, e ignorarla es un riesgo estratégico. Ibrahim ofrece un nuevo lenguaje para los líderes que quieren ser protagonistas de la transformación — y no solo espectadores.\"",
+          author: "CRISTIANO SOUZA",
+        },
+        {
+          text: "\"Este libro me dio la sensación de estar accediendo al código fuente del presente. Ibrahim traduce la complejidad de la IA con lucidez y profundidad. Una invitación a repensar cómo organizamos el trabajo, desarrollamos a las personas y creamos valor real.\"",
+          author: "PAOLLA MELLO",
+        },
+        {
+          text: "\"‘Economía Impulsada por IA’ es más que un libro — es un mapa para quienes necesitan navegar en un mundo donde las decisiones son cada vez más cognitivas. Ibrahim muestra que la inteligencia artificial, cuando se aplica bien, no reemplaza al humano — lo amplifica. Estratégico, provocador y actual.\"",
+          author: "JOÃO PEDRO MORENO",
         }
-      ]
+      ],
+      showMore: "Mostrar más {{count}}",
+      showLess: "Mostrar menos"
     },
-    faq: {
-      title: "Preguntas Frecuentes",
-      questions: [
-        {
-          question: "¿Para quién es el libro?",
-          answer: "Para profesionales, líderes, emprendedores y estudiantes interesados en el impacto real de la inteligencia artificial en la economía, los negocios y la humanidad."
-        },
-        {
-          question: "¿Necesito saber programación o IA para entender el contenido?",
-          answer: "No. El libro fue escrito con un lenguaje accesible, pero con profundidad técnica y estratégica para quienes quieren liderar con conciencia."
-        },
-        {
-          question: "¿Habrá versión digital?",
-          answer: "¡Sí! El libro estará disponible en e-book y versión física."
-        },
-        {
-          question: "¿Puedo comprarlo para mi equipo?",
-          answer: "¡Sí! Tenemos condiciones especiales para compras corporativas. Contáctanos por email."
-        }
-      ]
-    },
-    form: {
-      title: "Quiero más información",
-      subtitle: "Completa tus datos para recibir novedades y un capítulo de muestra.",
-      name: "Nombre",
-      email: "Correo electrónico",
-      phone: "Teléfono",
-      message: "Mensaje",
-      submit: "Enviar",
-      sending: "Enviando...",
-      success: "¡Datos enviados con éxito!",
-      error: "Ocurrió un error. Intenta nuevamente.",
-      required: "Campo obligatorio",
-      invalidEmail: "Correo electrónico inválido",
-      errorName: "Escribe al menos 3 letras en el nombre.",
-      errorEmail: "Escribe un correo electrónico válido.",
-      errorPhone: "Escribe un teléfono válido (solo números)."
-    },
-    
-    chat: {
-      title: "IBRAHIM RESPONDE",
-      placeholder: "Explora el libro con IA.",
-      userMessage: "Pregunta del usuario.",
-      botResponse: "Respuesta."
-    },
-    footer: {
-      publisherName: "Editorial Alta Books",
-      ctaButton: "Quiero mi ejemplar",
-      privacyPolicy: "Política de Privacidad",
-      termsOfUse: "Términos de Uso",
-      contact: "Contacto",
-      humanaSiteLabel: "Sitio de Humana AI:",
-      eduardoLabel: "Eduardo Ibrahim",
-    }
+  faq: {
+    title: "Preguntas Frecuentes",
+    questions: [
+      {
+        question: "¿Para quién es el libro?",
+        answer: "Para profesionales, líderes, emprendedores y estudiantes interesados en el impacto real de la inteligencia artificial en la economía, los negocios y la humanidad."
+      },
+      {
+        question: "¿Necesito saber programación o IA para entender el contenido?",
+        answer: "No. El libro fue escrito con un lenguaje accesible, pero con profundidad técnica y estratégica para quienes quieren liderar con conciencia."
+      },
+      {
+        question: "¿Habrá versión digital?",
+        answer: "¡Sí! El libro estará disponible en e-book y versión física."
+      },
+      {
+        question: "¿Puedo comprarlo para mi equipo?",
+        answer: "¡Sí! Tenemos condiciones especiales para compras corporativas. Contáctanos por email."
+      },
+    ]
+  },
+  form: {
+    title: "Quiero más información",
+    subtitle: "Completa tus datos para recibir novedades y un capítulo de muestra.",
+    name: "Nombre",
+    email: "Correo electrónico", 
+    phone: "Teléfono",
+    message: "Mensaje",
+    submit: "Enviar",
+    sending: "Enviando...",
+    success: "¡Datos enviados con éxito!",
+    error: "Ocurrió un error. Intenta nuevamente.",
+    required: "Campo obligatorio",
+    invalidEmail: "Correo electrónico inválido",
+    errorName: "Escribe al menos 3 letras en el nombre.",
+    errorEmail: "Escribe un correo electrónico válido.",
+    errorPhone: "Escribe un teléfono válido (solo números)."
+  },
+  chat: {
+    title: "IBRAHIM RESPONDE",
+    placeholder: "Explora el libro con IA.",
+    userMessage: "Pregunta del usuario.",
+    botResponse: "Respuesta."
+  },
+  footer: {
+    publisherName: "Editorial Alta Books",
+    ctaButton: "Quiero mi ejemplar", 
+    privacyPolicy: "Política de Privacidad",
+    termsOfUse: "Términos de Uso",
+    contact: "Contacto",
+    humanaSiteLabel: "Sitio de Humana AI:",
+    eduardoLabel: "Eduardo Ibrahim"
   }
-  };
+},
+}
+
   
   // Instância global do i18n
-export const i18n = new I18n({
-  defaultLocale: 'pt',
-  locales: ['pt', 'en', 'es'],
-  translations
-});
+  export const i18n = new I18n({
+    defaultLocale: 'pt',
+    locales: ['pt', 'en', 'es'],
+    translations
+  });
 
-
-  
-  // Hook React para usar i18n
-  import { useState, useEffect } from 'react';
-  
-  export function useI18n() {
-  const [locale, setLocale] = useState('pt'); // Sempre começar com pt
-  const [, forceUpdate] = useState({}); // Para forçar re-render
+// ✅ Hook React corrigido para evitar hidratação
+export function useI18n() {
+  const [locale, setLocale] = useState(i18n.getLocale());
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    // Sincronizar com o idioma atual
-    const currentLocale = i18n.getLocale();
-    console.log('🎣 useI18n hook initialized, current locale:', currentLocale);
-    setLocale(currentLocale);
+    // Hidratar apenas uma vez
+    if (!isHydrated) {
+      i18n.hydrate();
+      setIsHydrated(true);
+      
+      // Sincronizar com o locale após hidratação
+      const currentLocale = i18n.getLocale();
+      if (currentLocale !== locale) {
+        setLocale(currentLocale);
+      }
+    }
 
+    // Escutar mudanças
     const unsubscribe = i18n.subscribe(() => {
       const newLocale = i18n.getLocale();
       console.log('🔄 useI18n received locale change:', newLocale);
       setLocale(newLocale);
-      forceUpdate({}); // Forçar re-render
     });
     
     return unsubscribe;
-  }, []);
+  }, [isHydrated, locale]);
 
   return {
     t: (key: string, variables?: Record<string, string | number>): any => {
@@ -575,8 +640,7 @@ export const i18n = new I18n({
     setLocale: (newLocale: string) => {
       i18n.setLocale(newLocale);
     },
-    availableLocales: ['pt', 'en', 'es']
+    availableLocales: ['pt', 'en', 'es'],
+    isHydrated // ✅ Expor estado de hidratação
   };
 }
-  
-  

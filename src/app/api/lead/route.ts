@@ -2,8 +2,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-// Garanta runtime Node (Nodemailer não roda no Edge)
+// 🔹 garantir runtime Node (Nodemailer não roda no Edge)
 export const runtime = "nodejs";
+
+// 🔹 armazenamento temporário de leads enviados (reseta se servidor reiniciar)
+const submittedLeads = new Map<string, number>();
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,19 +20,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // transporter via env
+    // 🔹 criar chave única de identificação (email + telefone)
+    const key = `${email}-${telefone}`;
+
+    if (submittedLeads.has(key)) {
+      return NextResponse.json(
+        { error: "Já recebemos seus dados. Por favor, não envie novamente." },
+        { status: 400 }
+      );
+    }
+
+    // registra lead no mapa
+    submittedLeads.set(key, Date.now());
+
+    // configurar transporter via env com as novas credenciais
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,                 // ex: "smtp.gmail.com" ou do seu provedor
-      port: Number(process.env.SMTP_PORT || 587),  // 465 = secure true
-      secure: process.env.SMTP_SECURE === "true",
+      host: process.env.EMAIL_HOST || "smtp.gmail.com",
+      port: Number(process.env.EMAIL_PORT || 587),
+      secure: process.env.EMAIL_SECURE === "true",
       auth: {
-        user: process.env.SMTP_USER,               // usuário/conta
-        pass: process.env.SMTP_PASS,               // senha / app password
+        user: process.env.EMAIL_USER || "noreply@humana.ai",
+        pass: process.env.EMAIL_PASS || "ailsfnyuyqorzstg",
       },
     });
-
-    // opcional: verificar conexão/credenciais
-    // await transporter.verify();
 
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #000; color: #fff; padding: 20px; border-radius: 10px;">
@@ -73,16 +86,15 @@ Origem: Página "Quero meu exemplar"
     `.trim();
 
     const info = await transporter.sendMail({
-      from: process.env.MAIL_FROM || process.env.SMTP_USER, // remetente (deve ser do seu domínio/conta SMTP)
-      to: "matheus.rodrigues@humana.ai",                               // <- DESTINO fixo
-      replyTo: email,                                        // responder direto para o lead
+      from: `"${process.env.FROM_NAME || 'Humana AI'}" <${process.env.FROM_EMAIL || 'noreply@humana.ai'}>`,
+      to: process.env.SALES_EMAIL || "contato@humana.ai",
+      replyTo: email,
       subject: '📚 Novo interesse no livro "Economia guiada por IA"',
       html,
       text,
     });
 
-    // opcional: log id
-    console.log("Email sent:", info.messageId);
+    console.log("Email enviado:", info.messageId);
 
     return NextResponse.json({ message: "Enviado com sucesso" }, { status: 200 });
   } catch (error) {

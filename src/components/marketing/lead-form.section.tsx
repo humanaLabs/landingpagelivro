@@ -1,14 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useI18n } from "../../../lib/i18n";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { useScrollAnimation } from "@/lib/useScrollAnimation";
+
+const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
+
+const containerStagger: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: EASE, when: "beforeChildren", staggerChildren: 0.12 },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
 
 export function LeadForm() {
   const { t, locale } = useI18n();
   const [form, setForm] = useState({ nome: "", email: "", telefone: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.2 });
+
+  useEffect(() => {
+    setStatus("idle");
+    setErrorMsg("");
+  }, [locale]);
 
   const validate = () => {
     if (form.nome.trim().length < 3) {
@@ -38,129 +62,155 @@ export function LeadForm() {
     if (!validate()) return;
 
     setStatus("loading");
-
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
       if (res.ok) {
         setStatus("success");
         setForm({ nome: "", email: "", telefone: "" });
       } else {
-        setStatus("error");
+        const data = await res.json();
+        if (res.status === 400 && data.error?.includes("Já recebemos")) {
+          setErrorMsg("Você já enviou seus dados. Obrigado!");
+          setStatus("idle"); // 🔹 volta ao normal
+        } else {
+          setStatus("error");
+        }
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
       setStatus("error");
     }
   };
 
   return (
-    <section  key={locale} id="formularioContato" className="bg-black text-white py-16 px-4 scroll-mt-12">
-      <div className="max-w-3xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-3xl font-bold mb-6"
+    <section id="formularioContato" className="bg-black text-white py-16 px-4 scroll-mt-15">
+      <div ref={ref} className="max-w-3xl mx-auto text-center">
+        <motion.div
+          key={`lead-wrap-${locale}`}
+          variants={containerStagger}
+          initial="hidden"
+          animate={isVisible ? "show" : "hidden"}
         >
-          {t("form.title") || "Cadastre-se para saber mais"}
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="mb-8 text-gray-300"
-        >
-          {t("form.subtitle") || "Preencha seus dados para receber mais informações sobre o livro."}
-        </motion.p>
-
-        <motion.form
-          onSubmit={handleSubmit}
-          className="space-y-4"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-        >
-          <motion.input
-            type="text"
-            name="nome"
-            placeholder={t("form.name") || "Seu nome"}
-            value={form.nome}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg text-black focus:outline-none"
-            required
-            whileFocus={{ scale: 1.02 }}
-          />
-          <motion.input
-            type="email"
-            name="email"
-            placeholder={t("form.email") || "Seu e-mail"}
-            value={form.email}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg text-black focus:outline-none"
-            required
-            whileFocus={{ scale: 1.02 }}
-          />
-          <motion.input
-            type="tel"
-            name="telefone"
-            placeholder={t("form.phone") || "Seu telefone"}
-            value={form.telefone}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg text-black focus:outline-none"
-            required
-            whileFocus={{ scale: 1.02 }}
-          />
-
-          <motion.button
-            type="submit"
-            disabled={status === "loading" || !!errorMsg}
-            className={`px-6 py-3 rounded-full font-medium transition-colors duration-200 ${
-              status === "loading"
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-white text-black hover:bg-gray-200"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <motion.h2
+            key={`lead-title-${locale}`}
+            variants={fadeUp}
+            suppressHydrationWarning
+            className="font-bold mb-6 text-[1.875rem] md:text-[2.25rem] lg:text-[2.5rem] leading-[1.15]"
           >
-            {status === "loading"
-              ? t("form.sending") || "Enviando..."
-              : t("form.submit") || "Enviar"}
-          </motion.button>
+            {t("form.title") || "Cadastre-se para saber mais"}
+          </motion.h2>
 
-          {errorMsg && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-4 text-red-400"
+          <motion.p
+            key={`lead-sub-${locale}`}
+            variants={fadeUp}
+            className="mb-8 text-gray-300"
+          >
+            {t("form.subtitle") || "Preencha seus dados para receber mais informações sobre o livro."}
+          </motion.p>
+
+          <motion.form
+            key={`lead-form-${locale}`}
+            onSubmit={handleSubmit}
+            variants={fadeUp}
+            className="space-y-4"
+          >
+            {/* Campo Nome */}
+            <motion.div whileFocus={{ scale: 1.02 }}>
+              <input
+                key={`lead-name-${locale}`}
+                type="text"
+                name="nome"
+                placeholder={t("form.name") || "Seu nome"}
+                value={form.nome}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg text-black focus:outline-none"
+                required
+              />
+            </motion.div>
+
+            {/* Campo Email */}
+            <motion.div whileFocus={{ scale: 1.02 }}>
+              <input
+                key={`lead-email-${locale}`}
+                type="email"
+                name="email"
+                placeholder={t("form.email") || "Seu e-mail"}
+                value={form.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg text-black focus:outline-none"
+                required
+              />
+            </motion.div>
+
+            {/* Campo Telefone */}
+            <motion.div whileFocus={{ scale: 1.02 }}>
+              <input
+                key={`lead-phone-${locale}`}
+                type="tel"
+                name="telefone"
+                placeholder={t("form.phone") || "Seu telefone"}
+                value={form.telefone}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg text-black focus:outline-none"
+                required
+              />
+            </motion.div>
+
+            <motion.button
+              key={`lead-submit-${locale}`}
+              type="submit"
+              disabled={status === "loading" || !!errorMsg}
+              className={`px-6 py-3 rounded-full font-medium transition-colors duration-200 ${
+                status === "loading"
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-white text-black hover:bg-gray-200"
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {errorMsg}
-            </motion.p>
-          )}
-          {status === "success" && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-4 text-green-400"
-            >
-              {t("form.success") || "Dados enviados com sucesso!"}
-            </motion.p>
-          )}
-          {status === "error" && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-4 text-red-400"
-            >
-              {t("form.error") || "Ocorreu um erro. Tente novamente."}
-            </motion.p>
-          )}
-        </motion.form>
+              {status === "loading"
+                ? t("form.sending") || "Enviando..."
+                : t("form.submit") || "Enviar"}
+            </motion.button>
+
+            {/* Mensagens */}
+            {errorMsg && (
+              <motion.p
+                key={`lead-error-${locale}-${errorMsg}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-4 text-red-400"
+              >
+                {errorMsg}
+              </motion.p>
+            )}
+
+            {status === "success" && (
+              <motion.p
+                key={`lead-success-${locale}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-4 text-green-400"
+              >
+                {t("form.success") || "Dados enviados com sucesso!"}
+              </motion.p>
+            )}
+
+            {status === "error" && (
+              <motion.p
+                key={`lead-fail-${locale}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-4 text-red-400"
+              >
+                {t("form.error") || "Ocorreu um erro. Tente novamente."}
+              </motion.p>
+            )}
+          </motion.form>
+        </motion.div>
       </div>
     </section>
   );

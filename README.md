@@ -162,8 +162,21 @@ npm run test:e2e:ui
 Crie um arquivo `.env.local`:
 
 ```env
+# Configurações do site
 NEXT_PUBLIC_SITE_URL=https://seudominio.com
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# Configurações de Email (Nodemailer)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=noreply@humana.ai
+EMAIL_PASS=ailsfnyuyqorzstg
+
+# Destinatários
+FROM_EMAIL=noreply@humana.ai
+FROM_NAME=Humana AI
+SALES_EMAIL=contato@humana.ai
 ```
 
 ### Deployment
