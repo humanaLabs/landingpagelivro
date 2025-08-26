@@ -69,7 +69,7 @@ export function HeroSection() {
     className="pointer-events-auto drop-shadow-2xl mr-12"
   >
     <Image
-      src="/Livro.png"
+      src="/livro.png"
       alt="Livro Economia guiada por IA"
       width={400}
       height={500}
