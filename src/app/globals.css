@@ -260,3 +260,291 @@ img {
 .scroll-fast { transition-duration: 0.4s !important; }
 .scroll-slow { transition-duration: 1.2s !important; }
 .scroll-bounce { transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; }
+
+
+/* ========================================
+   MOBILE-ONLY OPTIMIZATIONS
+   Aplicadas APENAS para dispositivos móveis
+======================================== */
+
+/* Previne overflow horizontal APENAS em mobile */
+@media screen and (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+  }
+}
+
+/* Header fixo sempre visível - MOBILE ONLY */
+@media screen and (max-width: 768px) {
+  .header, .navbar, [class*="header"], [class*="nav"] {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.75rem 1rem !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 1000 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 60px !important;
+    box-sizing: border-box;
+  }
+
+  /* Logo mobile */
+  .header .logo, .navbar .logo, [class*="logo"] {
+    font-size: 1rem !important;
+    font-weight: 600;
+    color: white !important;
+  }
+
+  /* Botões de idioma sempre visíveis - MOBILE */
+  .language-selector, [class*="language"], [class*="lang"] {
+    display: flex !important;
+    gap: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  .lang-btn, [class*="lang-btn"], .language-selector button {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.7rem !important;
+    transition: all 0.3s ease;
+    min-width: 30px;
+    min-height: 30px;
+  }
+
+  .lang-btn:hover, .lang-btn.active, 
+  [class*="lang-btn"]:hover, [class*="lang-btn"].active,
+  .language-selector button:hover, .language-selector button.active {
+    background: white !important;
+    color: black !important;
+    border-color: white !important;
+  }
+
+  /* Botões CTA sempre visíveis - MOBILE */
+  .cta-button, .header-cta, [class*="cta"], [class*="btn-primary"] {
+    background: white !important;
+    color: black !important;
+    border: none !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem !important;
+    min-height: 36px;
+  }
+
+  .cta-button:hover, .header-cta:hover, 
+  [class*="cta"]:hover, [class*="btn-primary"]:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    transform: translateY(-1px);
+  }
+
+  /* Container principal com padding para header fixo - MOBILE */
+  .container, .main-content, main, [class*="container"] {
+    padding-top: 70px !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Seções com espaçamento responsivo - MOBILE */
+  section {
+    padding: 2rem 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Lista de benefícios responsiva - MOBILE */
+  .benefits-list, .feature-list, ul li {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .benefits-list li, .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    border-left: 3px solid white;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .benefits-list li:before, .feature-list li:before {
+    content: "✓";
+    color: white;
+    font-weight: bold;
+    margin-right: 0.75rem;
+    font-size: 1em;
+    flex-shrink: 0;
+  }
+
+  /* Formulários responsivos - MOBILE */
+  .form-section, [class*="form"] {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .form-group, [class*="form-group"] {
+    margin-bottom: 1rem;
+  }
+
+  .form-input, input[type="text"], input[type="email"], input[type="tel"] {
+    width: 100% !important;
+    padding: 0.75rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 0.5rem;
+    font-size: 1rem !important;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    font-size: 16px !important; /* Previne zoom no iOS */
+  }
+
+  .form-input:focus, input:focus {
+    outline: none !important;
+    border-color: white !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  }
+
+  .form-input::placeholder, input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  /* Botões responsivos - MOBILE */
+  button, .btn, [class*="button"] {
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 1.5rem;
+    font-size: 1rem !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .btn-primary, [class*="primary"] {
+    background: white !important;
+    color: black !important;
+    border: 2px solid white !important;
+  }
+
+  .btn-secondary, [class*="secondary"] {
+    background: transparent !important;
+    color: white !important;
+    border: 2px solid white !important;
+  }
+
+  .btn-primary:hover, [class*="primary"]:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary:hover, [class*="secondary"]:hover {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Mobile pequeno - ajustes extras */
+@media screen and (max-width: 480px) {
+  .header, .navbar, [class*="header"] {
+    padding: 0.5rem !important;
+    flex-wrap: wrap;
+    height: auto !important;
+    min-height: 60px;
+  }
+
+  .header .logo, .navbar .logo {
+    font-size: 0.9rem !important;
+  }
+
+  .lang-btn, [class*="lang-btn"] {
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.65rem !important;
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  .cta-button, .header-cta, [class*="cta"] {
+    padding: 0.5rem !important;
+    font-size: 0.75rem !important;
+    min-height: 32px;
+  }
+
+  .container, .main-content, main {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  .benefits-list li, .feature-list li {
+    padding: 0.5rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .form-section, [class*="form"] {
+    padding: 1.5rem 0.75rem !important;
+  }
+}
+
+/* Landscape em mobile */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  .header, .navbar {
+    height: 50px !important;
+    padding: 0.5rem !important;
+  }
+  
+  .container, .main-content, main {
+    padding-top: 60px !important;
+  }
+}
+
+/* Touch targets mínimos para dispositivos touch */
+@media (pointer: coarse) {
+  button, .btn, .cta-button, .lang-btn, input, .form-input,
+  [class*="button"], [class*="btn"], [class*="cta"] {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+
+/* Melhora performance em mobile */
+@media screen and (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Previne zoom no iOS em inputs */
+  select, textarea, input[type="text"], input[type="email"], input[type="tel"] {
+    font-size: 16px !important;
+  }
+}
