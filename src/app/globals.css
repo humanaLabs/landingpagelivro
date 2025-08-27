@@ -7,51 +7,83 @@
   /* Base Colors */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
+
+  /* Card Colors */
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
+
+  /* Popover Colors */
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
+
+  /* Primary Colors */
   --primary: 222.2 84% 4.9%;
   --primary-foreground: 210 40% 98%;
+
+  /* Secondary Colors */
   --secondary: 210 40% 96%;
   --secondary-foreground: 222.2 84% 4.9%;
+
+  /* Muted Colors */
   --muted: 210 40% 96%;
   --muted-foreground: 215.4 16.3% 46.9%;
+
+  /* Accent Colors */
   --accent: 210 40% 96%;
   --accent-foreground: 222.2 84% 4.9%;
+
+  /* Destructive Colors */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
+
+  /* Border Colors */
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
   --ring: 222.2 84% 4.9%;
+
+  /* Radius */
   --radius: 0.5rem;
+
+  /* Font Families */
   --font-sans: "Poppins", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+
+  /* --- CUSTOM VARS (livro & paper) --- */
   --book-scale: 1.0;
   --book-offset: 65px;
+
   --paper-w: clamp(420px, 42vw, 760px);
   --paper-overlap: -110px;
   --paper-overlap-abs: 110px;
+
   --hero-text-pad: clamp(0rem, 1.2vw, 1rem);
 }
 
 [data-theme="dark"] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
+
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;
+
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
+
   --primary: 210 40% 98%;
   --primary-foreground: 222.2 84% 4.9%;
+
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
+
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
+
   --accent: 217.2 32.6% 17.5%;
   --accent-foreground: 210 40% 98%;
+
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
+
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 212.7 26.8% 83.9%;
@@ -70,7 +102,6 @@ html {
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
   font-size: 16px;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -81,7 +112,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: geometricPrecision;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 /* Tipografia responsiva */
@@ -124,6 +155,7 @@ img {
   object-fit: contain;
 }
 
+/* Flex e grid modernos */
 .flex { display: flex; }
 .grid { display: grid; }
 
@@ -142,9 +174,11 @@ img {
   :root {
     --book-scale: .96;
     --book-offset: 42px;
+
     --paper-w: clamp(360px, 58vw, 640px);
     --paper-overlap: -80px;
     --paper-overlap-abs: 80px;
+
     --hero-text-pad: clamp(0rem, 2vw, .75rem);
   }
 }
@@ -153,9 +187,11 @@ img {
   :root {
     --book-scale: .92;
     --book-offset: 28px;
+
     --paper-w: clamp(280px, 84vw, 520px);
     --paper-overlap: -40px;
     --paper-overlap-abs: 40px;
+
     --hero-text-pad: clamp(0rem, 4vw, .5rem);
   }
 
@@ -168,6 +204,7 @@ img {
   .text-design-mega { font-size: 2rem; line-height: 1.3; }
 }
 
+/* Sticky cross-browser */
 .sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -211,6 +248,7 @@ img {
 .scroll-slide-right { transform: translateX(80px); }
 .scroll-slide-right.animate { opacity: 1; transform: translateX(0); }
 
+/* Stagger */
 .scroll-stagger-1.animate { transition-delay: 0.1s; }
 .scroll-stagger-2.animate { transition-delay: 0.2s; }
 .scroll-stagger-3.animate { transition-delay: 0.3s; }
@@ -218,71 +256,52 @@ img {
 .scroll-stagger-5.animate { transition-delay: 0.5s; }
 .scroll-stagger-6.animate { transition-delay: 0.6s; }
 
+/* Fast/Slow/Bounce */
 .scroll-fast { transition-duration: 0.4s !important; }
 .scroll-slow { transition-duration: 1.2s !important; }
 .scroll-bounce { transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; }
 
+
 /* ========================================
-   CORREÇÕES ESPECÍFICAS PARA MOBILE
+   MOBILE OPTIMIZATION FIXES
+   Correções específicas para os problemas identificados
 ======================================== */
 
-/* Previne overflow horizontal e bordas brancas - FIX CRÍTICO */
+/* 1. REMOVER BORDAS BRANCAS LATERAIS - Aplicar em todo o site */
 @media screen and (max-width: 768px) {
   html, body {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
-    width: 100vw !important;
-    position: relative;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  
-  /* Remove bordas brancas laterais - FIX PONTO 1 */
-  * {
-    max-width: 100vw;
-    box-sizing: border-box !important;
-  }
-  
-  /* Containers e wrappers sem bordas brancas */
-  .container, .main-content, main, section, div {
-    max-width: 100vw !important;
-    width: 100% !important;
     overflow-x: hidden;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    width: 100%;
   }
-
-  /* Força background completo em seções */
-  section {
-    width: 100vw !important;
+  
+  /* Garantir que todos os containers ocupem 100% da largura */
+  *, *::before, *::after {
+    max-width: 100vw;
+  }
+  
+  .container, .main-content, main, section, div,
+  [class*="container"], [class*="section"], [class*="content"] {
+    width: 100% !important;
+    max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  /* Aplicar padding interno apenas onde necessário */
+  .inner-content, .text-content, p, h1, h2, h3, h4, h5, h6 {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
-
-  /* Background preto/branco preenchendo tudo */
-  .hero-section, .dark-section, .black-section {
-    background: black !important;
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%) !important;
-    padding-left: calc(50vw - 50%) !important;
-    padding-right: calc(50vw - 50%) !important;
-  }
-
-  .white-section, .light-section {
-    background: white !important;
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%) !important;
-    padding-left: calc(50vw - 50%) !important;
-    padding-right: calc(50vw - 50%) !important;
-  }
 }
 
-/* Header móvel - FIX PONTO 2 - Botões lado a lado */
+/* 2. HEADER - Elementos lado a lado como no desktop */
 @media screen and (max-width: 768px) {
-  /* Header fixo sempre visível */
-  .header, .navbar, [class*="header"], [class*="nav"], header {
+  .header, .navbar, [class*="header"], [class*="nav"] {
     position: fixed !important;
     top: 0;
     left: 0;
@@ -295,35 +314,34 @@ img {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    z-index: 9999 !important;
+    z-index: 1000 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     height: 60px !important;
     box-sizing: border-box;
-    flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important; /* Manter tudo em uma linha */
   }
 
-  /* Logo responsivo */
-  .header .logo, .navbar .logo, [class*="logo"], .logo {
+  /* Logo à esquerda */
+  .header .logo, .navbar .logo, [class*="logo"] {
     font-size: 1rem !important;
     font-weight: 600;
     color: white !important;
     flex-shrink: 0;
-    white-space: nowrap;
   }
 
-  /* Container dos botões do header - lado a lado */
-  .header-buttons, .header-actions, .nav-actions {
+  /* Container direito com idiomas e CTA */
+  .header-right, .navbar-right {
     display: flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
+    align-items: center;
+    gap: 0.75rem;
     flex-shrink: 0;
   }
 
-  /* Botões de idioma - FIX PONTO 2 */
+  /* Seletor de idioma compacto ao lado do botão */
   .language-selector, [class*="language"], [class*="lang"] {
     display: flex !important;
-    gap: 0.25rem !important;
-    align-items: center !important;
+    gap: 0.25rem;
+    margin: 0 !important;
   }
 
   .lang-btn, [class*="lang-btn"], .language-selector button {
@@ -331,466 +349,307 @@ img {
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
     color: white !important;
     padding: 0.25rem 0.5rem !important;
-    border-radius: 0.25rem !important;
+    border-radius: 0.25rem;
     cursor: pointer;
-    font-size: 0.7rem !important;
+    font-size: 0.75rem !important;
     transition: all 0.3s ease;
-    min-width: 30px !important;
-    min-height: 30px !important;
-    flex-shrink: 0;
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .lang-btn:hover, .lang-btn.active, 
-  [class*="lang-btn"]:hover, [class*="lang-btn"].active,
-  .language-selector button:hover, .language-selector button.active {
+  [class*="lang-btn"]:hover, [class*="lang-btn"].active {
     background: white !important;
     color: black !important;
     border-color: white !important;
   }
 
-  /* Botão CTA do header - lado a lado com idiomas */
-  .header-cta, .cta-header, [class*="get-my-copy"], .get-copy-btn {
+  /* Botão CTA no header */
+  .cta-button, .header-cta, [class*="header"] .cta-button {
     background: white !important;
     color: black !important;
     border: none !important;
     padding: 0.5rem 0.75rem !important;
-    border-radius: 1.5rem !important;
+    border-radius: 1.5rem;
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
-    text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.8rem !important;
-    min-height: 36px !important;
-    white-space: nowrap !important;
-    flex-shrink: 0;
-    margin-left: 0.5rem !important;
-  }
-
-  .header-cta:hover, .cta-header:hover, 
-  [class*="get-my-copy"]:hover, .get-copy-btn:hover {
-    background: rgba(255, 255, 255, 0.9) !important;
-    transform: translateY(-1px);
+    min-height: 36px;
+    white-space: nowrap;
   }
 }
 
-/* Seções principais - FIX das imagens 2, 3, 4 */
+/* 3. SEÇÃO BENEFÍCIOS - Corrigir posicionamento da imagem do robô */
 @media screen and (max-width: 768px) {
-  /* Container principal com padding correto */
-  .container, .main-content, main, [class*="container"] {
-    padding-top: 70px !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  /* Seções com espaçamento */
-  section {
-    padding: 2rem 1rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  /* Hero section */
-  .hero, [class*="hero"] {
-    text-align: center !important;
-    padding: 3rem 1rem 2rem !important;
-  }
-
-  /* Títulos responsivos */
-  h1, .h1 {
-    font-size: clamp(1.75rem, 6vw, 2.5rem) !important;
-    line-height: 1.2 !important;
-    margin-bottom: 1rem !important;
-  }
-
-  h2, .h2 {
-    font-size: clamp(1.5rem, 5vw, 2rem) !important;
-    line-height: 1.3 !important;
-    margin-bottom: 1rem !important;
-  }
-
-  /* Parágrafos */
-  p {
-    font-size: clamp(0.875rem, 4vw, 1rem) !important;
-    line-height: 1.5 !important;
-    margin-bottom: 1rem !important;
-  }
-}
-
-/* Imagens de livro - FIX das imagens 2, 5 */
-@media screen and (max-width: 768px) {
-  .book-image, .product-image, [class*="book"], [class*="product"] {
-    max-width: 280px !important;
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 auto 2rem !important;
-    display: block !important;
-  }
-
-  /* Container de imagem */
-  .image-container, .book-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 2rem 0 !important;
-    padding: 0 1rem !important;
-  }
-}
-
-/* Formulários - FIX das imagens 1, 6 */
-@media screen and (max-width: 768px) {
-  .form-section, [class*="form"], form {
-    background: rgba(0, 0, 0, 0.8) !important;
-    padding: 2rem 1rem !important;
-    border-radius: 1rem;
-    margin: 2rem 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  .form-group, [class*="form-group"] {
-    margin-bottom: 1.25rem !important;
-    width: 100%;
-  }
-
-  .form-input, input[type="text"], input[type="email"], input[type="tel"],
-  input[name="nome"], input[name="email"], input[name="telefone"] {
-    width: 100% !important;
-    padding: 1rem !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
-    border-radius: 0.5rem !important;
-    font-size: 16px !important; /* Previne zoom no iOS */
-    transition: all 0.3s ease;
-    min-height: 50px !important;
-    box-sizing: border-box !important;
-  }
-
-  .form-input:focus, input:focus {
-    outline: none !important;
-    border-color: white !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
-  }
-
-  .form-input::placeholder, input::placeholder {
-    color: rgba(255, 255, 255, 0.6) !important;
-    font-size: 0.9rem !important;
-  }
-
-  /* Labels dos formulários */
-  label {
-    color: white !important;
-    font-weight: 500 !important;
-    margin-bottom: 0.5rem !important;
-    display: block !important;
-  }
-
-  /* Título do formulário */
-  .form-title, h2 {
-    color: white !important;
-    text-align: center !important;
-    margin-bottom: 1rem !important;
-  }
-}
-
-/* Botão Access Free Preview - FIX PONTO 4 */
-@media screen and (max-width: 768px) {
-  .preview-btn, .access-preview, [class*="preview"], [class*="access-free"] {
-    padding: 0.75rem 1.5rem !important;
-    border-radius: 1.5rem !important;
-    font-size: 0.875rem !important;
-    font-weight: 600 !important;
+  .benefits-section, [class*="benefit"] {
     background: white !important;
     color: black !important;
-    border: 2px solid black !important;
-    cursor: pointer;
-    min-height: 44px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-decoration: none !important;
-    margin: 1rem 0 !important;
-    transition: all 0.3s ease;
-    width: auto !important;
-    max-width: 200px !important;
+    padding: 3rem 0 !important;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .preview-btn:hover, .access-preview:hover, 
-  [class*="preview"]:hover, [class*="access-free"]:hover {
+  /* Container dos benefícios */
+  .benefits-container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  /* Título primeiro */
+  .benefits-title, .benefits-section h2, .benefits-section h3 {
+    font-size: clamp(1.5rem, 4vw, 2rem) !important;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 2rem 0 !important;
+    padding: 0 1rem;
+    color: black !important;
+    order: 1;
+  }
+
+  /* Lista de benefícios */
+  .benefits-list, .feature-list {
+    list-style: none;
+    padding: 0 1rem;
+    margin: 0;
+    width: 100%;
+    max-width: 600px;
+    order: 2;
+  }
+
+  .benefits-list li, .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    border-left: 3px solid black;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: black !important;
+  }
+
+  .benefits-list li:before, .feature-list li:before {
+    content: "✓";
+    color: black;
+    font-weight: bold;
+    margin-right: 0.75rem;
+    font-size: 1em;
+    flex-shrink: 0;
+  }
+
+  /* Imagem do robô por último */
+  .robot-image, .benefits-image, .book-robot-image {
+    order: 3;
+    width: 100% !important;
+    max-width: 300px;
+    height: auto;
+    margin: 2rem auto 0 auto;
+    display: block;
+    z-index: 1;
+  }
+}
+
+/* 4. BOTÃO "ACCESS FREE PREVIEW" - Normalizar tamanho */
+@media screen and (max-width: 768px) {
+  .preview-button, [class*="preview"], .free-preview-btn,
+  .cta-button:not(.header .cta-button):not(.header-cta) {
     background: black !important;
     color: white !important;
+    border: 2px solid black !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 1.5rem;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin: 1rem auto;
+    max-width: 200px;
+    width: auto;
+  }
+
+  .preview-button:hover, [class*="preview"]:hover, .free-preview-btn:hover {
+    background: transparent !important;
+    color: black !important;
     transform: translateY(-2px);
   }
 }
 
-/* Seção da mão robô + livro - FIX PONTO 3 */
+/* 5. FOOTER - Reorganizar elementos na ordem correta */
 @media screen and (max-width: 768px) {
-  /* Container da seção benefícios */
-  .benefits-section, .robot-hand-section, [class*="benefits"] {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    padding: 2rem 1rem !important;
-    background: white !important;
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%) !important;
-    padding-left: calc(50vw - 50% + 1rem) !important;
-    padding-right: calc(50vw - 50% + 1rem) !important;
-  }
-
-  /* Título de benefícios SEMPRE no topo */
-  .benefits-title, .section-title, h2 {
-    order: 1 !important;
-    margin-bottom: 1.5rem !important;
-    color: black !important;
-    text-align: center !important;
-    font-size: clamp(1.5rem, 5vw, 2rem) !important;
-    line-height: 1.3 !important;
+  .footer, footer {
+    background: black !important;
+    color: white !important;
+    padding: 3rem 0 1rem 0;
     width: 100% !important;
-    z-index: 2 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
   }
 
-  /* Lista de benefícios após o título */
-  .benefits-list, .feature-list, .checklist {
-    order: 2 !important;
-    width: 100% !important;
-    margin: 1rem 0 2rem !important;
-    z-index: 2 !important;
+  /* Formulário primeiro */
+  .footer-form, .newsletter-form, [class*="form"] {
+    order: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    margin: 0 1rem;
+    width: calc(100% - 2rem);
+    max-width: 400px;
   }
 
-  /* Imagem da mão robô SEMPRE por último */
-  .robot-hand-image, .hand-book-image, .product-showcase {
-    order: 3 !important;
-    max-width: 300px !important;
-    width: 100% !important;
-    height: auto !important;
-    margin: 2rem auto 0 !important;
-    display: block !important;
-    z-index: 1 !important;
+  /* Redes sociais do site */
+  .social-links, .website-social, [class*="social"]:not([class*="author"]) {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
   }
 
-  /* Força ordem dos elementos filho */
-  .benefits-section > *, .robot-hand-section > * {
-    position: relative !important;
+  .social-links::before, .website-social::before {
+    content: "HUMANA AI WEBSITE:";
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
   }
 
-  .benefits-section > h2, .robot-hand-section > h2,
-  .benefits-section > .benefits-title, .robot-hand-section > .section-title {
-    order: 1 !important;
+  /* Redes sociais do autor */
+  .author-social, [class*="author-social"] {
+    order: 3;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    margin-top: 1rem;
   }
 
-  .benefits-section > ul, .robot-hand-section > ul,
-  .benefits-section > .benefits-list, .robot-hand-section > .feature-list {
-    order: 2 !important;
+  .author-social::before {
+    content: "EDUARDO IBRAHIM:";
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
   }
 
-  .benefits-section > img, .robot-hand-section > img,
-  .benefits-section > .robot-hand-image, .robot-hand-section > .hand-book-image {
-    order: 3 !important;
+  /* Links de política e termos */
+  .footer-links, .legal-links {
+    order: 4;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
+  }
+
+  .footer-links a, .legal-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover, .legal-links a:hover {
+    color: white;
+  }
+
+  /* Editora por último */
+  .publisher, .footer-publisher, [class*="publisher"] {
+    order: 5;
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .publisher-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
   }
 }
 
-/* Footer organizado - FIX PONTO 5 */
+/* Container principal com padding para header fixo */
 @media screen and (max-width: 768px) {
-  footer, .footer {
-    padding: 2rem 1rem !important;
-    text-align: center !important;
-    background: rgba(0, 0, 0, 0.95) !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%) !important;
-    padding-left: calc(50vw - 50% + 1rem) !important;
-    padding-right: calc(50vw - 50% + 1rem) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1.5rem !important;
-  }
-
-  /* Redes sociais corporativas - primeiro */
-  .corporate-social, .company-social, [class*="corporate-social"] {
-    order: 1 !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 1rem !important;
-    margin: 0 !important;
-  }
-
-  .corporate-social a, .company-social a {
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 1.5rem !important;
-    transition: color 0.3s ease;
-  }
-
-  .corporate-social a:hover, .company-social a:hover {
-    color: white !important;
-  }
-
-  /* Redes sociais do autor - segundo */
-  .author-social, .personal-social, [class*="author-social"] {
-    order: 2 !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 1rem !important;
-    margin: 0 !important;
-  }
-
-  .author-social a, .personal-social a {
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 1.5rem !important;
-    transition: color 0.3s ease;
-  }
-
-  .author-social a:hover, .personal-social a:hover {
-    color: white !important;
-  }
-
-  /* Links de políticas e termos - terceiro */
-  .footer-links, .footer-nav, .legal-links {
-    order: 3 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-    margin: 1rem 0 !important;
-  }
-
-  .footer-links a, .footer-nav a, .legal-links a {
-    color: rgba(255, 255, 255, 0.7) !important;
-    text-decoration: none !important;
-    padding: 0.5rem !important;
-    font-size: 0.875rem !important;
-    transition: color 0.3s ease;
-  }
-
-  .footer-links a:hover, .footer-nav a:hover, .legal-links a:hover {
-    color: white !important;
-  }
-
-  /* Nome da editora - por último */
-  .publisher, .publisher-name, .editora, [class*="publisher"] {
-    order: 4 !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-    font-size: 0.8rem !important;
-    margin-top: 1rem !important;
-    padding-top: 1rem !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
-  }
-
-  /* Força a ordem dos elementos no footer */
-  footer > *, .footer > * {
-    margin: 0.5rem 0 !important;
-  }
-
-  /* Texto específico de "HUMANA AI WEBSITE" e similares */
-  .website-credit, [class*="website"], [class*="humana"] {
-    order: 1 !important;
-  }
-
-  /* Texto de "Alta Books Publisher" e similares */
-  .publisher-credit, [class*="alta"], [class*="books"] {
-    order: 4 !important;
-  }
-
-  /* Links de política de privacidade, termos, contato */
-  .privacy-link, .terms-link, .contact-link,
-  [href*="privacy"], [href*="terms"], [href*="contact"] {
-    order: 3 !important;
+  .container, .main-content, main {
+    padding-top: 70px !important;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
-/* Ajustes para telas muito pequenas */
+/* Mobile pequeno - ajustes extras */
 @media screen and (max-width: 480px) {
-  .container, .main-content, main {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+  .header, .navbar {
+    padding: 0.5rem !important;
+    height: auto !important;
+    min-height: 60px;
   }
 
-  section {
-    padding: 1.5rem 0.75rem !important;
+  .header .logo, .navbar .logo {
+    font-size: 0.9rem !important;
   }
 
-  .form-section, form {
-    padding: 1.5rem 1rem !important;
+  .lang-btn, [class*="lang-btn"] {
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.65rem !important;
+    min-width: 28px;
+    min-height: 28px;
   }
 
-  .form-input, input {
-    padding: 0.875rem !important;
-    min-height: 48px !important;
+  .cta-button, .header-cta {
+    padding: 0.5rem !important;
+    font-size: 0.75rem !important;
+    min-height: 32px;
   }
 
-  button, .btn {
-    padding: 0.875rem 1.5rem !important;
-    min-height: 48px !important;
-  }
-
-  h1, .h1 {
-    font-size: 1.75rem !important;
-  }
-
-  h2, .h2 {
+  .benefits-title {
     font-size: 1.5rem !important;
   }
-}
 
-/* Performance e touch em mobile */
-@media (pointer: coarse) {
-  button, .btn, .cta-button, input, .form-input,
-  [class*="button"], [class*="btn"], [class*="cta"] {
-    min-height: 44px !important;
-    min-width: 44px !important;
-  }
-
-  * {
-    -webkit-tap-highlight-color: transparent;
+  .benefits-list li {
+    padding: 0.75rem !important;
+    font-size: 0.85rem !important;
   }
 }
 
-/* Landscape em mobile */
-@media screen and (max-width: 900px) and (orientation: landscape) {
-  .header, .navbar {
-    height: 50px !important;
-    padding: 0.5rem 1rem !important;
-  }
-  
-  .container, .main-content, main {
-    padding-top: 60px !important;
-  }
-
-  section {
-    padding: 1.5rem 1rem !important;
-  }
-}
-
-/* Correção específica para elementos que saem da tela */
+/* Garantir que backgrounds se estendem completamente */
 @media screen and (max-width: 768px) {
-  /* Força todos os elementos a respeitarem o viewport */
-  * {
-    box-sizing: border-box !important;
-  }
-  
-  /* Containers específicos que podem causar overflow */
-  .hero-section, .cta-section, .book-section, .form-section {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Textos que podem quebrar o layout */
-  .hero-title, .section-title, h1, h2, h3 {
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
+  .hero-section, .about-section, .benefits-section, 
+  .testimonials-section, .faq-section, .footer,
+  [class*="section"], [class*="hero"], [class*="about"] {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    padding-left: calc(50vw - 50%) !important;
+    padding-right: calc(50vw - 50%) !important;
   }
 }
