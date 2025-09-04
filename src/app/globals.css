@@ -48,48 +48,41 @@
   --font-sans: "Poppins", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  /* --- CUSTOM VARS (livro & paper) --- */
-  --book-scale: 1.0;
-  --book-offset: 65px;
-
-  --paper-w: clamp(420px, 42vw, 760px);
-  --paper-overlap: -110px;
-  --paper-overlap-abs: 110px;
-
-  --hero-text-pad: clamp(0rem, 1.2vw, 1rem);
+  /* Mobile Variables */
+  --book-scale: .92;
+  --book-offset: 28px;
+  --paper-w: clamp(280px, 84vw, 520px);
+  --paper-overlap: -40px;
+  --paper-overlap-abs: 40px;
+  --hero-text-pad: clamp(0rem, 4vw, .5rem);
 }
 
 [data-theme="dark"] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
-
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;
-
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
-
   --primary: 210 40% 98%;
   --primary-foreground: 222.2 84% 4.9%;
-
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
-
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
-
   --accent: 217.2 32.6% 17.5%;
   --accent-foreground: 210 40% 98%;
-
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
-
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 212.7 26.8% 83.9%;
 }
 
-/* Reset básico */
+/* ========================================
+   RESET E BASE STYLES
+======================================== */
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -101,7 +94,13 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  font-size: 16px;
+  font-size: 14px;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  overflow-x: hidden !important;
+  background: #fff !important;
 }
 
 body {
@@ -113,18 +112,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: geometricPrecision;
   min-height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  overflow-x: hidden !important;
+  background: #fff !important;
 }
 
-/* Tipografia responsiva */
+/* ========================================
+   TIPOGRAFIA MOBILE
+======================================== */
+
 .text-design-mega {
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: 2rem;
   line-height: 1.3;
   font-weight: 600;
-  word-break: keep-all;
 }
 
 .text-design-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: 1.75rem;
   line-height: 1.3;
   font-weight: 600;
 }
@@ -147,7 +154,10 @@ body {
   font-weight: 500;
 }
 
-/* Imagens responsivas */
+/* ========================================
+   ELEMENTOS BASE
+======================================== */
+
 img {
   max-width: 100%;
   height: auto;
@@ -155,7 +165,6 @@ img {
   object-fit: contain;
 }
 
-/* Flex e grid modernos */
 .flex { display: flex; }
 .grid { display: grid; }
 
@@ -169,48 +178,15 @@ img {
 ::-webkit-scrollbar-thumb { background: hsl(var(--muted-foreground)); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent-foreground)); }
 
-/* Responsividade extra */
-@media screen and (max-width: 1024px) {
-  :root {
-    --book-scale: .96;
-    --book-offset: 42px;
-
-    --paper-w: clamp(360px, 58vw, 640px);
-    --paper-overlap: -80px;
-    --paper-overlap-abs: 80px;
-
-    --hero-text-pad: clamp(0rem, 2vw, .75rem);
-  }
-}
-
-@media screen and (max-width: 640px) {
-  :root {
-    --book-scale: .92;
-    --book-offset: 28px;
-
-    --paper-w: clamp(280px, 84vw, 520px);
-    --paper-overlap: -40px;
-    --paper-overlap-abs: 40px;
-
-    --hero-text-pad: clamp(0rem, 4vw, .5rem);
-  }
-
-  .text-design-mega { font-size: 2.5rem; line-height: 1.3; }
-  .text-design-title { font-size: 1.75rem; line-height: 1.3; }
-}
-
-@media screen and (max-width: 480px) {
-  html { font-size: 14px; }
-  .text-design-mega { font-size: 2rem; line-height: 1.3; }
-}
-
-/* Sticky cross-browser */
 .sticky {
   position: -webkit-sticky;
   position: sticky;
 }
 
-/* --- ANIMAÇÕES DE SCROLL --- */
+/* ========================================
+   ANIMAÇÕES DE SCROLL
+======================================== */
+
 .scroll-fade-in,
 .scroll-fade-in-left,
 .scroll-fade-in-right,
@@ -227,6 +203,7 @@ img {
   backface-visibility: hidden;
   perspective: 1000px;
 }
+
 .scroll-fade-in { transform: translateY(30px); }
 .scroll-fade-in.animate { opacity: 1; transform: translateY(0); }
 .scroll-fade-in-left { transform: translateX(-60px); }
@@ -261,1064 +238,308 @@ img {
 .scroll-slow { transition-duration: 1.2s !important; }
 .scroll-bounce { transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; }
 
-
 /* ========================================
-   MOBILE OPTIMIZATION FIXES - VERSÃO CORRIGIDA
-   Correções específicas para os problemas identificados
+   FULL-BLEED DE FUNDO (Mobile Only)
 ======================================== */
 
-/* 1. REMOVER BORDAS BRANCAS LATERAIS E REDUZIR TAMANHOS GERAIS */
-@media screen and (max-width: 768px) {
-  html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    font-size: 14px; /* Reduzir fonte base */
-  }
-  
-  /* Garantir que todos os containers ocupem 100% da largura */
-  *, *::before, *::after {
-    max-width: 100vw;
-  }
-  
-  .container, .main-content, main, section, div,
-  [class*="container"], [class*="section"], [class*="content"] {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  
-  /* Padding interno apenas onde necessário - REDUZIDO */
-  .inner-content, .text-content, p, h1, h2, h3, h4, h5, h6 {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-    font-size: 0.85rem !important;
-    line-height: 1.4 !important;
-  }
-  
-  h1, h2, h3 { font-size: 1.2rem !important; }
-  h4, h5, h6 { font-size: 1rem !important; }
+section.bg-black,
+section.bg-white {
+  position: relative;
+  isolation: isolate;
 }
 
-/* 2. HEADER CORRIGIDO - Logo com espaço + Idioma e botão lado a lado */
-@media screen and (max-width: 768px) {
-  .header, .navbar, [class*="header"], [class*="nav"] {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100% !important;
-    background: rgba(0, 0, 0, 0.95) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 0.5rem 0.75rem !important; /* Reduzido */
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    z-index: 1000 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    height: 50px !important; /* Reduzido */
-    box-sizing: border-box;
-    flex-wrap: nowrap !important;
-  }
-
-  /* Logo com espaçamento da borda */
-  .header .logo, .navbar .logo, [class*="logo"] {
-    font-size: 0.85rem !important; /* Reduzido */
-    font-weight: 600;
-    color: white !important;
-    flex-shrink: 0;
-    padding-left: 0.5rem !important; /* Espaço da borda */
-  }
-
-  /* Container direito - idiomas E botão lado a lado */
-  .header-right, .navbar-right, .language-selector {
-    display: flex !important;
-    align-items: center;
-    gap: 0.5rem !important; /* Espaço entre idioma e botão */
-    flex-shrink: 0;
-  }
-
-  /* Seletor de idioma COMPACTO */
-  .lang-btn, [class*="lang-btn"], .language-selector button {
-    background: transparent !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    color: white !important;
-    padding: 0.2rem 0.4rem !important; /* Bem pequeno */
-    border-radius: 0.2rem;
-    cursor: pointer;
-    font-size: 0.65rem !important; /* Muito pequeno */
-    transition: all 0.3s ease;
-    min-width: 26px; /* Compacto */
-    min-height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .lang-btn:hover, .lang-btn.active, 
-  [class*="lang-btn"]:hover, [class*="lang-btn"].active {
-    background: white !important;
-    color: black !important;
-  }
-
-  /* Botão CTA COMPACTO ao lado do idioma */
-  .cta-button, .header-cta, [class*="header"] .cta-button {
-    background: white !important;
-    color: black !important;
-    border: none !important;
-    padding: 0.3rem 0.6rem !important; /* Compacto */
-    border-radius: 1rem;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.65rem !important; /* Pequeno */
-    min-height: 26px; /* Igual ao idioma */
-    white-space: nowrap;
-  }
+/* Header preto em largura total */
+section.bg-black::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  box-shadow: 0 0 0 100vmax #000;
+  clip-path: inset(0 -100vmax);
 }
 
-/* 3. TODAS AS IMAGENS REDUZIDAS */
-@media screen and (max-width: 768px) {
-  img, .book-image, .robot-image, .author-image, 
-  [class*="image"], [class*="img"] {
-    max-width: 60% !important; /* Reduzido de 100% */
-    height: auto !important;
-    display: block;
-    margin: 0.5rem auto !important; /* Centralizado com margem pequena */
-  }
-  
-  /* Imagens de livro ainda menores */
-  .book-cover, .livro, [class*="book"] img {
-    max-width: 40% !important;
-    max-height: 200px !important;
-  }
-  
-  /* Imagem do robô específica */
-  .robot-hand, .robot-image, .benefits-image {
-    max-width: 50% !important;
-    max-height: 150px !important;
-  }
+/* Seção branca em largura total */
+section.bg-white::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  box-shadow: 0 0 0 100vmax #fff;
+  clip-path: inset(0 -100vmax);
 }
 
-/* 4. SEÇÃO BENEFÍCIOS CORRIGIDA - Texto acima, imagem abaixo */
-@media screen and (max-width: 768px) {
-  .benefits-section, [class*="benefit"] {
-    background: white !important;
-    color: black !important;
-    padding: 2rem 0 !important; /* Reduzido */
-    width: 100% !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  /* Título dos benefícios - PRIMEIRO */
-  .benefits-title, .benefits-section h2, .benefits-section h3 {
-    font-size: 1.3rem !important; /* Reduzido */
-    font-weight: 600;
-    text-align: center;
-    margin: 0 0 1rem 0 !important;
-    padding: 0 0.75rem;
-    color: black !important;
-    order: 1 !important;
-  }
+/* ========================================
+   HEADER MOBILE - APENAS PARA DISPOSITIVOS MÓVEIS
+======================================== */
 
-  /* Lista de benefícios - SEGUNDO */
-  .benefits-list, .feature-list {
-    list-style: none;
-    padding: 0 0.75rem;
-    margin: 0 0 1.5rem 0;
-    width: 100%;
-    max-width: 500px; /* Reduzido */
-    order: 2 !important;
-  }
-
-  .benefits-list li, .feature-list li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 0.75rem; /* Reduzido */
-    padding: 0.75rem; /* Reduzido */
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 0.4rem;
-    border-left: 2px solid black; /* Reduzido */
-    font-size: 0.8rem !important; /* Reduzido */
-    line-height: 1.3;
-    color: black !important;
-  }
-
-  .benefits-list li:before, .feature-list li:before {
-    content: "✓";
-    color: black;
-    font-weight: bold;
-    margin-right: 0.5rem; /* Reduzido */
-    font-size: 0.9em;
-    flex-shrink: 0;
-  }
-
-  /* Imagem do robô - TERCEIRO E MENOR */
-  .robot-image, .benefits-image, .book-robot-image {
-    order: 3 !important;
-    width: 40% !important; /* Bem menor */
-    max-width: 150px !important; /* Limite máximo */
-    height: auto;
-    margin: 1rem auto 0 auto;
-    display: block;
-  }
-}
-
-/* 5. SEÇÃO DO AUTOR ARREDONDADA E COMPACTA */
-@media screen and (max-width: 768px) {
-  .author-section, [class*="author"] {
-    background: white !important;
-    padding: 2rem 0.75rem !important; /* Reduzido */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .author-card, .author-info {
-    background: rgba(0, 0, 0, 0.05) !important;
-    border-radius: 1rem !important; /* Arredondado */
-    padding: 1.5rem 1rem !important; /* Compacto */
-    max-width: 400px !important; /* Limitado */
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-  
-  .author-name, .author-card h3 {
-    font-size: 1.1rem !important; /* Reduzido */
-    font-weight: 600;
-    margin-bottom: 1rem !important;
-    color: black !important;
-  }
-  
-  .author-bio, .author-description {
-    font-size: 0.8rem !important; /* Reduzido */
-    line-height: 1.4;
-    color: #333 !important;
-  }
-  
-  .author-photo, .author-image {
-    width: 60px !important; /* Bem pequeno */
-    height: 60px !important;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-  }
-}
-
-/* 6. FAQ CORRIGIDA - Layout melhorado */
-@media screen and (max-width: 768px) {
-  .faq-section, [class*="faq"] {
-    background: white !important;
-    padding: 2rem 0.75rem !important;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Título FAQ */
-  .faq-title, .faq-section h2 {
-    font-size: 1.3rem !important;
-    text-align: center;
-    margin-bottom: 1.5rem !important;
-    order: 1;
-  }
-  
-  /* Perguntas primeiro */
-  .faq-list, .faq-questions {
-    order: 2;
-    margin-bottom: 2rem;
-  }
-  
-  .faq-item, .faq-question {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 0.5rem;
-    margin-bottom: 0.75rem;
-    padding: 1rem;
-  }
-  
-  .faq-question h4 {
-    font-size: 0.9rem !important;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: black !important;
-  }
-  
-  .faq-answer p {
-    font-size: 0.8rem !important;
-    line-height: 1.4;
-    color: #555 !important;
-  }
-  
-  /* Imagem FAQ menor e por último */
-  .faq-image {
-    order: 3;
-    width: 100% !important;
-    max-width: 250px !important; /* Bem menor */
-    height: auto;
-    margin: 0 auto;
-    border-radius: 0.5rem;
-  }
-}
-
-/* 7. FOOTER REORGANIZADO CORRETAMENTE */
-@media screen and (max-width: 768px) {
-  .footer, footer {
-    background: black !important;
-    color: white !important;
-    padding: 2rem 0 1rem 0 !important; /* Reduzido */
-    width: 100% !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem; /* Reduzido */
-  }
-
-  /* 1. Formulário primeiro */
-  .footer-form, .newsletter-form, [class*="form"] {
-    order: 1;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem 1rem; /* Reduzido */
-    border-radius: 0.75rem;
-    margin: 0 0.75rem;
-    width: calc(100% - 1.5rem);
-    max-width: 350px; /* Reduzido */
-  }
-
-  /* 2. Redes sociais da empresa */
-  .social-corporate, .website-social, [class*="humana"] {
-    order: 2;
-    text-align: center;
-    padding: 0 0.75rem;
-  }
-
-  .social-corporate::before, .website-social::before {
-    content: "HUMANA AI WEBSITE:";
-    display: block;
-    font-size: 0.7rem !important; /* Pequeno */
-    margin-bottom: 0.5rem;
-    opacity: 0.7;
-    font-weight: 500;
-  }
-
-  .social-corporate a, .website-social a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.8rem;
-    margin: 0 0.5rem;
-  }
-
-  /* 3. Redes sociais do autor */
-  .social-author, [class*="eduardo"], [class*="ibrahim"] {
-    order: 3;
-    text-align: center;
-    padding: 0 0.75rem;
-  }
-
-  .social-author::before {
-    content: "EDUARDO IBRAHIM:";
-    display: block;
-    font-size: 0.7rem !important; /* Pequeno */
-    margin-bottom: 0.5rem;
-    opacity: 0.7;
-    font-weight: 500;
-  }
-
-  .social-author a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.8rem;
-    margin: 0 0.5rem;
-  }
-
-  /* 4. Nome da editora */
-  .publisher, .footer-publisher, [class*="alta"], [class*="books"] {
-    order: 4;
-    text-align: center;
-    padding: 1rem 0.75rem 0.5rem 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    width: 100%;
-  }
-
-  .publisher-name {
-    font-size: 0.85rem !important; /* Reduzido */
-    font-weight: 600;
-    opacity: 0.8;
-  }
-
-  /* 5. Políticas e termos por último */
-  .footer-links, .legal-links, [class*="privacy"], [class*="terms"] {
-    order: 5;
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    padding: 0.5rem 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    width: 100%;
-  }
-
-  .footer-links a, .legal-links a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    font-size: 0.7rem !important; /* Pequeno */
-    transition: color 0.3s ease;
-  }
-
-  .footer-links a:hover, .legal-links a:hover {
-    color: white;
-  }
-}
-
-/* 8. BOTÕES NORMALIZADOS */
-@media screen and (max-width: 768px) {
-  .preview-button, [class*="preview"], .free-preview-btn,
-  .cta-button:not(.header .cta-button):not(.header-cta) {
-    background: black !important;
-    color: white !important;
-    border: 2px solid black !important;
-    padding: 0.6rem 1.2rem !important; /* Reduzido */
-    border-radius: 1.2rem;
-    font-size: 0.8rem !important; /* Reduzido */
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    min-height: 40px; /* Reduzido */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    margin: 0.75rem auto;
-    max-width: 180px; /* Reduzido */
-    width: auto;
-  }
-
-  .preview-button:hover, [class*="preview"]:hover {
-    background: transparent !important;
-    color: black !important;
-    transform: translateY(-1px);
-  }
-}
-
-/* Container principal com padding para header fixo REDUZIDO */
-@media screen and (max-width: 768px) {
-  .container, .main-content, main {
-    padding-top: 60px !important; /* Reduzido para header menor */
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  /* Seções com menos espaçamento */
-  section {
-    padding: 1.5rem 0 !important; /* Reduzido */
-  }
-}
-
-/* Mobile muito pequeno */
-@media screen and (max-width: 480px) {
-  html { font-size: 13px !important; }
-  
-  .header { height: 45px !important; }
-  .container, main { padding-top: 55px !important; }
-  
-  .lang-btn { min-width: 24px !important; min-height: 24px !important; }
-  .cta-button, .header-cta { min-height: 24px !important; }
-  
-  img { max-width: 50% !important; }
-  .book-cover { max-width: 35% !important; }
-  .robot-image { max-width: 40% !important; }
-}
-
-/* Garantir backgrounds completos */
-@media screen and (max-width: 768px) {
-  .hero-section, .about-section, .benefits-section, 
-  .testimonials-section, .faq-section, .footer,
-  [class*="section"] {
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%) !important;
-    padding-left: calc(50vw - 50%) !important;
-    padding-right: calc(50vw - 50%) !important;
+/* Aplicar apenas em telas menores que 768px (mobile) */
+@media (max-width: 767px) {
+  header img[src*="economiaguiadaporia"], 
+  .logo img, 
+  header .logo {
+    height: 2rem !important;
+    width: auto !important;
+    max-width: 70% !important;
   }
 }
 
 /* ========================================
-   CORREÇÕES ESPECÍFICAS PARA MOBILE
-   Baseadas nos problemas identificados pelo usuário
+   HERO SECTION MOBILE
 ======================================== */
 
-/* 1. HERO SECTION - Corrigir ordem: título → texto → botão → livro */
-@media screen and (max-width: 768px) {
-  .hero-section, [class*="hero"] {
-    padding: 1rem 0.75rem 2rem 0.75rem !important;
-    text-align: center;
-    min-height: auto !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  /* Título primeiro */
-  .hero-section h1, [class*="hero"] h1 {
-    order: 1 !important;
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    margin: 0 !important;
-    color: black !important;
-    text-align: center;
-    width: 100%;
-    max-width: 90%;
-  }
-
-  /* Texto segundo */
-  .hero-section p, [class*="hero"] p {
-    order: 2 !important;
-    font-size: 0.9rem !important;
-    line-height: 1.4 !important;
-    margin: 0 !important;
-    color: #666 !important;
-    text-align: center;
-    width: 100%;
-    max-width: 90%;
-  }
-
-  /* Botão terceiro */
-  .hero-section .cta-button, [class*="hero"] .cta-button,
-  .hero-section button, [class*="hero"] button {
-    order: 3 !important;
-    background: black !important;
-    color: white !important;
-    border: none !important;
-    padding: 0.6rem 1.2rem !important;
-    border-radius: 1.5rem;
-    font-size: 0.85rem !important;
-    font-weight: 600;
-    cursor: pointer;
-    margin: 0.5rem auto !important;
-    width: auto;
-    min-width: 160px;
-    transition: all 0.3s ease;
-  }
-
-  /* Livro por último - centralizado e com tamanho adequado */
-  .book-container, .hero-image-container, .book-image,
-  [class*="book"], [class*="livro"] {
-    order: 4 !important;
-    width: 100% !important;
-    max-width: 280px !important; /* Tamanho adequado para não cortar */
-    height: auto !important;
-    margin: 1rem auto 0 auto !important;
-    display: block;
-    text-align: center;
-  }
-
-  /* Preservar animação de expandir ao tocar */
-  .book-container img, .hero-image-container img,
-  .book-image, [class*="book"] img, [class*="livro"] img {
-    max-width: 100% !important;
-    height: auto !important;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-
-  .book-container img:hover, .hero-image-container img:hover,
-  .book-image:hover, [class*="book"] img:hover, [class*="livro"] img:hover {
-    transform: scale(1.05);
-  }
+section.relative.bg-white {
+  min-height: 100vh !important;
+  min-height: 100svh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 3rem !important;
+  padding-bottom: 1rem !important;
 }
 
-/* 2. SEGUNDA PARTE - Quadrado ondulado com bordas reduzidas */
-@media screen and (max-width: 768px) {
-  .about-section, [class*="about"], [class*="ondulado"] {
-    padding: 2rem 0.75rem !important;
-  }
-
-  .about-container, .about-content, [class*="content"] {
-    background: white !important;
-    border-radius: 1rem !important;
-    padding: 1.5rem 1rem !important; /* Reduzido padding lateral */
-    margin: 0 0.75rem !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 90% !important; /* Reduzir largura */
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  .about-title, .about-section h2, [class*="about"] h2 {
-    font-size: 1.3rem !important;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 1rem !important;
-    color: black !important;
-  }
-
-  .about-text, .about-section p, [class*="about"] p {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
-    color: #333 !important;
-    text-align: left;
-    margin-bottom: 0.75rem !important;
-  }
+.hero-mobile-container {
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: calc(100vh - 4rem) !important;
+  min-height: calc(100svh - 4rem) !important;
+  gap: 1rem !important;
 }
 
-/* 3. SEÇÃO BENEFÍCIOS - Corrigir estrutura quebrada */
-@media screen and (max-width: 768px) {
-  .benefits-section, [class*="benefit"] {
-    background: white !important;
-    color: black !important;
-    padding: 2rem 0.75rem !important;
-    width: 100% !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  /* Título dos benefícios - PRIMEIRO */
-  .benefits-title, .benefits-section h2, .benefits-section h3,
-  [class*="beneficio"], [class*="benefit"] h2, [class*="benefit"] h3 {
-    order: 1 !important;
-    font-size: 1.4rem !important;
-    font-weight: 600;
-    text-align: center;
-    margin: 0 !important;
-    padding: 0 0.75rem;
-    color: black !important;
-    width: 100%;
-  }
-
-  /* Lista de benefícios - SEGUNDO */
-  .benefits-list, .feature-list, [class*="benefit"] ul, [class*="benefit"] ol {
-    order: 2 !important;
-    list-style: none;
-    padding: 0 0.75rem;
-    margin: 0 !important;
-    width: 100%;
-    max-width: 500px;
-  }
-
-  .benefits-list li, .feature-list li, [class*="benefit"] li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-    padding: 0.75rem;
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 0.5rem;
-    border-left: 3px solid black;
-    font-size: 0.85rem !important;
-    line-height: 1.4;
-    color: black !important;
-  }
-
-  .benefits-list li:before, .feature-list li:before, [class*="benefit"] li:before {
-    content: "✓";
-    color: black;
-    font-weight: bold;
-    margin-right: 0.75rem;
-    font-size: 1em;
-    flex-shrink: 0;
-  }
-
-  /* Imagem do robô com livro - TERCEIRO */
-  .robot-image, .benefits-image, .book-robot-image,
-  [class*="robot"], [class*="mao"], [class*="hand"] {
-    order: 3 !important;
-    width: 100% !important;
-    max-width: 200px !important; /* Tamanho adequado */
-    height: auto !important;
-    margin: 0 auto !important;
-    display: block;
-    text-align: center;
-  }
+.hero-book-mobile {
+  margin: 0 0 1rem 0 !important;
+  flex-shrink: 0 !important;
 }
 
-/* 4. SEÇÃO "QUERO UM VISLUMBRE DO FUTURO" - Alinhar conteúdo */
-@media screen and (max-width: 768px) {
-  .preview-section, [class*="vislumbre"], [class*="preview"] {
-    padding: 2rem 0.75rem !important;
-    background: white !important;
-    text-align: center;
-  }
-
-  .preview-container, [class*="preview"] .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .preview-title, [class*="vislumbre"] h2, [class*="preview"] h2 {
-    font-size: 1.4rem !important;
-    font-weight: 600;
-    color: black !important;
-    margin: 0 !important;
-    order: 1;
-  }
-
-  .preview-text, [class*="vislumbre"] p, [class*="preview"] p {
-    font-size: 0.9rem !important;
-    line-height: 1.5;
-    color: #333 !important;
-    margin: 0 !important;
-    order: 2;
-  }
-
-  /* Botão normalizado */
-  .preview-button, [class*="preview"] button, [class*="vislumbre"] button {
-    order: 3;
-    background: black !important;
-    color: white !important;
-    border: none !important;
-    padding: 0.75rem 1.5rem !important;
-    border-radius: 1.5rem;
-    font-size: 0.9rem !important;
-    font-weight: 600;
-    cursor: pointer;
-    margin: 0.5rem auto !important;
-    width: auto;
-    min-width: 180px;
-    transition: all 0.3s ease;
-  }
-
-  /* Imagem alinhada e com tamanho adequado */
-  .preview-image, [class*="preview"] img, [class*="vislumbre"] img {
-    order: 4;
-    width: 100% !important;
-    max-width: 250px !important; /* Tamanho adequado */
-    height: auto !important;
-    margin: 0 auto !important;
-    display: block;
-    border-radius: 0.5rem;
-  }
+.hero-book-mobile img {
+  width: 350px !important;
+  height: auto !important;
+  max-width: 80% !important;
+  object-fit: contain !important;
 }
 
-/* 5. SEÇÃO DO AUTOR - Corrigir imagem cortada e restaurar nome */
-@media screen and (max-width: 768px) {
-  .author-section, [class*="author"] {
-    background: white !important;
-    padding: 2rem 0.75rem !important;
-    text-align: center;
-  }
-
-  .author-container, [class*="author"] .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  /* Foto do autor - menor e não cortada */
-  .author-image, .author-photo, [class*="author"] img {
-    width: 80px !important; /* Reduzido para não cortar */
-    height: 80px !important;
-    border-radius: 50% !important;
-    object-fit: cover;
-    border: 2px solid black;
-    order: 1;
-    margin: 0 auto 1rem auto;
-  }
-
-  /* Informações do autor */
-  .author-info, [class*="author"] .info {
-    order: 2;
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Nome do autor RESTAURADO */
-  .author-name, [class*="author"] h3, [class*="author"] h2 {
-    font-size: 1.3rem !important;
-    font-weight: 600 !important;
-    margin-bottom: 0.5rem !important;
-    color: black !important;
-    display: block !important; /* Garantir que apareça */
-  }
-
-  .author-title, [class*="author"] .title {
-    font-size: 1rem !important;
-    color: #666 !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .author-description, [class*="author"] .description {
-    font-size: 0.85rem !important;
-    line-height: 1.5;
-    color: #333 !important;
-    text-align: left;
-  }
+.hero-title-mobile-compact {
+  font-size: 1.4rem !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  color: #000 !important;
+  margin: 0 0 0.5rem 0 !important;
+  text-align: center !important;
+  margin-top: -3rem !important;
 }
 
-/* 6. VIDEO DO AVATAR - Formato retangular e tamanho reduzido */
-@media screen and (max-width: 768px) {
-  .video-section, [class*="video"], [class*="avatar"] {
-    padding: 2rem 0.75rem !important;
-    background: white !important;
-  }
-
-  .video-container, [class*="video"] .container {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .video-title, [class*="video"] h2, [class*="avatar"] h2 {
-    font-size: 1.3rem !important;
-    font-weight: 600;
-    color: black !important;
-    margin-bottom: 1rem !important;
-    text-align: center;
-  }
-
-  /* Container do vídeo com formato retangular */
-  .video-wrapper, .video-frame, [class*="video"] iframe,
-  [class*="video"] video, [class*="avatar"] iframe, [class*="avatar"] video {
-    width: 100% !important;
-    max-width: 400px !important; /* Largura máxima */
-    height: 225px !important; /* Proporção 16:9 */
-    margin: 0 auto !important;
-    display: block;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Se for iframe do YouTube */
-  .video-wrapper iframe, [class*="video"] iframe, [class*="avatar"] iframe {
-    border: none;
-    width: 100% !important;
-    height: 225px !important;
-  }
+.hero-subtitle-mobile-compact {
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  color: #000 !important;
+  margin: 0 0 1rem 0 !important;
+  max-width: 320px !important;
+  text-align: center !important;
 }
 
-/* 7. FAQ - Imagem abaixo das perguntas e cobrindo toda a tela */
-@media screen and (max-width: 768px) {
-  .faq-section, [class*="faq"] {
-    background: white !important;
-    padding: 2rem 0.75rem !important;
-  }
-
-  .faq-container, [class*="faq"] .container {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  /* Título FAQ */
-  .faq-title, .faq-section h2, [class*="faq"] h2 {
-    font-size: 1.4rem !important;
-    font-weight: 600;
-    text-align: center;
-    margin: 0 0 1.5rem 0 !important;
-    color: black !important;
-    order: 1;
-  }
-
-  /* Lista de perguntas - PRIMEIRO */
-  .faq-list, .faq-questions, [class*="faq"] ul, [class*="faq"] ol {
-    order: 2;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  .faq-item, .faq-question, [class*="faq"] li {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 0.5rem;
-    margin-bottom: 0.75rem;
-    padding: 1rem;
-    border-left: 3px solid black;
-  }
-
-  .faq-question h4, [class*="faq"] h4, [class*="faq"] h3 {
-    font-size: 0.95rem !important;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: black !important;
-  }
-
-  .faq-answer p, [class*="faq"] p {
-    font-size: 0.85rem !important;
-    line-height: 1.4;
-    color: #555 !important;
-  }
-
-  /* Imagem FAQ - SEGUNDO e cobrindo toda a tela */
-  .faq-image, [class*="faq"] img {
-    order: 3;
-    width: 100vw !important; /* Cobrir toda a largura da tela */
-    max-width: 100vw !important;
-    height: auto !important;
-    margin: 0 calc(-50vw + 50%) !important; /* Estender além do container */
-    display: block;
-    border-radius: 0; /* Sem bordas para cobrir toda a tela */
-  }
+.hero-cta-mobile-compact {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  margin: 0 !important;
 }
 
-/* 8. FOOTER - Reorganizar elementos na ordem correta */
-@media screen and (max-width: 768px) {
-  .footer, footer {
-    background: black !important;
-    color: white !important;
-    padding: 2rem 0.75rem 1rem 0.75rem !important;
-    width: 100% !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  /* 1. Formulário primeiro */
-  .footer-form, .newsletter-form, [class*="form"] {
-    order: 1;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem 1rem;
-    border-radius: 0.75rem;
-    margin: 0;
-    width: 100%;
-    max-width: 350px;
-  }
-
-  /* 2. Site da Humana AI e redes sociais */
-  .social-corporate, .website-social, [class*="humana"], [class*="site"] {
-    order: 2;
-    text-align: center;
-    padding: 0;
-    width: 100%;
-  }
-
-  .social-corporate::before, .website-social::before {
-    content: "SITE DA HUMANA AI:";
-    display: block;
-    font-size: 0.75rem !important;
-    margin-bottom: 0.5rem;
-    opacity: 0.8;
-    font-weight: 500;
-  }
-
-  .social-corporate a, .website-social a, [class*="humana"] a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.8rem;
-    margin: 0 0.5rem;
-  }
-
-  /* 3. Nome do autor e redes sociais */
-  .social-author, [class*="eduardo"], [class*="ibrahim"], [class*="author"] {
-    order: 3;
-    text-align: center;
-    padding: 0;
-    width: 100%;
-  }
-
-  .social-author::before {
-    content: "EDUARDO IBRAHIM:";
-    display: block;
-    font-size: 0.75rem !important;
-    margin-bottom: 0.5rem;
-    opacity: 0.8;
-    font-weight: 500;
-  }
-
-  .social-author a, [class*="eduardo"] a, [class*="ibrahim"] a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.8rem;
-    margin: 0 0.5rem;
-  }
-
-  /* 4. Políticas, termos e contato */
-  .footer-links, .legal-links, [class*="privacy"], [class*="terms"], [class*="contato"] {
-    order: 4;
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    padding: 0.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    width: 100%;
-  }
-
-  .footer-links a, .legal-links a, [class*="privacy"] a, [class*="terms"] a, [class*="contato"] a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    font-size: 0.7rem !important;
-    transition: color 0.3s ease;
-  }
-
-  .footer-links a:hover, .legal-links a:hover {
-    color: white;
-  }
-
-  /* 5. Nome da editora por último e centralizado */
-  .publisher, .footer-publisher, [class*="alta"], [class*="books"], [class*="editora"] {
-    order: 5;
-    text-align: center;
-    padding: 1rem 0 0.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    width: 100%;
-  }
-
-  .publisher-name, [class*="alta"] span, [class*="books"] span, [class*="editora"] span {
-    font-size: 0.85rem !important;
-    font-weight: 600;
-    opacity: 0.8;
-    display: block;
-  }
+.hero-cta-mobile-compact:hover {
+  background: #fff !important;
+  color: #000 !important;
 }
 
-/* Ajustes finais para mobile */
-@media screen and (max-width: 768px) {
-  /* Garantir que todas as seções tenham espaçamento adequado */
-  section {
-    padding: 2rem 0 !important;
-  }
+/* ========================================
+   SEÇÃO BENEFÍCIOS - Imagem da mão / livro
+======================================== */
 
-  /* Reduzir margens e paddings gerais */
-  .container, .main-content, main {
-    padding-top: 60px !important;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Melhorar legibilidade geral */
-  p, li {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
-  }
-
-  h1, h2, h3 {
-    font-size: 1.3rem !important;
-    line-height: 1.3 !important;
-  }
+.hand-image {
+  transform: translateY(var(--book-offset, 0)) scale(0.9) !important;
+  transition: transform 0.3s ease;
+  display: block !important;
+  margin: 2rem auto 0 !important;
+  width: 250px !important;
+  height: auto !important;
 }
 
-/* Mobile muito pequeno - ajustes extras */
-@media screen and (max-width: 480px) {
-  .hero-section h1 { font-size: 1.3rem !important; }
-  .hero-section p { font-size: 0.8rem !important; }
-  
-  .book-container { max-width: 250px !important; }
-  .robot-image { max-width: 180px !important; }
-  .author-image { width: 70px !important; height: 70px !important; }
-  
-  .video-wrapper { height: 200px !important; }
-  
-  .faq-image { width: 100vw !important; }
+/* ========================================
+   SEÇÃO PAPER - Centralizar imagem
+======================================== */
+
+.paper-section img,
+.paper-image {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 90% !important;
+  max-width: 350px !important;
+  position: relative !important;
+  z-index: 50 !important;
+  margin-bottom: 50px !important;
+  filter: none !important;
+  box-shadow: none !important;
 }
+
+/* ========================================
+   DESCRIÇÃO DO LIVRO - Quebra de linhas
+======================================== */
+
+.book-description-mobile {
+  line-height: 1.4 !important;
+  text-align: center !important;
+  font-size: 0.875rem !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  font-weight: 300 !important;
+  padding: 0 1.5rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.book-description-mobile .line-1 {
+  display: block !important;
+  margin-bottom: 0.25rem !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.book-description-mobile .line-2 {
+  display: block !important;
+  margin-bottom: 0.25rem !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.book-description-mobile .line-3 {
+  display: block !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* ========================================
+   VÍDEO - Posição e título abaixo
+======================================== */
+
+.video-section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin-top: 2rem !important;
+}
+
+.video-section video,
+.video-section iframe {
+  width: 100% !important;
+  max-width: 350px !important;
+  border-radius: 8px !important;
+  margin-bottom: 1rem !important;
+}
+
+.video-section::after {
+  content: "Economia guiada por IA";
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+  text-align: center;
+  color: #000;
+}
+
+/* ========================================
+   FAQ - Elemento decorativo com CSS puro
+======================================== */
+
+.faq-section {
+  position: relative !important;
+}
+
+.faq-section::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, #0070f3, #7928ca);
+  border-radius: 2px;
+  margin: 2rem auto 0 auto;
+}
+
+/* ========================================
+   CORREÇÃO ESPAÇAMENTO ENTRE SEÇÕES
+======================================== */
+
+/* AuthorSection - padding-top aumentado para evitar sobreposição */
+section.bg-white:has(h2[class*="text-design-title"]) {
+  padding-top: 8rem !important;
+}
+
+.author-section-first {
+  padding-top: 8rem !important;
+  position: relative !important;
+  z-index: 20 !important;
+}
+
+/* FeaturesSection - Paper com z-index controlado */
+section.bg-black:has(img[src*="engenhariareversa"]) {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.paper-section,
+.paper-image,
+img[src*="engenhariareversa"] {
+  z-index: 5 !important;
+  position: relative !important;
+}
+
+section.bg-black .relative.z-50 {
+  z-index: 5 !important;
+  margin-bottom: -4rem !important;
+}
+
+.author-section-container {
+  background: white !important;
+  position: relative !important;
+  z-index: 25 !important;
+  margin-top: 2rem !important;
+}
+
+.author-section-safe-spacing {
+  padding-top: 8rem !important;
+  background: white !important;
+  position: relative !important;
+  z-index: 30 !important;
+}
+
+.author-content-container {
+  background: white !important;
+  border-radius: 1rem 1rem 0 0 !important;
+  padding: 2rem 1rem 0 1rem !important;
+  position: relative !important;
+  z-index: 35 !important;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer, .footer-section {
+  width: 100% !important;
+  background: #000 !important;
+  color: #fff !important;
+  padding: 1.5rem 1rem !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+
+

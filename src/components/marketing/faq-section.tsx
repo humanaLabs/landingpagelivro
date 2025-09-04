@@ -30,28 +30,34 @@ export function FaqSection() {
 
   return (
     // força remontagem da seção ao trocar idioma (garante reanimação)
-    <section key={`faq-section-${locale}`} className="relative bg-white min-h-screen">
-      <div className="grid lg:grid-cols-2 min-h-screen">
-
+    <section
+      key={`faq-section-${locale}`}
+      className="relative w-full overflow-hidden"
+    >
+      <div className="grid lg:grid-cols-2 min-h-screen w-full">
         {/* Imagem à esquerda */}
         <motion.div
           key={`faq-left-${locale}`}
           initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0, transition: { duration: 0.6, ease: EASE } }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.6, ease: EASE },
+          }}
           viewport={{ once: true, amount: 0.2 }}
-          className="relative bg-black overflow-hidden"
+          className="relative bg-black overflow-hidden lg:w-full lg:h-full"
         >
           <Image
             src="/Imagem 1.png"
             alt="Design Visual Effects"
             fill
-            className="object-cover opacity-90"
+            className="object-cover object-center opacity-90"
             priority
           />
         </motion.div>
 
         {/* FAQ à direita */}
-        <div className="bg-white px-16 py-20 flex flex-col justify-center">
+        <div className="bg-white px-8 lg:px-16 py-20 flex flex-col justify-center">
           <div className="max-w-md">
 
             {/* Título */}
