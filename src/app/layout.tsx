@@ -3,6 +3,7 @@ import { Poppins, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import ScrollRestoration from "@/components/ScrollRestoration";
 
 const poppins = Poppins({
   variable: "--font-sans",
@@ -96,6 +97,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+
       <head>
         {/* Polyfills e compatibilidade - executado primeiro */}
         <script
@@ -297,7 +299,7 @@ export default function RootLayout({
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#000000" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body
         className={`${poppins.variable} ${jetbrainsMono.variable} antialiased`}
@@ -313,6 +315,7 @@ export default function RootLayout({
         <Header />
         <main>
           {children}
+          <ScrollRestoration />
         </main>
         <Footer />
       </body>

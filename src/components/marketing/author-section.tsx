@@ -1,17 +1,32 @@
 "use client";
 
 import Image from "next/image";
+import { useI18n } from "../../../lib/i18n";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export function AuthorSection() {
+  const { t, locale } = useI18n();
+  const testimonials = t("author.testimonials");
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleTestimonials = showAll ? testimonials : testimonials.slice(0, 3);
+
   return (
-    <>
-      {/* Seção inicial do autor - compacta */}
-      <section className="bg-white pt-48 pb-20 relative z-0"> {/* Compensar sobreposição da seção anterior */}
+    <div key={locale}>
+      {/* Seção inicial do autor */}
+      <section className="bg-white pt-48 pb-20 relative z-0">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            
-            {/* Author Header - Photo + Name */}
-            <div className="flex items-center gap-6 mb-8">
+            {/* Header do autor */}
+            <motion.div
+              className="flex items-center gap-6 mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
               <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/fotoeduardo.png"
@@ -21,81 +36,116 @@ export function AuthorSection() {
                   priority
                 />
               </div>
-              <h2 className="text-design-title  text-black">
-                Eduardo Ibrahim
+              <h2 className="text-design-title text-black">
+                {t("author.name")}
               </h2>
-            </div>
+            </motion.div>
 
-            {/* Expandable About Section */}
-            <div className="bg-white border border-black rounded-2xl p-8">
-              <h3 className="text-design-subtitle  text-black mb-6">
-                Sobre o autor
+            {/* Sobre o autor */}
+            <motion.div
+              className="bg-white border border-black rounded-2xl p-8"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-design-subtitle text-black mb-6">
+                {t("author.aboutAuthor")}
               </h3>
-              
               <div className="text-black space-y-4">
-                <p className="text-design-body ">
-                  Eduardo Ibrahim é uma das maiores referências em tecnologia e futuro. Fundador e CEO da Humana AI, 
-                  Professor da Singularity University e autor do best-seller Economia Exponencial, Ibrahim é um dos 
-                  pioneiros na aplicação da IA no contexto estratégico de negócios.
-                </p>
-                
-                <p className="text-design-body ">
-                  Com trajetória que passa pelo campus da NASA no Vale do Silício, TEDx e programas de beta-tester da 
-                  OpenAI, Ibrahim combina visão prática e pensamento disruptivo. Como palestrante internacional é voz 
-                  ativa em grandes organizações, onde traduz o complexo em linguagem acessível.
-                </p>
-                
-                <p className="text-design-body ">
-                  Neste novo livro, ele propõe uma visão transformadora: a IA guiando a economia não para nos substituir, 
-                  mas para ampliar o que temos de mais humano. Uma leitura provocadora e essencial para líderes, 
-                  inovadores e todos que desejam prosperar na nova era da IA.
-                </p>
+                <p className="text-design-body">{t("author.bio1")}</p>
+                <p className="text-design-body">{t("author.bio2")}</p>
+                <p className="text-design-body">{t("author.bio3")}</p>
               </div>
-            </div>
-
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Nova seção - Avatar interativo + Título + Quote */}
+      {/* Avatar interativo + título */}
       <section className="bg-white">
         <div className="w-full">
-          {/* Avatar Interativo - Formato quadro */}
-          <div className="flex justify-center py-12 bg-white">
-          <div className="relative w-[800px] h-[450px] bg-white rounded-lg overflow-hidden shadow-xl border border-gray-200">
-              <Image
-                src="/avatarinterativo.png"
-                alt="Avatar Interativo Eduardo Ibrahim"
-                fill
-                className="object-cover object-top"
-                priority
+          <motion.div
+            className="flex justify-center py-12 bg-white"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <div className="relative w-[800px] h-[450px] bg-white rounded-lg overflow-hidden shadow-xl border border-gray-200">
+              <video
+                src="/videoavatar.mp4"
+                className="w-full h-full object-cover object-top"
+                controls
+                autoPlay
+                muted
+                loop
               />
             </div>
-          </div>
+          </motion.div>
 
-          {/* Barra branca com título */}
-          <div className="bg-white py-8 px-4">
-            <div className="text-center">
-              <h2 className="text-design-mega  text-black tracking-tight">
-                ECONOMIA GUIADA POR IA
-              </h2>
-            </div>
-          </div>
+          <motion.div
+            className="bg-white py-8 px-4 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-design-mega text-black tracking-tight">
+              {t("author.bookTitle")}
+            </h2>
+          </motion.div>
 
-          {/* Quote Section - Parte inferior */}
-          <div className="bg-black text-white py-16 px-8 min-h-[80vh] flex items-center font-light">
-            <div className="max-w-4xl mx-auto text-center w-full">
-              <blockquote className="text-design-body  mb-8 italic">
-                "Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece
-                uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas.
-                Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em
-                IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente."
-              </blockquote>
-              <cite className="text-white  font-medium not-italic">— Gary Bolles</cite>
+          {/* Depoimentos */}
+          <div className="bg-white py-16 px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                {visibleTestimonials.map((testimonial: any, index: number) => (
+                  <motion.div
+                    key={index}
+                    className="bg-white p-6 text-center h-full flex flex-col border border-gray-200 rounded-xl shadow-sm"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      ease: "easeOut",
+                      delay: index * 0.2, // efeito cascata
+                    }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="text-black text-sm leading-relaxed mb-6 flex-grow">
+                      {testimonial.text}
+                    </div>
+                    <div className="mt-auto">
+                      <div className="bg-black text-white py-3 mb-4 rounded-md">
+                        <div className="font-bold text-sm">
+                          {testimonial.author}
+                        </div>
+                      </div>
+                      <div className="flex justify-center">
+                        <span className="text-black text-xl">✦✦✦✦✦</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Botão de expandir/recolher */}
+              {testimonials.length > 3 && (
+                <div className="flex justify-center mt-8">
+                  <button
+                    onClick={() => setShowAll(!showAll)}
+                    className="flex items-center gap-2 text-black font-medium hover:underline"
+                  >
+                    {showAll ? "Mostrar menos" : "Mostrar mais"}
+                    {showAll ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

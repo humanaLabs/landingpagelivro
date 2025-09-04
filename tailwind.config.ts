@@ -70,11 +70,11 @@ const config: Config = {
         '9xl': '8rem',      // 128px
         
         // Tamanhos personalizados baseados no design (em px)
-        'design-button': ['15px', { lineHeight: '28px', fontWeight: '600' }],       // Botões
-        'design-body': ['22px', { lineHeight: '138%', fontWeight: '400' }],         // Texto corpo
-        'design-subtitle': ['26px', { lineHeight: '138%', fontWeight: '600' }],     // Subtítulos
-        'design-title': ['55px', { lineHeight: '61px', fontWeight: '600' }],        // Títulos principais
-        'design-mega': ['122px', { lineHeight: '61px', fontWeight: '600' }],        // Título mega
+       'design-button': ['19px', { lineHeight: '28px', fontWeight: '600' }],
+  'design-body': ['clamp(1rem, 1.2vw, 1.375rem)', { lineHeight: '138%', fontWeight: '400' }], // ~16px → 22px
+  'design-subtitle': ['clamp(1.25rem, 2vw, 1.625rem)', { lineHeight: '138%', fontWeight: '600' }], // ~20px → 26px
+  'design-title': ['clamp(1.75rem, 3vw, 2.75rem)', { lineHeight: '1.2', fontWeight: '600' }], // ~28px → 44px
+  'design-mega': ['clamp(2.25rem, 5vw, 3.75rem)', { lineHeight: '1.1', fontWeight: '600' }],  // ~36px → 60px       // Título mega
       },
       lineHeight: {
         'design-tight': '61px',
