@@ -1,13 +1,12 @@
 // src/components/layout/header.tsx
 "use client";
 
-import { useState } from 'react';
+
 import Link from 'next/link';
 import { LanguageSelector } from './language-selector';
 import { useI18n } from '../../../lib/i18n';
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t, locale } = useI18n();
 
   return (
@@ -17,63 +16,53 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center"> 
             <Link href="/" className="text-white">
-             <img src="/economiaguiadaporia.png"
-              className="h-7 w-auto" // Ajuste a altura conforme necessário // 
+              <img 
+                src="/economiaguiadaporia.png"
+                className="h-8 w-auto md:h-10 lg:h-10" // Menor no mobile
+                alt="Economia Guiada por IA"
               />
               </Link>
                </div>
           {/* Language Selector and CTA Button - Desktop */}
           <div className="hidden md:flex items-center space-x-4">
-  <LanguageSelector />
-  <button
-    type="button"
-    onClick={() => {
-      const formulario = document.getElementById("formularioContato");
-      if (formulario) {
-        formulario.scrollIntoView({ behavior: "smooth" });
-      } else {
-        console.warn("Elemento com id formularioContato não encontrado!");
-      }
-    }}
-    className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-design-button"
-  >
-    {t("hero.cta")}
-  </button>
-</div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+            <LanguageSelector />
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white hover:text-gray-300 focus:outline-none"
+              type="button"
+              onClick={() => {
+                const formulario = document.getElementById("formularioContato");
+                if (formulario) {
+                  formulario.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  console.warn("Elemento com id formularioContato não encontrado!");
+                }
+              }}
+              className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-design-button"
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {t("hero.cta")}
+            </button>
+          </div>
+
+          {/* Mobile: Language Selector and CTA Button - Mesma linha */}
+          <div className="md:hidden flex items-center space-x-2">
+            <LanguageSelector className="mobile-compact" />
+            <button
+              type="button"
+              onClick={() => {
+                const formulario = document.getElementById("formularioContato");
+                if (formulario) {
+                  formulario.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  console.warn("Elemento com id formularioContato não encontrado!");
+                }
+              }}
+              className="border border-white text-white px-2 py-1 rounded-full hover:bg-white hover:text-black transition-colors text-xs whitespace-nowrap"
+            >
+              {t("hero.cta")}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-600">
-            <div className="flex flex-col space-y-4">
-              <div className="flex justify-center">
-                <LanguageSelector />
-              </div>
-              <button 
-                className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-center text-design-button"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('hero.cta')}
-              </button>
-            </div>
-          </div>
-        )}
+
       </div>
     </header>
   );
