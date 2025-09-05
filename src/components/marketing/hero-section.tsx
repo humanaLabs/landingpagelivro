@@ -43,6 +43,36 @@ export function HeroSection() {
     });
   };
 
+  // Função para renderizar o título com quebras de linha forçadas
+  const renderTitle = (className: string) => {
+    const line1 = t("hero.titleLine1");
+    const line2 = t("hero.titleLine2");
+    const line3 = t("hero.titleLine3");
+    
+    return (
+      <div className={className}>
+        <div className="block">{line1}</div>
+        <div className="block">{line2}</div>
+        <div className="block">{line3}</div>
+      </div>
+    );
+  };
+
+  // Função para renderizar o subtítulo com quebras de linha forçadas
+  const renderSubtitle = (className: string) => {
+    const line1 = t("hero.subtitleLine1");
+    const line2 = t("hero.subtitleLine2");
+    const line3 = t("hero.subtitleLine3");
+    
+    return (
+      <div className={className}>
+        <div className="block mb-1">{line1}</div>
+        <div className="block mb-1">{line2}</div>
+        <div className="block">{line3}</div>
+      </div>
+    );
+  };
+
   return (
     <section
       ref={ref}
@@ -82,28 +112,22 @@ export function HeroSection() {
               </motion.div>
             </motion.div>
 
-            <motion.h1
+            <motion.div
               suppressHydrationWarning
               variants={fadeUp}
               initial="hidden"
               animate={isVisible ? "show" : "hidden"}
-              className="text-3xl font-semibold leading-tight !whitespace-normal break-words lg:hidden"
             >
-              <span className="block mb-1">{t("hero.titleLine1")}</span>
-              <span className="block mb-1">{t("hero.titleLine2")}</span>
-              <span className="block">{t("hero.titleLine3")}</span>
-            </motion.h1>
+              {renderTitle("text-3xl font-semibold leading-tight !whitespace-normal break-words lg:hidden")}
+            </motion.div>
 
             <motion.div
-              className="text-base leading-relaxed opacity-90"
               variants={fadeUp}
               initial="hidden"
               animate={isVisible ? "show" : "hidden"}
               suppressHydrationWarning
             >
-              <span className="block mb-1">{t("hero.subtitleLine1")}</span>
-              <span className="block mb-1">{t("hero.subtitleLine2")}</span>
-              <span className="block">{t("hero.subtitleLine3")}</span>
+              {renderSubtitle("text-base leading-relaxed opacity-90")}
             </motion.div>
 
             <motion.div variants={fadeUp} initial="hidden" animate={isVisible ? "show" : "hidden"}>
@@ -162,25 +186,24 @@ export function HeroSection() {
                 className="flex flex-col justify-center"
               >
                 {/* Título */}
-                <motion.h1
+                <motion.div
                   suppressHydrationWarning
-                  className="text-5xl xl:text-6xl font-bold leading-tight mb-6"
                   variants={fadeUp}
                 >
-                  <span className="block mb-1">{t("hero.titleLine1")}</span>
-                  <span className="block mb-1">{t("hero.titleLine2")}</span>
-                  <span className="block">{t("hero.titleLine3")}</span>
-                </motion.h1>
+                  {renderTitle("text-5xl xl:text-6xl font-bold leading-tight mb-6")}
+                </motion.div>
 
                 {/* Subtítulo */}
                 <motion.div
-                  className="text-lg opacity-90 leading-relaxed mb-8"
                   suppressHydrationWarning
                   variants={fadeUp}
+                  style={{ 
+                    display: 'block',
+                    width: '100%',
+                    textAlign: 'left'
+                  }}
                 >
-                  <div className="block mb-1">{t("hero.subtitleLine1")}</div>
-                  <div className="block mb-1">{t("hero.subtitleLine2")}</div>
-                  <div className="block">{t("hero.subtitleLine3")}</div>
+                  {renderSubtitle("text-lg opacity-90 leading-relaxed mb-8")}
                 </motion.div>
 
                 {/* Botão */}
