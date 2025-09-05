@@ -43,12 +43,12 @@ export function HeroSection() {
     });
   };
 
-  // Função para renderizar o título com quebras de linha forçadas
-  const renderTitle = (className: string) => {
+  // título MOBILE (já estava ok)
+  const renderTitleMobile = (className: string) => {
     const line1 = t("hero.titleLine1");
     const line2 = t("hero.titleLine2");
     const line3 = t("hero.titleLine3");
-    
+
     return (
       <div className={className}>
         <div className="block">{line1}</div>
@@ -58,12 +58,30 @@ export function HeroSection() {
     );
   };
 
-  // Função para renderizar o subtítulo com quebras de linha forçadas
+  // título DESKTOP (forçado para quebrar 3 linhas no Chrome)
+  const renderTitleDesktop = (className: string) => {
+    const line1 = t("hero.titleLine1"); // "O futuro da economia"
+    const line2 = t("hero.titleLine2"); // "é cognitivo —"
+    const line3 = t("hero.titleLine3"); // "e já começou."
+  
+    return (
+      <h1
+        className={`${className} text-black leading-tight 
+        text-4xl xl:text-5xl 2xl:text-6xl`} // diminui um pouco no desktop
+      >
+        <span className="block">{line1}</span>
+        <span className="block">{line2}</span>
+        <span className="block">{line3}</span>
+      </h1>
+    );
+  };
+
+  // subtítulo (sem alteração)
   const renderSubtitle = (className: string) => {
     const line1 = t("hero.subtitleLine1");
     const line2 = t("hero.subtitleLine2");
     const line3 = t("hero.subtitleLine3");
-    
+
     return (
       <div className={className}>
         <div className="block mb-1">{line1}</div>
@@ -80,7 +98,6 @@ export function HeroSection() {
     >
       <div className="container mx-auto px-4 relative z-10 h-full">
         <div className="max-w-7xl mx-auto h-full">
-          
           {/* MOBILE */}
           <div className="lg:hidden flex flex-col items-center text-center gap-5">
             <motion.div
@@ -103,7 +120,9 @@ export function HeroSection() {
               >
                 <Image
                   src="/livro.png"
-                  alt={t("hero.bookAlt", { defaultValue: "Livro Economia guiada por IA" })}
+                  alt={t("hero.bookAlt", {
+                    defaultValue: "Livro Economia guiada por IA",
+                  })}
                   width={300}
                   height={380}
                   priority
@@ -118,7 +137,9 @@ export function HeroSection() {
               initial="hidden"
               animate={isVisible ? "show" : "hidden"}
             >
-              {renderTitle("text-3xl font-semibold leading-tight !whitespace-normal break-words lg:hidden")}
+              {renderTitleMobile(
+                "text-3xl font-semibold leading-tight !whitespace-normal break-words lg:hidden"
+              )}
             </motion.div>
 
             <motion.div
@@ -130,16 +151,22 @@ export function HeroSection() {
               {renderSubtitle("text-base leading-relaxed opacity-90")}
             </motion.div>
 
-            <motion.div variants={fadeUp} initial="hidden" animate={isVisible ? "show" : "hidden"}>
-              <button onClick={handleScrollToForm} className="hero-cta-mobile-compact">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate={isVisible ? "show" : "hidden"}
+            >
+              <button
+                onClick={handleScrollToForm}
+                className="hero-cta-mobile-compact"
+              >
                 {t("hero.cta")}
               </button>
             </motion.div>
           </div>
 
-          {/* DESKTOP - VERSÃO LIMPA */}
+          {/* DESKTOP */}
           <div className="hidden lg:grid lg:grid-cols-12 lg:gap-8 items-center min-h-screen">
-            
             {/* Livro */}
             <div className="lg:col-span-6 flex justify-center">
               <motion.div
@@ -149,7 +176,7 @@ export function HeroSection() {
                 animate={isVisible ? "show" : "hidden"}
               >
                 <motion.div
-                  animate={{ 
+                  animate={{
                     scale: hovered ? 1.06 : 1,
                     rotateY: hovered ? 5 : 0,
                   }}
@@ -161,12 +188,14 @@ export function HeroSection() {
                       ? "drop-shadow(0px 40px 80px rgba(0,0,0,.3))"
                       : "drop-shadow(0px 25px 50px rgba(0,0,0,.2))",
                     transformStyle: "preserve-3d",
-                    marginLeft: "-40px", // APENAS ESTA LINHA MOVE O LIVRO
+                    marginLeft: "-40px",
                   }}
                 >
                   <Image
                     src="/livro.png"
-                    alt={t("hero.bookAlt", { defaultValue: "Livro Economia guiada por IA" })}
+                    alt={t("hero.bookAlt", {
+                      defaultValue: "Livro Economia guiada por IA",
+                    })}
                     width={700}
                     height={600}
                     priority
@@ -176,7 +205,7 @@ export function HeroSection() {
               </motion.div>
             </div>
 
-            {/* Conteúdo - TOTALMENTE SEPARADO */}
+            {/* Conteúdo */}
             <div className="lg:col-span-6">
               <motion.div
                 key={`hero-content-desktop-${locale}`}
@@ -186,21 +215,20 @@ export function HeroSection() {
                 className="flex flex-col justify-center"
               >
                 {/* Título */}
-                <motion.div
-                  suppressHydrationWarning
-                  variants={fadeUp}
-                >
-                  {renderTitle("text-5xl xl:text-6xl font-bold leading-tight mb-6")}
+                <motion.div suppressHydrationWarning variants={fadeUp}>
+                  {renderTitleDesktop(
+                    "text-5xl xl:text-6xl font-bold leading-tight mb-6"
+                  )}
                 </motion.div>
 
                 {/* Subtítulo */}
                 <motion.div
                   suppressHydrationWarning
                   variants={fadeUp}
-                  style={{ 
-                    display: 'block',
-                    width: '100%',
-                    textAlign: 'left'
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    textAlign: "left",
                   }}
                 >
                   {renderSubtitle("text-lg opacity-90 leading-relaxed mb-8")}
@@ -208,8 +236,8 @@ export function HeroSection() {
 
                 {/* Botão */}
                 <motion.div variants={fadeInRight}>
-                  <button 
-                    onClick={handleScrollToForm} 
+                  <button
+                    onClick={handleScrollToForm}
                     className="bg-black text-white border border-black px-5 py-1 rounded-full text-base font-semibold transition-all duration-300 hover:bg-white hover:text-black"
                   >
                     {t("hero.cta")}

@@ -41,11 +41,18 @@ export function FeaturesSection() {
                 </span>
               </h2>
 
-              <div className="text-sm md:text-base text-white leading-relaxed max-w-4xl mx-auto font-thin mb-20 text-center book-description-mobile">
-                <div className="line-1">{t("features.bookDescriptionLine1")}</div>
-                <div className="line-2">{t("features.bookDescriptionLine2")}</div>
-                <div className="line-3">{t("features.bookDescriptionLine3")}</div>
-              </div>
+              <div
+  className="
+    text-sm md:text-base lg:!text-base xl:text-xl
+    text-white leading-relaxed
+    max-w-4xl mx-auto font-thin mb-20 text-center
+    book-description-mobile
+  "
+>
+  <div className="line-1">{t("features.bookDescriptionLine1")}</div>
+  <div className="line-2">{t("features.bookDescriptionLine2")}</div>
+  <div className="line-3">{t("features.bookDescriptionLine3")}</div>
+</div>
             </div>
 
             <motion.div

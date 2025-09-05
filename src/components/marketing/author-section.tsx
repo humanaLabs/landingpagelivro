@@ -53,7 +53,7 @@ export function AuthorSection() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 md:w-16 md:h-16 w-12 h-12">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 md:w-16 md:h-16 w-16 h-16">
                 <Image
                   src="/fotoeduardo.png"
                   alt="Eduardo Ibrahim"
@@ -91,29 +91,19 @@ export function AuthorSection() {
       {/* Avatar interativo + título */}
       <section className="bg-white">
         <div className="w-full">
+          {/* Vídeo responsivo ocupando toda a largura */}
           <motion.div
-            className={`flex justify-center bg-white ${
-              isMobile ? "py-8 px-4" : "py-12"
-            }`}
+            className="flex justify-center bg-white py-12 px-4"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            <div
-              className={`relative bg-white rounded-lg overflow-hidden shadow-xl border border-gray-200 ${
-                isMobile
-                  ? "w-96 h-80 max-w-[90vw] max-h-[55vh]"
-                  : "w-[800px] h-[450px]"
-              }`}
-              style={isMobile ? { aspectRatio: "5/4" } : {}}
-            >
+            <div className="relative w-full max-w-5xl aspect-[16/9] rounded-lg overflow-hidden shadow-xl border border-gray-200">
               <video
                 key={locale}
                 src={getVideoPath(locale)}
-                className={`w-full h-full object-cover ${
-                  isMobile ? "object-center object-top" : "object-top"
-                }`}
+                className="w-full h-full object-cover object-top"
                 controls
                 autoPlay
                 muted
@@ -123,47 +113,52 @@ export function AuthorSection() {
             </div>
           </motion.div>
 
-       {/* Faixa contínua estilo estádio */}
-<div className="overflow-hidden bg-white py-6">
-  <motion.div
-    className="flex whitespace-nowrap"
-    animate={{ x: ["0%", "-100%"] }}
-    transition={{
-      repeat: Infinity,
-      repeatType: "loop",
-      duration: 12, // velocidade ajustável
-      ease: "linear",
-    }}
-  >
-    {/* Primeiro bloco */}
-    <div className="flex">
-      {[...Array(6)].map((_, i) => (
-        <h2
-          key={`block1-${i}`}
-          className={`text-black font-bold tracking-tight mx-[20vw] ${
-            isMobile ? "text-3xl md:text-5xl leading-tight" : "text-5xl"
-          }`}
-        >
-          {t("author.bookTitle")}
-        </h2>
-      ))}
-    </div>
+          {/* Faixa contínua estilo estádio */}
+          <div className="overflow-hidden bg-white py-8">
+            <motion.div
+              className="flex whitespace-nowrap"
+              animate={{ x: ["0%", "-100%"] }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 20, // mais suave
+                ease: "linear",
+              }}
+            >
+              {/* Primeiro bloco */}
+              <div className="flex">
+                {[...Array(6)].map((_, i) => (
+                  <h2
+                    key={`block1-${i}`}
+                    className={`text-black font-bold tracking-tight mx-[12vw] ${
+                      isMobile
+                        ? "text-3xl md:text-5xl leading-tight"
+                        : "text-8xl"
+                    }`}
+                  >
+                    {t("author.bookTitle")}
+                  </h2>
+                ))}
+              </div>
 
-    {/* Segundo bloco (cópia para continuidade) */}
-    <div className="flex">
-      {[...Array(6)].map((_, i) => (
-        <h2
-          key={`block2-${i}`}
-          className={`text-black font-bold tracking-tight mx-[20vw] ${
-            isMobile ? "text-3xl md:text-5xl leading-tight" : "text-5xl"
-          }`}
-        >
-          {t("author.bookTitle")}
-        </h2>
-      ))}
-    </div>
-  </motion.div>
-</div>
+              {/* Segundo bloco (cópia para continuidade) */}
+              <div className="flex">
+                {[...Array(6)].map((_, i) => (
+                  <h2
+                    key={`block2-${i}`}
+                    className={`text-black font-bold tracking-tight mx-[12vw] ${
+                      isMobile
+                        ? "text-3xl md:text-5xl leading-tight"
+                        : "text-6xl"
+                    }`}
+                  >
+                    {t("author.bookTitle")}
+                  </h2>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
           {/* Depoimentos */}
           <div className={`bg-white px-4 ${isMobile ? "py-12" : "py-16"}`}>
             <div className="max-w-6xl mx-auto">
