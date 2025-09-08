@@ -190,7 +190,7 @@ export function HeroSection() {
                   suppressHydrationWarning
                   variants={fadeUp}
                 >
-                 {renderTitle("text-5xl xl:text-6xl font-bold leading-tight mb-6 whitespace-pre-line break-keep")}
+                 {renderTitle("text-5xl xl:text-5xl font-bold leading-tight mb-6 whitespace-pre-line break-keep")}
 
                 </motion.div>
 
