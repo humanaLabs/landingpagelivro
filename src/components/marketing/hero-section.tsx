@@ -48,11 +48,7 @@ export function HeroSection() {
     const line1 = t("hero.titleLine1");
     const line2 = t("hero.titleLine2");
     const line3 = t("hero.titleLine3");
-<<<<<<< HEAD
-
-=======
   
->>>>>>> desenv
     return (
       <div className={`${className} flex flex-col`}>
         <span className="block whitespace-nowrap">{line1}</span>
@@ -219,19 +215,12 @@ export function HeroSection() {
                 className="flex flex-col justify-center"
               >
                 {/* Título */}
-<<<<<<< HEAD
-                <motion.div suppressHydrationWarning variants={fadeUp}>
-                  {renderTitleDesktop(
-                    "text-5xl xl:text-6xl font-bold leading-tight mb-6"
-                  )}
-=======
                 <motion.div
                   suppressHydrationWarning
                   variants={fadeUp}
                 >
-                 {renderTitle("text-5xl xl:text-5xl font-bold leading-tight mb-6 whitespace-pre-line break-keep")}
+                 {renderTitleDesktop("text-5xl xl:text-5xl font-bold leading-tight mb-6 whitespace-pre-line break-keep")}
 
->>>>>>> desenv
                 </motion.div>
 
                 {/* Subtítulo */}
