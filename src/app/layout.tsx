@@ -19,10 +19,10 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: "Economia guiada por IA - Eduardo Ibrahim",
-  description: "Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas.",
-  keywords: ["economia", "inteligência artificial", "IA", "Eduardo Ibrahim", "livro", "negócios", "tecnologia"],
+export const metadata: Metadata = { 
+  title: "AI-Driven Economy - Eduardo Ibrahim",
+  description: "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
+  keywords: ["economy", "artificial intelligence", "AI", "Eduardo Ibrahim", "book", "business", "technology"],
   authors: [{ name: "Eduardo Ibrahim" }],
   creator: "Eduardo Ibrahim",
   publisher: "Eduardo Ibrahim",
@@ -32,27 +32,27 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Economia guiada por IA - Eduardo Ibrahim",
-    description: "Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas.",
+    title: "AI-Driven Economy - Eduardo Ibrahim",
+    description: "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
     url: "https://ai-driveneconomy.com",
-    siteName: "Economia guiada por IA",
-    locale: "pt_BR",
+    siteName: "AI-Driven Economy",
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://ai-driveneconomy.com/ade.png", // coloque sua capa aqui
+        url: "https://ai-driveneconomy.com/ade-og.png", // recommended horizontal 1200x630 version
         width: 1200,
         height: 630,
-        alt: "Capa do livro Economia guiada por IA",
+        alt: "Cover of the book AI-Driven Economy",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Economia guiada por IA - Eduardo Ibrahim",
-    description: "Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas.",
+    title: "AI-Driven Economy - Eduardo Ibrahim",
+    description: "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
     creator: "@eduardoibrahim",
-    images: ["https://ai-driveneconomy.com/ade.png"], // mesma imagem aqui
+    images: ["https://ai-driveneconomy.com/ade-og.png"], // same image for Twitter
   },
   robots: {
     index: true,
@@ -66,6 +66,7 @@ export const metadata: Metadata = {
     },
   },
 };
+
 
 
 // Componente ErrorBoundary que funciona no App Directory
@@ -310,6 +311,27 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          {/* Open Graph */}
+  <meta property="og:title" content="Economia guiada por IA - Eduardo Ibrahim" />
+  <meta property="og:description" content="Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas." />
+  <meta property="og:url" content="https://ai-driveneconomy.com" />
+  <meta property="og:site_name" content="Economia guiada por IA" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://ai-driveneconomy.com/ade.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Capa do livro Economia guiada por IA" />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Economia guiada por IA - Eduardo Ibrahim" />
+  <meta name="twitter:description" content="Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas." />
+  <meta name="twitter:image" content="https://ai-driveneconomy.com/ade.png" />
+  <meta name="twitter:creator" content="@eduardoibrahim" />
+
+  {/* (Opcional, só para remover o aviso do Facebook) */}
+  <meta property="fb:app_id" content="1234567890" />
       </head>
       <body
         className={`${poppins.variable} ${jetbrainsMono.variable} antialiased`}
