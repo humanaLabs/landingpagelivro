@@ -30,11 +30,12 @@ export const metadata: Metadata = {
     title: "AI-Driven Economy - Eduardo Ibrahim",
     description:
       "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
-    siteName: "Economia guiada por IA",
-    locale: "pt_BR",
+    siteName: "AI-Driven Economy",
+    locale: "en_US",
     images: [
       {
         url: "https://ai-driveneconomy.com/ade-og.jpg",
+        secureUrl: "https://ai-driveneconomy.com/ade-og.jpg",
         width: 1200,
         height: 630,
         alt: "AI-Driven Economy - Eduardo Ibrahim",
@@ -53,6 +54,7 @@ export const metadata: Metadata = {
     canonical: "https://ai-driveneconomy.com",
   },
 };
+
 
 
 

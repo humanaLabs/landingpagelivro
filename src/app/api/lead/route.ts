@@ -20,9 +20,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 🔹 criar chave única de identificação (email + telefone)
+    // criar chave única
     const key = `${email}-${telefone}`;
-
     if (submittedLeads.has(key)) {
       return NextResponse.json(
         { error: "Já recebemos seus dados. Por favor, não envie novamente." },
@@ -30,10 +29,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // registra lead no mapa
     submittedLeads.set(key, Date.now());
 
-    // configurar transporter via env com as novas credenciais
+    // configurar transporter
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST || "smtp.gmail.com",
       port: Number(process.env.EMAIL_PORT || 587),
