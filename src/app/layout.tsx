@@ -311,27 +311,6 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          {/* Open Graph */}
-  <meta property="og:title" content="Economia guiada por IA - Eduardo Ibrahim" />
-  <meta property="og:description" content="Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas." />
-  <meta property="og:url" content="https://ai-driveneconomy.com" />
-  <meta property="og:site_name" content="Economia guiada por IA" />
-  <meta property="og:locale" content="pt_BR" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://ai-driveneconomy.com/ade-og.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Capa do livro Economia guiada por IA" />
-
-  {/* Twitter */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Economia guiada por IA - Eduardo Ibrahim" />
-  <meta name="twitter:description" content="Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas." />
-  <meta name="twitter:image" content="https://ai-driveneconomy.com/ade.jpg" />
-  <meta name="twitter:creator" content="@eduardoibrahim" />
-
-  {/* (Opcional, só para remover o aviso do Facebook) */}
-  <meta property="fb:app_id" content="1234567890" />
       </head>
       <body
         className={`${poppins.variable} ${jetbrainsMono.variable} antialiased`}
