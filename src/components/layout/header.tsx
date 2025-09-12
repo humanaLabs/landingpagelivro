@@ -23,46 +23,52 @@ export function Header() {
               />
               </Link>
                </div>
-          {/* Language Selector and CTA Button - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <LanguageSelector />
-            <button
-              type="button"
-              onClick={() => {
-                const formulario = document.getElementById("formularioContato");
-                if (formulario) {
-                  formulario.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  console.warn("Elemento com id formularioContato não encontrado!");
-                }
-              }}
-              className="border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-design-button"
-            >
-              {t("hero.cta")}
-            </button>
-          </div>
+               <div className="hidden md:flex items-center relative">
+  <div className="flex-shrink-0 absolute -left-20 pointer-events-none">
+    <div className="pointer-events-auto">
+      <LanguageSelector className="min-w-[160px] whitespace-nowrap" />
+    </div>
+  </div>
+  <button
+    type="button"
+    onClick={() => {
+      const formulario = document.getElementById("formularioContato");
+      if (formulario) {
+        formulario.scrollIntoView({ behavior: "smooth" });
+      } else {
+        console.warn("Elemento com id formularioContato não encontrado!");
+      }
+    }}
+    className="relative z-50 border border-white text-white px-4 py-0.5 rounded-full hover:bg-white hover:text-black transition-colors text-design-button"
+  >
+    {t("hero.cta")}
+  </button>
+</div>
 
-          {/* Mobile: Language Selector and CTA Button - Mesma linha */}
-          <div className="md:hidden flex items-center space-x-2">
-            <LanguageSelector className="mobile-compact" />
-            <button
-              type="button"
-              onClick={() => {
-                const formulario = document.getElementById("formularioContato");
-                if (formulario) {
-                  formulario.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  console.warn("Elemento com id formularioContato não encontrado!");
-                }
-              }}
-              className="border border-white text-white px-2 py-1 rounded-full hover:bg-white hover:text-black transition-colors text-xs whitespace-nowrap"
-            >
-              {t("hero.cta")}
-            </button>
-          </div>
+{/* Mobile: AJUSTE MANUAL - Apenas o LanguageSelector se move */}
+<div className="md:hidden flex items-center relative">
+  <div 
+    className="w-36 min-w-36"
+    style={{ transform: 'translateX(65px)' }} /* AJUSTE AQUI: valores positivos movem para direita, negativos para esquerda */
+  >
+    <LanguageSelector className="text-xs w-full" />
+  </div>
+  <button
+    type="button"
+    onClick={() => {
+      const formulario = document.getElementById("formularioContato");
+      if (formulario) {
+        formulario.scrollIntoView({ behavior: "smooth" });
+      } else {
+        console.warn("Elemento com id formularioContato não encontrado!");
+      }
+    }}
+    className="border border-white text-white px-2 py-1 rounded-full hover:bg-white hover:text-black transition-colors text-xs whitespace-nowrap flex-shrink-0"
+  >
+    {t("hero.cta")}
+  </button>
+</div>
         </div>
-
-
       </div>
     </header>
   );

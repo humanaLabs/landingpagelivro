@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useI18n } from "../../../lib/i18n";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 export function AuthorSection() {
@@ -11,6 +11,10 @@ export function AuthorSection() {
   const testimonials = t("author.testimonials");
   const [showAll, setShowAll] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [bannerWidth, setBannerWidth] = useState(0);
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const mobileDuration = 20; // ajuste rápido quando quiser mudar
+  const desktopDuration = 20;
 
   // Detecta se é mobile
   useEffect(() => {
@@ -25,6 +29,12 @@ export function AuthorSection() {
   }, []);
 
   const visibleTestimonials = showAll ? testimonials : testimonials.slice(0, 3);
+
+  useEffect(() => {
+    if (bannerRef.current) {
+      setBannerWidth(bannerRef.current.scrollWidth / 2);
+    }
+  }, [isMobile, locale]); // recalcula se mobile ou idioma mudar
 
   // Função para obter o caminho do vídeo baseado no idioma
   const getVideoPath = (currentLocale: string) => {
@@ -53,7 +63,7 @@ export function AuthorSection() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 md:w-16 md:h-16 w-12 h-12">
+              <div className="relative w-16 h-16 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/fotoeduardo.png"
                   alt="Eduardo Ibrahim"
@@ -62,9 +72,9 @@ export function AuthorSection() {
                   priority
                 />
               </div>
-              <h2 className="text-design-title text-black">
-                {t("author.name")}
-              </h2>
+              <h2 className="text-black text-design-title-mobile md:text-design-title">
+  {t("author.name")}
+</h2>
             </motion.div>
 
             {/* Sobre o autor */}
@@ -75,14 +85,14 @@ export function AuthorSection() {
               transition={{ duration: 1, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <h3 className="text-design-subtitle text-black mb-6 md:mb-6 mb-4">
-                {t("author.aboutAuthor")}
-              </h3>
+             <h3 className="text-xl md:text-2xl lg:text-xl font-bold text-black mb-4 md:mb-6">
+  {t("author.aboutAuthor")}
+</h3>
               <div className="text-black space-y-4 md:space-y-4 space-y-3">
-                <p className="text-design-body">{t("author.bio1")}</p>
-                <p className="text-design-body">{t("author.bio2")}</p>
-                <p className="text-design-body">{t("author.bio3")}</p>
-              </div>
+  <p className="text-design-body-mobile md:text-design-body">{t("author.bio1")}</p>
+  <p className="text-design-body-mobile md:text-design-body">{t("author.bio2")}</p>
+  <p className="text-design-body-mobile md:text-design-body">{t("author.bio3")}</p>
+</div>
             </motion.div>
           </div>
         </div>
@@ -91,29 +101,19 @@ export function AuthorSection() {
       {/* Avatar interativo + título */}
       <section className="bg-white">
         <div className="w-full">
+          {/* Vídeo responsivo ocupando toda a largura */}
           <motion.div
-            className={`flex justify-center bg-white ${
-              isMobile ? "py-8 px-4" : "py-12"
-            }`}
+            className="flex justify-center bg-white py-12 px-4"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            <div
-              className={`relative bg-white rounded-lg overflow-hidden shadow-xl border border-gray-200 ${
-                isMobile
-                  ? "w-96 h-80 max-w-[90vw] max-h-[55vh]"
-                  : "w-[800px] h-[450px]"
-              }`}
-              style={isMobile ? { aspectRatio: "5/4" } : {}}
-            >
+            <div className="relative w-full max-w-5xl aspect-[16/9] rounded-lg overflow-hidden shadow-xl border border-gray-200">
               <video
                 key={locale}
                 src={getVideoPath(locale)}
-                className={`w-full h-full object-cover ${
-                  isMobile ? "object-center object-top" : "object-top"
-                }`}
+                className="w-full h-full object-cover object-top"
                 controls
                 autoPlay
                 muted
@@ -123,15 +123,16 @@ export function AuthorSection() {
             </div>
           </motion.div>
 
-       {/* Faixa contínua estilo estádio */}
-<div className="overflow-hidden bg-white py-6">
+          {/* Faixa contínua estilo estádio */}
+<div className="overflow-hidden bg-white py-8">
   <motion.div
+    ref={bannerRef}
     className="flex whitespace-nowrap"
-    animate={{ x: ["0%", "-100%"] }}
+    animate={{ x: [0, -bannerWidth / 2] }}
     transition={{
       repeat: Infinity,
       repeatType: "loop",
-      duration: 12, // velocidade ajustável
+      duration: isMobile ? mobileDuration : desktopDuration,
       ease: "linear",
     }}
   >
@@ -140,8 +141,10 @@ export function AuthorSection() {
       {[...Array(6)].map((_, i) => (
         <h2
           key={`block1-${i}`}
-          className={`text-black font-bold tracking-tight mx-[20vw] ${
-            isMobile ? "text-3xl md:text-5xl leading-tight" : "text-5xl"
+          className={`text-black font-bold tracking-tight mx-[12vw] ${
+            isMobile
+              ? "text-5xl md:text-6xl leading-tight"
+              : "text-8xl"
           }`}
         >
           {t("author.bookTitle")}
@@ -149,13 +152,15 @@ export function AuthorSection() {
       ))}
     </div>
 
-    {/* Segundo bloco (cópia para continuidade) */}
+    {/* Segundo bloco (duplicado) */}
     <div className="flex">
       {[...Array(6)].map((_, i) => (
         <h2
           key={`block2-${i}`}
-          className={`text-black font-bold tracking-tight mx-[20vw] ${
-            isMobile ? "text-3xl md:text-5xl leading-tight" : "text-5xl"
+          className={`text-black font-bold tracking-tight mx-[12vw] ${
+            isMobile
+              ? "text-5xl md:text-6xl leading-tight"
+              : "text-8xl"
           }`}
         >
           {t("author.bookTitle")}
@@ -164,9 +169,10 @@ export function AuthorSection() {
     </div>
   </motion.div>
 </div>
+
           {/* Depoimentos */}
           <div className={`bg-white px-4 ${isMobile ? "py-12" : "py-16"}`}>
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-8xl mx-auto">
               <div
                 className={`items-start ${
                   isMobile
@@ -178,7 +184,7 @@ export function AuthorSection() {
                   <motion.div
                     key={index}
                     className={`bg-white text-center h-full flex flex-col border border-gray-200 rounded-xl shadow-sm ${
-                      isMobile ? "p-5 max-w-sm mx-auto w-full" : "p-6"
+                      isMobile ? "p-5 max-w-sm mx-auto w-full" : "p-8"
                     }`}
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -190,15 +196,14 @@ export function AuthorSection() {
                     viewport={{ once: true }}
                   >
                     <div
-                      className={`text-black leading-relaxed mb-6 flex-grow ${
-                        isMobile ? "text-sm" : "text-sm"
-                      }`}
+                      className={`text-black leading-relaxed mb-6 flex-grow 
+                         ${isMobile ? "text-base" : "text-base lg:text-lg"}`}
                     >
                       {testimonial.text}
                     </div>
                     <div className="mt-auto">
                       <div className="bg-black text-white py-3 mb-4 rounded-md">
-                        <div className="font-bold text-sm">
+                        <div className="font-bold text-sm md:text-base lg:text-lg">
                           {testimonial.author}
                         </div>
                       </div>
@@ -210,22 +215,24 @@ export function AuthorSection() {
                 ))}
               </div>
 
-              {/* Botão de expandir/recolher */}
-              {testimonials.length > 3 && (
-                <div className="flex justify-center mt-8">
-                  <button
-                    onClick={() => setShowAll(!showAll)}
-                    className="flex items-center gap-2 text-black font-medium hover:underline"
-                  >
-                    {showAll ? "Mostrar menos" : "Mostrar mais"}
-                    {showAll ? (
-                      <ChevronUp size={20} />
-                    ) : (
-                      <ChevronDown size={20} />
-                    )}
-                  </button>
-                </div>
-              )}
+             {/* Botão de expandir/recolher */}
+{testimonials.length > 3 && (
+  <div className="flex justify-center mt-8">
+    <button
+      onClick={() => setShowAll(!showAll)}
+      className="flex items-center gap-2 text-black font-medium text-lg md:text-xl px-4 md:px-6 py-2 md:py-3 hover:underline"
+    >
+      {showAll
+        ? t("author.showLess")
+        : t("author.showMore", { count: testimonials.length - 3 })}
+      {showAll ? (
+        <ChevronUp size={24} />
+      ) : (
+        <ChevronDown size={24} />
+      )}
+    </button>
+  </div>
+)}
             </div>
           </div>
         </div>
