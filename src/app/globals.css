@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -121,7 +121,7 @@ body {
 }
 
 /* ========================================
-   TIPOGRAFIA MOBILE
+   TIPOGRAFIA MOBILE e DESKTOP
 ======================================== */
 
 .text-design-mega {
@@ -131,21 +131,51 @@ body {
 }
 
 .text-design-title {
-  font-size: 1.75rem;
+  font-size: 2.0rem; /* Maior no mobile */
   line-height: 1.3;
   font-weight: 600;
 }
 
+/* A partir do tablet (640px+), volta ao tamanho original */
+@media (min-width: 640px) {
+  .text-design-title {
+    font-size: 2.30rem; /* Tamanho original no desktop */
+  }
+}
+
+.text-design-title-mobile {
+  font-size: 2.1rem !important;
+  font-weight: 700 !important; /* bold */
+  line-height: 1.4 !important;
+}
+
 .text-design-subtitle {
-  font-size: clamp(1rem, 2vw, 1.1875rem);
+  font-size: clamp(1.20rem, 2vw, 1.1875rem);
   line-height: 1.4;
   font-weight: 600;
 }
 
+.text-design-body-mobile {
+  font-size: 1rem; /* mobile */
+  line-height: 1.6;
+}
+
 .text-design-body {
-  font-size: clamp(0.875rem, 1.5vw, 0.9375rem);
+  font-size: 1.03rem; /* base */
   line-height: 1.5;
   font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .text-design-body {
+    font-size: 1.255rem; /* tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-design-body {
+    font-size: 1.145rem; /* desktop grande */
+  }
 }
 
 .text-design-button {
@@ -278,9 +308,9 @@ section.bg-white::before {
   header img[src*="economiaguiadaporia"], 
   .logo img, 
   header .logo {
-    height: 2rem !important;
+    height: 2.55rem !important;
     width: auto !important;
-    max-width: 70% !important;
+    max-width: 80% !important;
   }
 }
 
@@ -312,14 +342,14 @@ section.relative.bg-white {
 }
 
 .hero-book-mobile {
-  margin: 0 0 1rem 0 !important;
-  flex-shrink: 0 !important;
+  margin-top: 4rem !important;
+  flex-shrink: 0;
 }
 
 .hero-book-mobile img {
   width: 350px !important;
   height: auto !important;
-  max-width: 80% !important;
+  max-width: 85% !important;
   object-fit: contain !important;
 }
 
@@ -328,9 +358,8 @@ section.relative.bg-white {
   line-height: 1.3 !important;
   font-weight: 700 !important;
   color: #000 !important;
-  margin: 0 0 0.5rem 0 !important;
+  margin-top: 2rem !important;
   text-align: center !important;
-  margin-top: -3rem !important;
 }
 
 .hero-subtitle-mobile-compact {
@@ -346,17 +375,42 @@ section.relative.bg-white {
   background: #000 !important;
   color: #fff !important;
   border: 1px solid #000 !important;
-  padding: 0.75rem 1.5rem !important;
+  padding: 0.40rem 1.5rem !important;
   border-radius: 9999px !important;
   font-size: 0.9rem !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   transition: all 0.3s ease !important;
-  margin: 0 !important;
+  margin-top: 1rem !important;
 }
 
 .hero-cta-mobile-compact:hover {
   background: #fff !important;
   color: #000 !important;
+}
+
+/* ========================================
+   HERO SECTION DESKTOP
+======================================== */
+
+@media (min-width: 1024px) {
+  /* Container do livro no desktop */
+  .hero-book-desktop {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  /* Imagem do livro no desktop */
+  .hero-book-desktop img {
+    width: 560px !important;        /* ← CONTROLE O TAMANHO AQUI */
+    height: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+  }
+  
+  /* Para imagens ainda maiores, use: */
+  /* width: 1000px !important; */
+  /* width: 1100px !important; */
 }
 
 /* ========================================
@@ -376,18 +430,29 @@ section.relative.bg-white {
    SEÇÃO PAPER - Centralizar imagem
 ======================================== */
 
+/* Estilo base para todos os dispositivos (mobile incluído) */
 .paper-section img,
 .paper-image {
-  display: block !important;
-  margin: 0 auto !important;
-  width: 90% !important;
-  max-width: 350px !important;
-  position: relative !important;
-  z-index: 50 !important;
-  margin-bottom: 50px !important;
-  filter: none !important;
-  box-shadow: none !important;
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 350px;
+  position: relative;
+  z-index: 50;
+  margin-bottom: 50px;
+  filter: none;
+  box-shadow: none;
+  transform: -translateY(-20px); /* sem deslocamento no mobile */
 }
+
+/* Apenas no desktop (a partir de 1024px) */
+@media (min-width: 1024px) {
+  .paper-section img,
+  .paper-image {
+    transform: translateX(-30px) translateY(0) scale(1.5) !important; /* sobe a imagem suavemente no desktop */
+  }
+}
+
 
 /* ========================================
    DESCRIÇÃO DO LIVRO - Quebra de linhas

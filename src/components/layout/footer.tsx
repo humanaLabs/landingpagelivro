@@ -131,8 +131,9 @@ export function Footer() {
 
           {/* Centralizado: Editora + links */}
           <div className="mt-10 flex flex-col items-center">
-            <div className="text-[13px] text-white/70">{t("footer.publisherName")}</div>
-            <div className="mt-4 flex items-center justify-center gap-3 text-[13px] whitespace-nowrap">
+            <div className="text-[13px] md:text-sm lg:text-base text-white/70">{t("footer.publisherName")}</div>
+
+            <div className="mt-4 flex items-center justify-center gap-3 text-[13px] md:text-sm lg:text-base whitespace-nowrap">
               <a href="#" className="hover:text-gray-300">{t("footer.privacyPolicy")}</a>
               <span className="text-white/30">|</span>
               <a href="#" className="hover:text-gray-300">{t("footer.termsOfUse")}</a>

@@ -95,21 +95,21 @@ export function LeadForm() {
           animate={isVisible ? "show" : "hidden"}
         >
           <motion.h2
-            key={`lead-title-${locale}`}
-            variants={fadeUp}
-            suppressHydrationWarning
-            className="font-bold mb-6 text-[1.875rem] md:text-[2.25rem] lg:text-[2.5rem] leading-[1.15]"
-          >
-            {t("form.title") || "Cadastre-se para saber mais"}
-          </motion.h2>
+  key={`lead-title-${locale}`}
+  variants={fadeUp}
+  suppressHydrationWarning
+  className="font-semibold mb-6 text-[1.875rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.15]"
+>
+  {t("form.title") || "Cadastre-se para saber mais"}
+</motion.h2>
 
-          <motion.p
-            key={`lead-sub-${locale}`}
-            variants={fadeUp}
-            className="mb-8 text-gray-300"
-          >
-            {t("form.subtitle") || "Preencha seus dados para receber mais informações sobre o livro."}
-          </motion.p>
+<motion.p
+  key={`lead-sub-${locale}`}
+  variants={fadeUp}
+  className="mb-8 text-gray-300 text-base md:text-base lg:text-xl"
+>
+  {t("form.subtitle") || "Preencha seus dados para receber mais informações sobre o livro."}
+</motion.p>
 
           <motion.form
             key={`lead-form-${locale}`}

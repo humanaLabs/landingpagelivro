@@ -61,69 +61,69 @@ export function FaqSection() {
           <div className="max-w-md">
 
             {/* Título */}
-            <motion.h2
-              key={`faq-title-${locale}`}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              suppressHydrationWarning
-              className="text-design-title text-black mb-16"
-            >
-              {t("faq.title")}
-            </motion.h2>
+<motion.h2
+  key={`faq-title-${locale}`}
+  variants={fadeUp}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.3 }}
+  suppressHydrationWarning
+  className="text-design-title text-black mb-16 text-4xl sm:text-3xl lg:text-5xl"
+>
+  {t("faq.title")}
+</motion.h2>
 
-            {/* Lista FAQ com stagger */}
+{/* Lista FAQ com stagger */}
+<motion.div
+  key={`faq-list-${locale}`}
+  variants={containerStagger}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.2 }}
+  className="space-y-10"
+>
+  {faqQuestions.map((faq, index) => (
+    <motion.div
+      key={`${locale}-${index}`}
+      variants={fadeUp}
+      className="border-b border-gray-100 pb-8"
+    >
+      <div className="group">
+        <button
+          onClick={() => setOpenFaq(openFaq === index ? null : index)}
+          className="w-full cursor-pointer text-design-subtitle text-black flex items-center justify-between py-2 text-left hover:text-gray-700 transition-colors duration-200 text-xl sm:text-xl"
+        >
+          <span suppressHydrationWarning>{faq.question}</span>
+          <motion.svg
+            animate={{ rotate: openFaq === index ? 180 : 0 }}
+            transition={{ duration: 0.25 }}
+            className="w-6 h-6 sm:w-5 sm:h-5 flex-shrink-0 ml-6 text-gray-400"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </motion.svg>
+        </button>
+
+        <AnimatePresence initial={false}>
+          {openFaq === index && (
             <motion.div
-              key={`faq-list-${locale}`}
-              variants={containerStagger}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="space-y-10"
+              key={`answer-${locale}-${index}`}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              className="overflow-hidden mt-6"
             >
-              {faqQuestions.map((faq, index) => (
-                <motion.div
-                  key={`${locale}-${index}`}
-                  variants={fadeUp}
-                  className="border-b border-gray-100 pb-8"
-                >
-                  <div className="group">
-                    <button
-                      onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                      className="w-full cursor-pointer text-design-subtitle text-black flex items-center justify-between py-2 text-left hover:text-gray-700 transition-colors duration-200"
-                    >
-                      <span suppressHydrationWarning>{faq.question}</span>
-                      <motion.svg
-                        animate={{ rotate: openFaq === index ? 180 : 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="w-5 h-5 flex-shrink-0 ml-6 text-gray-400"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                      </motion.svg>
-                    </button>
-
-                    <AnimatePresence initial={false}>
-                      {openFaq === index && (
-                        <motion.div
-                          key={`answer-${locale}-${index}`}
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: "easeInOut" }}
-                          className="overflow-hidden mt-6"
-                        >
-                          <div suppressHydrationWarning className="text-design-body text-black pb-2">
-                            {faq.answer}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </motion.div>
-              ))}
+              <div suppressHydrationWarning className="text-design-body text-black pb-2 text-xl sm:text-base lg:text-lg">
+                {faq.answer}
+              </div>
             </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  ))}
+</motion.div>
           </div>
         </div>
 

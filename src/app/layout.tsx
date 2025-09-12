@@ -34,16 +34,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Economia guiada por IA - Eduardo Ibrahim",
     description: "Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas.",
-    url: "https://economiaiai.com",
+    url: "https://ai-driveneconomy.com",
     siteName: "Economia guiada por IA",
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "https://ai-driveneconomy.com/ade.png", // coloque sua capa aqui
+        width: 1200,
+        height: 630,
+        alt: "Capa do livro Economia guiada por IA",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Economia guiada por IA - Eduardo Ibrahim",
     description: "Descubra como a inteligência artificial está mudando a lógica do valor, do trabalho e da tomada de decisões nas empresas.",
     creator: "@eduardoibrahim",
+    images: ["https://ai-driveneconomy.com/ade.png"], // mesma imagem aqui
   },
   robots: {
     index: true,
@@ -57,6 +66,7 @@ export const metadata: Metadata = {
     },
   },
 };
+
 
 // Componente ErrorBoundary que funciona no App Directory
 function ErrorFallback({ error }: { error: Error }) {

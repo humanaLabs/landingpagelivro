@@ -171,15 +171,14 @@ const translations: Record<string, Translations> = {
       contact: "Contato",
       blog: "Blog"
     },
-    hero: {
-      titleLine1: "O futuro da economia",
-      titleLine2: "é cognitivo — e já",
-      titleLine3: "começou.",
-      subtitleLine1: "Descubra como a inteligência artificial está mudando",
-      subtitleLine2: "a lógica do valor, do trabalho e da tomada de",
-      subtitleLine3: "decisões nas empresas.",
-      cta: "Quero meu exemplar"
-    },
+      hero: {
+        titleLine1: "Descubra como a",
+        titleLine2: "inteligência artificial está",
+        titleLine3: "transformando a economia",
+        titleLine4: " e mudando as regras",
+        titleLine5: "dos negócios.",
+        cta: "Quero meu exemplar"
+      },
     features: {
       aiTitleLine1: "A inteligência artificial não está",
       aiTitleLine2: "apenas otimizando processos.",
@@ -209,37 +208,37 @@ const translations: Record<string, Translations> = {
       bio2: "Com trajetória que passa pelo campus da NASA no Vale do Silício, TEDx e programas de beta-tester da OpenAI, Ibrahim combina visão prática e pensamento disruptivo. Como palestrante internacional é voz ativa em grandes organizações, onde traduz o complexo em linguagem acessível.",
       bio3: "Neste novo livro, ele propõe uma visão transformadora: a IA guiando a economia não para nos substituir, mas para ampliar o que temos de mais humano. Uma leitura provocadora e essencial para líderes, inovadores e todos que desejam prosperar na nova era da IA.",
       bookTitle: "ECONOMIA GUIADA POR IA",
-      testimonials: [
-        {
-          text: "\"Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas. Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente.\"",
-          author: "GARY BOLLES",
-        },
-        {
-          text: "\"Cada capítulo deste livro revela o que muitos ainda não enxergaram: a inteligência artificial já está moldando o presente, e ignorá-la é um risco estratégico. Ibrahim oferece uma nova linguagem para os líderes que querem ser protagonistas da transformação — e não apenas espectadores dela.\"",
-          author: "CRISTIANO SOUZA",
-        },
-        {
-          text: "\"Ibrahim não está apenas acompanhando a revolução da IA — ele está conduzindo a conversa. Este livro redefine o que significa liderar em um mundo cognitivo, onde máquinas e humanos pensam juntos. A clareza com que ele conecta estratégia, talento e valor é rara. Uma leitura que muda não só a cabeça, mas o rumo dos negócios.\"",
-          author: "RICARDO ALEM",
-        },
-        {
-          text: "\"Ler este livro é como ajustar sua lente mental para uma realidade já moldada pela inteligência artificial. Ibrahim não apenas explica o que está acontecendo — ele nos prepara para participar disso. Seu conceito de 'inteligência combinada' não é apenas uma teoria, é um chamado à ação para líderes e criativos. Se você ainda está se perguntando se a IA é importante, está fazendo a pergunta errada.\"",
-          author: "ISABELA VANZIN",
-        },
-        {
-          text: "\"Este livro é como uma aula magna sobre o agora. Ibrahim não está prevendo o futuro — ele está nomeando o que já começou. A forma como ele articula o papel da IA nas organizações, nos talentos e na criação de valor transforma nossa percepção de presente. Uma leitura obrigatória para quem quer pensar com profundidade, estratégia e humanidade.\"",
-          author: "ANANDA ZOUAIN",
-        },
-        {
-          text: "\"Este livro me deu a sensação de estar acessando o código-fonte do presente. Ibrahim traduz a complexidade da IA com lucidez e, ao mesmo tempo, profundidade. Um convite para repensar como organizamos o trabalho, desenvolvemos pessoas e criamos valor real.\"",
-          author: "PAOLLA MELLO",
-        },
-        {
-          text: "\"‘Economia Guiada por IA’ é mais do que um livro — é um mapa para quem precisa navegar um mundo onde decisões são cada vez mais cognitivas. Ibrahim mostra que a inteligência artificial, quando bem aplicada, não substitui o humano — ela o amplia. Estratégico, provocador e atual.\"",
-          author: "JOÃO PEDRO MORENO",
-        }
-      ],
-        showMore: "Mostrar mais {{count}}",
+        testimonials: [
+          {
+            text: "\"Ibrahim entrega, neste livro, muito mais do que uma visão sobre inteligência artificial: ele nos oferece uma nova gramática para entender valor, talento e decisão em um mundo que pensa com máquinas. Essa é uma leitura essencial para líderes que não querem reconstruir suas organizações com base em IA. O que ele propõe aqui não é futurismo. É um manual poderoso para o presente.\"",
+            author: "GARY BOLLES",
+          },
+          {
+            text: "\"Ibrahim não está apenas acompanhando a revolução da IA — ele está conduzindo a conversa. Este livro redefine o que significa liderar em um mundo cognitivo, onde máquinas e humanos pensam juntos. A clareza com que ele conecta estratégia, talento e valor é rara. Uma leitura que muda não só a cabeça, mas o rumo dos negócios.\"",
+            author: "RICARDO ALEM",
+          },
+          {
+            text: "\"Cada capítulo deste livro revela o que muitos ainda não enxergaram: a inteligência artificial já está moldando o presente, e ignorá-la é um risco estratégico. Ibrahim oferece uma nova linguagem para os líderes que querem ser protagonistas da transformação — e não apenas espectadores dela.\"",
+            author: "CRISTIANO SOUZA",
+          },
+          {
+            text: "\"Ler este livro é como ajustar sua lente mental para uma realidade já moldada pela inteligência artificial. Ibrahim não apenas explica o que está acontecendo — ele nos prepara para participar disso. Seu conceito de 'inteligência combinada' não é apenas uma teoria, é um chamado à ação para líderes e criativos. Se você ainda está se perguntando se a IA é importante, está fazendo a pergunta errada.\"",
+            author: "ISABELA VANZIN",
+          },
+          {
+            text: "\"Este livro é como uma aula magna sobre o agora. Ibrahim não está prevendo o futuro — ele está nomeando o que já começou. A forma como ele articula o papel da IA nas organizações, nos talentos e na criação de valor transforma nossa percepção de presente. Uma leitura obrigatória para quem quer pensar com profundidade, estratégia e humanidade.\"",
+            author: "ANANDA ZOUAIN",
+          },
+          {
+            text: "\"Este livro me deu a sensação de estar acessando o código-fonte do presente. Ibrahim traduz a complexidade da IA com lucidez e, ao mesmo tempo, profundidade. Um convite para repensar como organizamos o trabalho, desenvolvemos pessoas e criamos valor real.\"",
+            author: "PAOLLA MELLO",
+          },
+          {
+            text: "\"‘Economia Guiada por IA’ é mais do que um livro — é um mapa para quem precisa navegar um mundo onde decisões são cada vez mais cognitivas. Ibrahim mostra que a inteligência artificial, quando bem aplicada, não substitui o humano — ela o amplia. Estratégico, provocador e atual.\"",
+            author: "JOÃO PEDRO MORENO",
+          }
+        ],
+        showMore: "Mostrar mais",
         showLess: "Mostrar menos"
       },
     faq: {
@@ -320,19 +319,18 @@ const translations: Record<string, Translations> = {
       blog: "Blog"
     },
     hero: {
-      titleLine1: "The future of economy",
-      titleLine2: "is cognitive — and it",
-      titleLine3: "has already begun.",
-      subtitleLine1: "Discover how artificial intelligence is changing",
-      subtitleLine2: "the logic of value, work and decision-making",
-      subtitleLine3: "in companies.",
+      titleLine1: "Find out how artificial",
+      titleLine2: "intelligence is transforming",
+      titleLine3: "the economy and",
+      titleLine4: "changing the rules",
+      titleLine5: "of business.",
       cta: "Get my copy"
     },
     features: {
       aiTitleLine1: "Artificial intelligence is not just",
       aiTitleLine2: "optimizing processes.",
       aiTitleLine3: "It's redefining what value is.",
-      bookDescriptionLine1: "\"AI-Guided Economy\", by Eduardo Ibrahim, presents a strategic",
+      bookDescriptionLine1: "\"AI-Driven Economy\", by Eduardo Ibrahim, presents a strategic",
       bookDescriptionLine2: "and realistic vision of how AI is transforming the structure",
       bookDescriptionLine3: "of organizations and the global economy.",
       aboutBook: "About the book",
@@ -356,13 +354,21 @@ const translations: Record<string, Translations> = {
       bio1: "Eduardo Ibrahim is one of the greatest references in technology and the future. Founder and CEO of Humana AI, Professor at Singularity University and author of the bestseller Exponential Economy, Ibrahim is one of the pioneers in applying AI in the strategic business context.",
       bio2: "With a trajectory that includes NASA's campus in Silicon Valley, TEDx and OpenAI beta-tester programs, Ibrahim combines practical vision and disruptive thinking. As an international speaker, he is an active voice in large organizations, where he translates the complex into accessible language.",
       bio3: "In this new book, he proposes a transformative vision: AI guiding the economy not to replace us, but to amplify what we have that is most human. A provocative and essential read for leaders, innovators and all who wish to thrive in the new AI era.",
-      bookTitle: "AI-GUIDED ECONOMY",
+      bookTitle: "AI-DRIVEN ECONOMY",
       quote: "\"Ibrahim delivers, in this book, much more than a vision about artificial intelligence: he offers us a new grammar for understanding value, talent and decision in a world that thinks with machines. This is essential reading for leaders who don't want to rebuild their organizations based on AI. What he proposes here is not futurism. It's a powerful manual for the present.\"",
       quoteAuthor: "— Gary Bolles",
         testimonials: [
           {
             text: "\"In this book, Ibrahim delivers much more than a vision about artificial intelligence: he offers us a new grammar to understand value, talent, and decision-making in a world that thinks with machines. This is essential reading for leaders who don’t want to rebuild their organizations based on AI. What he proposes here is not futurism. It is a powerful manual for the present.\"",
             author: "GARY BOLLES",
+          },
+          {
+            text: "\"Ibrahim is not just following the AI revolution — he's leading the conversation. This book redefines what it means to lead in a cognitive world, where humans and machines think together. The clarity with which he connects strategy, talent, and value is rare. A read that shifts not just your mind, but the direction of business.\"",
+            author: "RICARDO ALEM",
+          },
+          {
+            text: "\"Each chapter of this book reveals what many still fail to see: artificial intelligence is already shaping the present, and ignoring it is a strategic risk. Ibrahim offers a new language for leaders who want to be protagonists of transformation — not just spectators.\"",
+            author: "CRISTIANO SOUZA",
           },
             {
               text: "\"Reading this book feels like adjusting your mental lens to a reality already shaped by artificial intelligence. Ibrahim doesn’t just explain what's happening — he equips us to participate in it. His concept of ‘intelligence combined’ is not just a theory, it’s a wake-up call for leaders and creatives alike. If you're still asking whether AI matters, you’re asking the wrong question.\"",
@@ -373,14 +379,6 @@ const translations: Record<string, Translations> = {
               author: "ANANDA ZOUAIN",
             },
             {
-              text: "\"Ibrahim is not just following the AI revolution — he's leading the conversation. This book redefines what it means to lead in a cognitive world, where humans and machines think together. The clarity with which he connects strategy, talent, and value is rare. A read that shifts not just your mind, but the direction of business.\"",
-              author: "RICARDO ALEM",
-            },
-            {
-              text: "\"Each chapter of this book reveals what many still fail to see: artificial intelligence is already shaping the present, and ignoring it is a strategic risk. Ibrahim offers a new language for leaders who want to be protagonists of transformation — not just spectators.\"",
-              author: "CRISTIANO SOUZA",
-            },
-            {
               text: "\"This book feels like accessing the source code of the present. Ibrahim translates the complexity of AI with clarity and depth. It’s an invitation to rethink how we organize work, develop people, and create real value.\"",
               author: "PAOLLA MELLO",
             },
@@ -389,7 +387,7 @@ const translations: Record<string, Translations> = {
               author: "JOÃO PEDRO MORENO",
             }
           ],
-        showMore: "Show more {{count}}",
+        showMore: "Show more",
         showLess: "Show less"
       },
     faq: {
@@ -469,15 +467,15 @@ const translations: Record<string, Translations> = {
         contact: "Contacto",
         blog: "Blog"
       },
-      hero: {
-        titleLine1: "El futuro de la economía",
-        titleLine2: "es cognitivo — y ya",
-        titleLine3: "ha comenzado.",
-        subtitleLine1: "Descubre cómo la inteligencia artificial está cambiando",
-        subtitleLine2: "la lógica del valor, el trabajo y la toma de",
-        subtitleLine3: "decisiones en las empresas.",
-        cta: "Quiero mi ejemplar"
-      },
+        // ... other translations remain the same
+        hero: {
+          titleLine1: "Descubre cómo la",
+          titleLine2: "inteligencia artificial está",
+          titleLine3: "transformando la economía",
+          titleLine4: "y cambiando las reglas",
+          titleLine5: "de los negocios.",
+          cta: "Quiero mi ejemplar"
+        },
     features: {
       aiTitleLine1: "La inteligencia artificial no solo está",
       aiTitleLine2: "optimizando procesos.",
@@ -513,10 +511,6 @@ const translations: Record<string, Translations> = {
           author: "GARY BOLLES",
         },
         {
-          text: "\"Cada capítulo de este libro revela lo que muchos aún no ven: la inteligencia artificial ya está moldeando el presente, e ignorarla es un riesgo estratégico. Ibrahim ofrece un nuevo lenguaje para los líderes que quieren ser protagonistas de la transformación — y no solo espectadores.\"",
-          author: "CRISTIANO SOUZA",
-        },
-        {
           text: "\"Ibrahim no solo está siguiendo la revolución de la IA — está liderando la conversación. Este libro redefine lo que significa liderar en un mundo cognitivo, donde humanos y máquinas piensan juntos. La claridad con la que conecta estrategia, talento y valor es rara. Una lectura que cambia no solo la mente, sino también el rumbo de los negocios.\"",
           author: "RICARDO ALEM",
         },
@@ -529,6 +523,14 @@ const translations: Record<string, Translations> = {
           author: "ANANDA ZOUAIN",
         },
         {
+          text: "\"Este libro es como una clase magistral sobre el presente. Ibrahim no predice el futuro, sino que nombra lo que ya ha comenzado. La forma en que articula el papel de la IA en las organizaciones, el talento y la creación de valor transforma nuestra percepción del presente. Una lectura imprescindible para cualquiera que desee pensar con profundidad, estrategia y humanidad.\"",
+          author: "ANANDA ZOUAIN",
+        },
+        {
+          text: "\"Leer este libro es como ajustar la lente mental a una realidad ya moldeada por la inteligencia artificial. Ibrahim no solo explica lo que está sucediendo, sino que nos prepara para participar en ello. Su concepto de ‘inteligencia combinada’  no es solo una teoría; es un llamado a la acción para líderes y creativos. Si todavía te preguntas si la IA es importante, te estás haciendo la pregunta equivocada.\"",
+          author: "ISABELA VANZIN",
+        },
+        {
           text: "\"Este libro me dio la sensación de estar accediendo al código fuente del presente. Ibrahim traduce la complejidad de la IA con lucidez y profundidad. Una invitación a repensar cómo organizamos el trabajo, desarrollamos a las personas y creamos valor real.\"",
           author: "PAOLLA MELLO",
         },
@@ -537,9 +539,7 @@ const translations: Record<string, Translations> = {
           author: "JOÃO PEDRO MORENO",
         }
       ],
-      
-      
-      showMore: "Mostrar más {{count}}",
+      showMore: "Mostrar más",
       showLess: "Mostrar menos"
     },
   faq: {
@@ -598,7 +598,7 @@ const translations: Record<string, Translations> = {
 },
 }
 
-  
+
   // Instância global do i18n
   export const i18n = new I18n({
     defaultLocale: 'pt',
