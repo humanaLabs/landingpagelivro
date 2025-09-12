@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://ai-driveneconomy.com/ade-og.jpg",
-        secureUrl: "https://ai-driveneconomy.com/ade-og.jpg",
+        url: "https://ai-driveneconomy.com/ade-og.jpg?v=2", // query string para refresh
+        secureUrl: "https://ai-driveneconomy.com/ade-og.jpg?v=2",
         width: 1200,
         height: 630,
         alt: "AI-Driven Economy - Eduardo Ibrahim",
@@ -47,13 +47,14 @@ export const metadata: Metadata = {
     title: "AI-Driven Economy - Eduardo Ibrahim",
     description:
       "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
-    images: ["https://ai-driveneconomy.com/ade-og.jpg"],
+    images: ["https://ai-driveneconomy.com/ade-og.jpg?v=2"],
     creator: "@eduardoibrahim",
   },
   alternates: {
     canonical: "https://ai-driveneconomy.com",
   },
 };
+
 
 
 
