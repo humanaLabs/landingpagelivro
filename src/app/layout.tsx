@@ -19,51 +19,38 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-export const metadata: Metadata = { 
+export const metadata: Metadata = {
+  metadataBase: new URL("https://ai-driveneconomy.com"),
   title: "AI-Driven Economy - Eduardo Ibrahim",
-  description: "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
-  keywords: ["economy", "artificial intelligence", "AI", "Eduardo Ibrahim", "book", "business", "technology"],
-  authors: [{ name: "Eduardo Ibrahim" }],
-  creator: "Eduardo Ibrahim",
-  publisher: "Eduardo Ibrahim",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  description:
+    "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
   openGraph: {
-    title: "AI-Driven Economy - Eduardo Ibrahim",
-    description: "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
-    url: "https://ai-driveneconomy.com",
-    siteName: "AI-Driven Economy",
-    locale: "en_US",
     type: "website",
+    url: "https://ai-driveneconomy.com",
+    title: "AI-Driven Economy - Eduardo Ibrahim",
+    description:
+      "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
+    siteName: "Economia guiada por IA",
+    locale: "pt_BR",
     images: [
       {
-        url: "https://ai-driveneconomy.com/ade-og.jpg", // recommended horizontal 1200x630 version
+        url: "https://ai-driveneconomy.com/ade-og.jpg",
         width: 1200,
         height: 630,
-        alt: "Cover of the book AI-Driven Economy",
+        alt: "AI-Driven Economy - Eduardo Ibrahim",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI-Driven Economy - Eduardo Ibrahim",
-    description: "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
+    description:
+      "Discover how artificial intelligence is changing the logic of value, work, and decision-making in companies.",
+    images: ["https://ai-driveneconomy.com/ade-og.jpg"],
     creator: "@eduardoibrahim",
-    images: ["https://ai-driveneconomy.com/ade-og.jpg"], // same image for Twitter
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+  alternates: {
+    canonical: "https://ai-driveneconomy.com",
   },
 };
 
