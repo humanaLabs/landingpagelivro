@@ -143,8 +143,8 @@ export function AuthorSection() {
           key={`block1-${i}`}
           className={`text-black font-bold tracking-tight mx-[12vw] ${
             isMobile
-              ? "text-5xl md:text-6xl leading-tight"
-              : "text-8xl"
+              ? "text-7xl md:text-6xl leading-tight"
+              : "text-9xl"
           }`}
         >
           {t("author.bookTitle")}
