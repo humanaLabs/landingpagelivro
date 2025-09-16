@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import ScrollRestoration from "@/components/ScrollRestoration";
+import ScrollToTop from '@/components/ScrollToTop';
 
 const poppins = Poppins({
   variable: "--font-sans",
@@ -316,6 +317,7 @@ export default function RootLayout({
         <main>
           {children}
           <ScrollRestoration />
+          <ScrollToTop />
         </main>
         <Footer />
       </body>
