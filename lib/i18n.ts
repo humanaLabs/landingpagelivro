@@ -177,7 +177,8 @@ const translations: Record<string, Translations> = {
         titleLine3: "transformando a economia",
         titleLine4: " e mudando as regras",
         titleLine5: "dos negócios.",
-        cta: "Quero meu exemplar"
+        cta: "Quero meu exemplar",
+        bookAlt: "Imagem do livro 'Economia Guiada por IA' de Eduardo Ibrahim"
       },
     features: {
       aiTitleLine1: "A inteligência artificial não está",
@@ -324,7 +325,8 @@ const translations: Record<string, Translations> = {
       titleLine3: "the economy and",
       titleLine4: "changing the rules",
       titleLine5: "of business.",
-      cta: "Get my copy"
+      cta: "Get my copy",
+      bookAlt: "Image of the book 'AI-Driven Economy' by Eduardo Ibrahim",
     },
     features: {
       aiTitleLine1: "Artificial intelligence is not just",
@@ -474,7 +476,8 @@ const translations: Record<string, Translations> = {
           titleLine3: "transformando la economía",
           titleLine4: "y cambiando las reglas",
           titleLine5: "de los negocios.",
-          cta: "Quiero mi ejemplar"
+          cta: "Quiero mi ejemplar",
+          bookAlt: "Imagen del libro 'Economía Guiada por IA' de Eduardo Ibrahim",
         },
     features: {
       aiTitleLine1: "La inteligencia artificial no solo está",
