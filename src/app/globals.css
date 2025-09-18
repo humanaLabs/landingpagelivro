@@ -349,7 +349,7 @@ section.relative.bg-white {
 .hero-book-mobile img {
   width: 350px !important;
   height: auto !important;
-  max-width: 85% !important;
+  max-width: 80% !important;
   object-fit: contain !important;
 }
 
